@@ -1,0 +1,9 @@
+.App{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #f0f8ff, #d6e4ff);
+    font-family: 'Segoe UI', sans-serif;
+}

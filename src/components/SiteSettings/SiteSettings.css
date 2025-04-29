@@ -1,0 +1,38 @@
+.site-settings {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 2000;
+  }
+  
+  .settings-toggle {
+    background-color: var(--theme-color, #1a237e);
+    color: white;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  .settings-panel {
+    background: #fff;
+    padding: 1rem;
+    margin-top: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    width: 220px;
+  }
+  
+  .settings-panel label {
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  

@@ -1,0 +1,28 @@
+.commingSoon {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #f0f8ff, #d6e4ff);
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .coming-soon {
+    text-align: center;
+    background: white;
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .coming-soon h1 {
+    font-size: 3rem;
+    color: #333;
+  }
+  
+  .coming-soon p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-top: 10px;
+  }
+  

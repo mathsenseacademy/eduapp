@@ -1,0 +1,65 @@
+.programs {
+    background-color: #f0f4ff;
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+  
+  .programs h2 {
+    font-size: 2rem;
+    color: #1a237e;
+    margin-bottom: 2rem;
+  }
+  
+  .programs-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+  }
+  
+  .program-card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    overflow: hidden;
+    width: 280px;
+    transition: transform 0.3s;
+  }
+  
+  .program-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .program-card img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .program-info {
+    padding: 1rem;
+  }
+  
+  .program-info h3 {
+    color: #1a237e;
+    margin-bottom: 0.5rem;
+  }
+  
+  .program-info p {
+    font-size: 0.95rem;
+    color: #444;
+    margin-bottom: 1rem;
+  }
+  
+  .enroll-btn {
+    background-color: #3949ab;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    text-decoration: none;
+    border-radius: 6px;
+    display: inline-block;
+  }
+  
+  .enroll-btn:hover {
+    background-color: #283593;
+  }
+  

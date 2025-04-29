@@ -1,0 +1,51 @@
+.contact-cta {
+    background-color: #1a237e;
+    color: #fff;
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+  
+  .contact-cta h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .contact-cta p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .cta-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .btn {
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-primary {
+    background-color: #fff;
+    color: #1a237e;
+  }
+  
+  .btn-primary:hover {
+    background-color: #f0f4ff;
+  }
+  
+  .btn-outline {
+    border: 2px solid #fff;
+    color: #fff;
+  }
+  
+  .btn-outline:hover {
+    background-color: #3949ab;
+    border-color: #3949ab;
+  }
+  

@@ -1,0 +1,29 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* centers content horizontally */
+    gap: 60px;             /* spacing between sections */
+    padding: 20px;
+    background-color: #f5f9ff; /* optional light background */
+  }
+  
+  /* Optional: style each section for clarity */
+  section {
+    width: 100%;
+    max-width: 1200px;
+    padding: 40px 20px;
+    box-sizing: border-box;
+  }
+  
+  /* Add responsive behavior */
+  @media (max-width: 768px) {
+    .home-container {
+      gap: 40px;
+      padding: 10px;
+    }
+  
+    section {
+      padding: 30px 15px;
+    }
+  }
+  
