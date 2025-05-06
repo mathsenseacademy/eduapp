@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="footer-content">
         {/* Column 1: Logo/Title */}
         <div className="footer-section">
-          <h3>Math Club</h3>
+          <h3>Math Senseacademy</h3>
           <p>Inspiring young minds to love and master math through expert-led online programs.</p>
         </div>
 
@@ -33,7 +33,7 @@ const Footer = () => {
       </div>
 
       <div className="footer-bottom">
-        <p>&copy; {new Date().getFullYear()} Math Club for Kids. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Math Senseacademy for Kids. All rights reserved.</p>
       </div>
     </footer>
   );

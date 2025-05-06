@@ -27,7 +27,7 @@ const features = [
 const FeaturesSection = () => {
   return (
     <section className="features">
-      <h2>Why Choose Math Club?</h2>
+      <h2>Why Choose Math Senseacademy?</h2>
       <div className="features-grid">
         {features.map((feature, idx) => (
           <div key={idx} className="feature-card">

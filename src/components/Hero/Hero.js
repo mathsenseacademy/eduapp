@@ -1,20 +1,26 @@
+// src/components/Hero/Hero.js
 import React from 'react';
 import './Hero.css';
-import heroImg from '../../assets/img1.png'; // Replace with actual image
-
+import heroImg from '../../assets/img1.png';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 const Hero = () => {
+  const navigate = useNavigate();
+  const { t } = useTranslation(); // ✅ Add this
+
   return (
     <section className="hero">
       <div className="hero-content">
-        <h1>Unlock Your Child's Math Potential</h1>
-        <p>Engaging, expert-led online math programs for kids from Grade 1 to Grade 10.</p>
-        <a href="#programs" className="hero-btn">Explore Programs</a>
+        <h1>{t('hero.title')}</h1>
+        <p>{t('hero.description')}</p>
+        <button className="btn btn-primary mt-3" onClick={() => navigate('/student/register')}>
+          {t('hero.registerButton')}
+        </button>
       </div>
       <div className="hero-image">
-        <img src={heroImg} alt="Happy kid learning math" />
+        <img src={heroImg} alt={t('hero.imageAlt')} />
       </div>
     </section>
   );
 };
-
 export default Hero;

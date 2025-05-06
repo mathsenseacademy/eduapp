@@ -1,0 +1,42 @@
+.container {
+    background-color: #f0f4ff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    max-width: 900px;
+  }
+  
+  h2 {
+    color: #1a237e;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  form input,
+  form textarea {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+  
+  form input:focus,
+  form textarea:focus {
+    border-color: #3949ab;
+    box-shadow: 0 0 0 0.15rem rgba(57, 73, 171, 0.25);
+  }
+  
+  button[type="submit"] {
+    background-color: #3949ab;
+    border: none;
+    transition: background 0.3s ease;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #283593;
+  }
+  
+  .text-danger {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  

@@ -6,12 +6,12 @@ const AboutSection = () => {
   return (
     <section className="about">
       <div className="about-image">
-        <img src={aboutImg} alt="About Math Club" />
+        <img src={aboutImg} alt="About Math Senseacademy" />
       </div>
       <div className="about-content">
-        <h2>About Math Club</h2>
+        <h2>About Math Senseacademy</h2>
         <p>
-          Math Club for Kids is dedicated to transforming the way children learn math. Our interactive programs are
+          Math Senseacademy for Kids is dedicated to transforming the way children learn math. Our interactive programs are
           designed to boost confidence, sharpen problem-solving skills, and spark curiosity in young minds.
         </p>
         <p>

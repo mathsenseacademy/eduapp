@@ -1,17 +1,21 @@
 {
-    "home": "Home",
-    "about": "About",
-    "courses": "Courses",
-    "experts": "Our Experts",
-    "blog": "Blog",
-    "contact": "Contact",
-  
-    "analytical": "Analytical Maths Using Python",
-    "ml": "Data Science and Machine Learning with Python",
-    "olympiad": "Olympiad Courses",
-    "stats": "Statistics with Data Science using Python",
-    "algorithms": "Mathematics as Algorithms Using Python",
-    "vedic": "Mental Focussing Through Vedic Math",
-    "animation": "Math & Programming for 3D Animation"
+  "home": "Home",
+  "about": "About",
+  "courses": "Courses",
+  "experts": "Our Experts",
+  "blog": "Blog",
+  "contact": "Contact",
+  "analytical": "Analytical Maths Using Python",
+  "ml": "Data Science and Machine Learning with Python",
+  "olympiad": "Olympiad Courses",
+  "stats": "Statistics with Data Science using Python",
+  "algorithms": "Mathematics as Algorithms Using Python",
+  "vedic": "Mental Focussing Through Vedic Math",
+  "animation": "Math & Programming for 3D Animation",
+  "hero": {
+    "title": "Unlock Your Child's Math Potential",
+    "description": "Engaging, expert-led online math programs for kids from Grade 1 to Grade 10.",
+    "registerButton": "Register as Student",
+    "imageAlt": "Happy kid learning math"
   }
-  
+}
