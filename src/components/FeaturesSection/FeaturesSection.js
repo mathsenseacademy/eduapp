@@ -1,33 +1,36 @@
 import React from 'react';
 import './FeaturesSection.css';
-
-const features = [
-  {
-    title: 'Expert Tutors',
-    description: 'All our instructors are math experts with years of experience.',
-    icon: '🎓',
-  },
-  {
-    title: 'Interactive Classes',
-    description: 'Fun, engaging sessions that keep kids excited about learning.',
-    icon: '📚',
-  },
-  {
-    title: 'Flexible Scheduling',
-    description: 'Weekend and evening classes available to fit your schedule.',
-    icon: '🕒',
-  },
-  {
-    title: 'Personalized Learning',
-    description: 'Courses designed to meet each student’s unique needs.',
-    icon: '📈',
-  },
-];
+import { useTranslation } from 'react-i18next';
 
 const FeaturesSection = () => {
+  const { t } = useTranslation(); // ✅
+
+  const features = [
+    {
+      title: t('features.expertTutors.title'),
+      description: t('features.expertTutors.description'),
+      icon: '🎓',
+    },
+    {
+      title: t('features.interactiveClasses.title'),
+      description: t('features.interactiveClasses.description'),
+      icon: '📚',
+    },
+    {
+      title: t('features.flexibleScheduling.title'),
+      description: t('features.flexibleScheduling.description'),
+      icon: '🕒',
+    },
+    {
+      title: t('features.personalizedLearning.title'),
+      description: t('features.personalizedLearning.description'),
+      icon: '📈',
+    },
+  ];
+
   return (
     <section className="features">
-      <h2>Why Choose Math Senseacademy?</h2>
+      <h2>{t('features.heading')}</h2>
       <div className="features-grid">
         {features.map((feature, idx) => (
           <div key={idx} className="feature-card">
@@ -40,5 +43,6 @@ const FeaturesSection = () => {
     </section>
   );
 };
+
 
 export default FeaturesSection;

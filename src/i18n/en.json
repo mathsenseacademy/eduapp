@@ -17,5 +17,25 @@
     "description": "Engaging, expert-led online math programs for kids from Grade 1 to Grade 10.",
     "registerButton": "Register as Student",
     "imageAlt": "Happy kid learning math"
+  },
+  "features": {
+  "heading": "Why Choose Math Senseacademy?",
+  "expertTutors": {
+    "title": "Expert Tutors",
+    "description": "All our instructors are math experts with years of experience."
+  },
+  "interactiveClasses": {
+    "title": "Interactive Classes",
+    "description": "Fun, engaging sessions that keep kids excited about learning."
+  },
+  "flexibleScheduling": {
+    "title": "Flexible Scheduling",
+    "description": "Weekend and evening classes available to fit your schedule."
+  },
+  "personalizedLearning": {
+    "title": "Personalized Learning",
+    "description": "Courses designed to meet each student’s unique needs."
   }
+}
+
 }
