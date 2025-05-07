@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import {jwtDecode} from 'jwt-decode';
 import api from '../../api/api';
 import './Header.css';
 
@@ -10,9 +11,22 @@ const Header = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState(null);
+  const [adminUser, setAdminUser] = useState(null);
 
   const { t } = useTranslation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        setAdminUser(decoded);
+      } catch (err) {
+        console.error('Invalid token:', err);
+      }
+    }
+  }, []);
 
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
   const handleLoginToggle = () => setShowLogin(!showLogin);
@@ -24,13 +38,23 @@ const Header = () => {
         username,
         password,
       });
-      console.log('Login success:', response.data);
+      const { access } = response.data;
+      localStorage.setItem('accessToken', access);
+      const decoded = jwtDecode(access);
+      setAdminUser(decoded);
       setShowLogin(false);
       setLoginError(null);
+      navigate('/admin');
     } catch (error) {
       setLoginError('Login failed. Check your credentials.');
       console.error(error);
     }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('accessToken');
+    setAdminUser(null);
+    navigate('/');
   };
 
   return (
@@ -66,7 +90,7 @@ const Header = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        {/* Center + Right: Nav links + Login in collapsible area */}
+        {/* Center + Right: Nav links + Auth */}
         <div className="collapse navbar-collapse justify-content-end mt-3 mt-lg-0" id="mainNav">
           <ul className="navbar-nav align-items-center gap-3 mb-2 mb-lg-0">
             <li className="nav-item"><Link to="/" className="nav-link">{t('home')}</Link></li>
@@ -77,34 +101,47 @@ const Header = () => {
           </ul>
 
           <div className="position-relative mt-2 mt-lg-0">
-            <button className="btn btn-outline-primary" onClick={handleLoginToggle}>{t('login')}</button>
-            {showLogin && (
-              <form onSubmit={handleLogin} className="login-form p-3 border bg-white shadow rounded position-absolute end-0 mt-2">
-                <input
-                  type="text"
-                  className="form-control mb-2"
-                  placeholder="Username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  required
-                />
-                <input
-                  type="password"
-                  className="form-control mb-2"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-                <button type="submit" className="btn btn-primary w-100">Login</button>
-                {loginError && <p className="text-danger mt-2">{loginError}</p>}
-                <p className="register-link mt-2 text-center">
-                  Don't have an account?{' '}
-                  <span onClick={() => navigate('/register')} className="text-primary" style={{ cursor: 'pointer' }}>
-                    Register
-                  </span>
-                </p>
-              </form>
+            {adminUser ? (
+              <div className="d-flex align-items-center gap-2">
+                <span className="text-success fw-semibold">
+                  Admin ID: {adminUser.admin_id}
+                </span>
+                <button className="btn btn-outline-danger" onClick={handleLogout}>
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <>
+                <button className="btn btn-outline-primary" onClick={handleLoginToggle}>{t('login')}</button>
+                {showLogin && (
+                  <form onSubmit={handleLogin} className="login-form p-3 border bg-white shadow rounded position-absolute end-0 mt-2">
+                    <input
+                      type="text"
+                      className="form-control mb-2"
+                      placeholder="Username"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      required
+                    />
+                    <input
+                      type="password"
+                      className="form-control mb-2"
+                      placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                    <button type="submit" className="btn btn-primary w-100">Login</button>
+                    {loginError && <p className="text-danger mt-2">{loginError}</p>}
+                    <p className="register-link mt-2 text-center">
+                      Don't have an account?{' '}
+                      <span onClick={() => navigate('/register')} className="text-primary" style={{ cursor: 'pointer' }}>
+                        Register
+                      </span>
+                    </p>
+                  </form>
+                )}
+              </>
             )}
           </div>
         </div>
