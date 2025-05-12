@@ -30,4 +30,4 @@ jobs:
       - name: Create Deployment
         id: deploy
         run: |
-          aws deploy create-deployment --application-name eduapp --deployment-group-name Eduapp-Deployment --deployment-config-name CodeDeployDefault.OneAtATime --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
+          aws deploy create-deployment --application-name Eduapp1 --deployment-group-name Eduapp-Deployment --deployment-config-name CodeDeployDefault.OneAtATime --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
