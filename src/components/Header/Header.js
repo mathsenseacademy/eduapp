@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import api from '../../api/api';
 import './Header.css';
 
@@ -12,6 +12,7 @@ const Header = () => {
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState(null);
   const [adminUser, setAdminUser] = useState(null);
+  const [showStickyRegister, setShowStickyRegister] = useState(false);
 
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -26,6 +27,15 @@ const Header = () => {
         console.error('Invalid token:', err);
       }
     }
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setShowStickyRegister(scrollTop > 300); // show after scrolling 300px
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
@@ -61,9 +71,10 @@ const Header = () => {
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top px-3">
       <div className="container-fluid">
 
-        {/* Left: Logo + Courses */}
-        <div className="d-flex align-items-center gap-3">
+        {/* Left: Logo + Courses + Sticky Register */}
+        <div className="d-flex align-items-center gap-5">
           <span className="navbar-brand fw-bold logo mb-0">Math Senseacademy</span>
+
           <div className="nav-item dropdown">
             <button className="btn btn-outline-danger dropdown-toggle" onClick={toggleDropdown}>
               {t('courses')}
@@ -78,6 +89,15 @@ const Header = () => {
               <li><Link to="/courses/3d-animation" className="dropdown-item">{t('animation')}</Link></li>
             </ul>
           </div>
+
+          {showStickyRegister && (
+            <button
+              className="btn btn-warning sticky-register-btn"
+              onClick={() => navigate('/student/register')}
+            >
+              {t('hero.registerButton')}
+            </button>
+          )}
         </div>
 
         {/* Hamburger toggler */}
@@ -90,7 +110,7 @@ const Header = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        {/* Center + Right: Nav links + Auth */}
+        {/* Nav Links + Auth */}
         <div className="collapse navbar-collapse justify-content-end mt-3 mt-lg-0" id="mainNav">
           <ul className="navbar-nav align-items-center gap-3 mb-2 mb-lg-0">
             <li className="nav-item"><Link to="/" className="nav-link">{t('home')}</Link></li>
