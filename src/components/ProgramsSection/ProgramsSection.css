@@ -8,41 +8,106 @@
   color: #1a237e;
   font-weight: 600;
   text-align: center;
+  margin-bottom: 2rem;
 }
 
+/* Card container */
 .program-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 12px;
+  padding: 1.25rem;
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Card hover effect */
+.program-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* Internal layout: icon + text side by side */
+.program-inner {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
-  gap: 1.75rem;
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 1rem;
-  margin: 1rem;
   height: 100%;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  gap: 1.5rem;
 }
 
-.program-card:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+/* Icon style */
+.program-icon-box {
+  width: 60px;
+  height: 60px;
+  min-width: 60px;
+  background-color: #e8eaf6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .program-icon {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-  margin-top: 4px;
+  width: 30px;
+  height: 30px;
 }
 
+/* Text + Button column */
+.program-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.program-text h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1a237e;
+  margin-bottom: 0.5rem;
+}
+
+.program-text p {
+  font-size: 0.95rem;
+  color: #555;
+  flex-grow: 1;
+}
+
+/* Button aligned to bottom */
+.program-btn-wrapper {
+  margin-top: 1rem;
+}
 
 .enroll-btn {
   background-color: #3949ab !important;
   text-transform: none;
   font-weight: 500;
+  font-size: 0.9rem;
+  padding: 0.4rem 1rem;
 }
 
 .enroll-btn:hover {
   background-color: #283593 !important;
+}
+
+/* Responsive Fix */
+@media (max-width: 768px) {
+  .program-inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .program-text {
+    align-items: center;
+  }
+
+  .program-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
 }

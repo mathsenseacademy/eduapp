@@ -13,29 +13,48 @@
   "vedic": "Mental Focussing Through Vedic Math",
   "animation": "Math & Programming for 3D Animation",
   "hero": {
-    "title": "Unlock Your Child's Math Potential",
-    "description": "Engaging, expert-led online math programs for kids from Grade 1 to Grade 12.",
+    "title": "<span class='highlight'>Unlock</span> Your <span class='child-word'>Child's</span> Math Potential",
+    "description": "Engaging, <span class='emphasize'>expert-led</span> online math programs for kids from <span class='grade'>Grade 1 to Grade 12</span>.",
     "registerButton": "Register as Student",
     "imageAlt": "Happy kid learning math"
   },
   "features": {
-  "heading": "Why Choose Math Senseacademy?",
+  "heading": "Why Choose <span class='highlight'>Math</span> <span class='grade'>Senseacademy</span>?",
   "expertTutors": {
-    "title": "Expert Tutors",
-    "description": "All our instructors are math experts with years of experience."
+    "title": "<span class='emphasize'>Expert Tutors</span>",
+    "description": "All our instructors are <span class='highlight'>math experts</span> with <span class='child-word'>years of experience</span>."
   },
   "interactiveClasses": {
-    "title": "Interactive Classes",
-    "description": "Fun, engaging sessions that keep kids excited about learning."
+    "title": "<span class='emphasize'>Interactive Classes</span>",
+    "description": "Fun, <span class='highlight'>engaging sessions</span> that keep kids <span class='child-word'>excited about learning</span>."
   },
   "flexibleScheduling": {
-    "title": "Flexible Scheduling",
-    "description": "Weekend and evening classes available to fit your schedule."
+    "title": "<span class='emphasize'>Flexible Scheduling</span>",
+    "description": "<span class='highlight'>Weekend</span> and <span class='highlight'>evening classes</span> available to fit your <span class='child-word'>schedule</span>."
   },
   "personalizedLearning": {
-    "title": "Personalized Learning",
-    "description": "Courses designed to meet each student’s unique needs."
+    "title": "<span class='emphasize'>Personalized Learning</span>",
+    "description": "Courses designed to meet each student’s <span class='highlight'>unique needs</span> and <span class='child-word'>learning style</span>."
   }
-}
-
-}
+},
+"programs": {
+  "heading": "Explore <span class='highlight'>Our Programs</span>",
+  "items": [
+    {
+      "title": "<span class='grade'>Grade 1–3 Math</span>",
+      "description": "Foundations in <span class='highlight'>addition</span>, <span class='highlight'>subtraction</span>, and <span class='child-word'>number sense</span>."
+    },
+    {
+      "title": "<span class='grade'>Grade 4–6 Math</span>",
+      "description": "<span class='highlight'>Multiplication</span>, <span class='highlight'>division</span>, and early <span class='child-word'>algebra</span>."
+    },
+    {
+      "title": "<span class='grade'>Grade 7–8 Math</span>",
+      "description": "Pre-Algebra and <span class='highlight'>Geometry</span> essentials."
+    },
+    {
+      "title": "<span class='grade'>High School Math</span>",
+      "description": "<span class='highlight'>Algebra</span>, <span class='highlight'>Geometry</span>, and <span class='child-word'>SAT/ACT prep</span>."
+    }
+  ]
+}}

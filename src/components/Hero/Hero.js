@@ -11,8 +11,8 @@ const Hero = () => {
   return (
     <section className="hero">
       <div className="hero-content">
-        <h1>{t('hero.title')}</h1>
-        <p>{t('hero.description')}</p>
+       <h1 dangerouslySetInnerHTML={{ __html: t('hero.title') }} />
+<p dangerouslySetInnerHTML={{ __html: t('hero.description') }} />
         <button className="hero-btn" onClick={() => navigate('/student/register')}>
           {t('hero.registerButton')}
         </button>
