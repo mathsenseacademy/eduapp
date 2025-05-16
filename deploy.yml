@@ -24,8 +24,10 @@
       git clone https://github.com/mathsenseacademy/eduapp.git "$REPO_DIR"
       cd "$REPO_DIR"
     fi
+    
     npm install
-
+    npm i -S react-scripts
+    npm start
     #REPO_DIR_2="$HOME/github-aws-ec2/simple-web-server"
     #if [ -d "$REPO_DIR_2/.git" ]; then
      # cd "$REPO_DIR_2"
