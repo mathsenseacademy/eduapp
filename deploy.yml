@@ -16,7 +16,7 @@
 
     #npm install -g pm2
 
-    REPO_DIR="$HOME/eduapp"
+    REPO_DIR="$HOME/"
     if [ -d "$REPO_DIR/.git" ]; then
       cd "$REPO_DIR"
       git pull origin main
