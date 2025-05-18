@@ -8,7 +8,7 @@ set -o pipefail
 REACT_APP_DIR="/var/www/eduapp"
 NGINX_DIR="/var/www/html"
 BACKUP_DIR="/var/www/backups"
-LOG_FILE="$REACT_APP_DIR/react-deploy.log"
+LOG_FILE="$REACT_APP_DIR/eduapp.log"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 
 # Default SERVER_NAME (can be overridden by .env file)
