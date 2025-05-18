@@ -8,13 +8,18 @@ set -o pipefail
 REACT_APP_DIR="/var/www/react-app"
 NGINX_DIR="/var/www/html"
 BACKUP_DIR="/var/www/backups"
-LOG_FILE="/var/log/react-deploy.log"
+LOG_FILE="$REACT_APP_DIR/react-deploy.log"  # Changed to user-accessible directory
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+
+# Default SERVER_NAME (can be overridden by .env file)
 SERVER_NAME="ec2-15-206-148-160.ap-south-1.compute.amazonaws.com"
-# Create log file with proper permissions
+
+# Create necessary directories
+mkdir -p "$REACT_APP_DIR" "$BACKUP_DIR" "$NGINX_DIR"
+
+# Create and set permissions for log file
 touch "$LOG_FILE"
-#sudo chown $USER:$USER "$LOG_FILE"
-sudo chmod 644 "$LOG_FILE"
+chmod 644 "$LOG_FILE"
 
 # Logging function
 log() {
@@ -31,13 +36,13 @@ trap 'handle_error $LINENO' ERR
 
 # Load environment variables if exists
 if [ -f .env ]; then
+    log "Loading environment variables from .env file"
     source .env
 fi
 
 # Verify required environment variables
 if [ -z "$SERVER_NAME" ]; then
-    log "Error: SERVER_NAME environment variable not set"
-    exit 1
+    log "Warning: SERVER_NAME not set in .env, using default: $SERVER_NAME"
 fi
 
 # Create necessary directories with proper permissions
@@ -51,6 +56,7 @@ backup_current() {
     log "Creating backup of current deployment"
     if [ -d "$NGINX_DIR" ]; then
         sudo tar -czf "$BACKUP_DIR/backup_$TIMESTAMP.tar.gz" -C "$NGINX_DIR" .
+        log "Backup created: $BACKUP_DIR/backup_$TIMESTAMP.tar.gz"
     fi
 }
 
@@ -67,6 +73,10 @@ verify_dependencies() {
         log "npm not found. Installing..."
         sudo apt-get install -y npm
     fi
+    
+    # Log versions
+    log "Node.js version: $(node --version)"
+    log "npm version: $(npm --version)"
 }
 
 # Update system packages
@@ -105,6 +115,8 @@ deploy_app() {
         log "Error: Build directory not found"
         handle_error $LINENO
     fi
+    
+    log "Build completed successfully"
 }
 
 # Configure Nginx
@@ -157,6 +169,7 @@ EOL
     
     # Test Nginx configuration
     sudo nginx -t || handle_error $LINENO
+    log "Nginx configuration verified"
 }
 
 # Verify deployment
@@ -167,6 +180,7 @@ verify_deployment() {
         log "Error: Application not accessible after deployment"
         handle_error $LINENO
     fi
+    log "Deployment verification successful"
 }
 
 # Main deployment process
