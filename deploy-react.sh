@@ -8,22 +8,26 @@ set -o pipefail
 REACT_APP_DIR="/var/www/eduapp"
 NGINX_DIR="/var/www/html"
 BACKUP_DIR="/var/www/backups"
-LOG_FILE="$REACT_APP_DIR/react-deploy.log"  # Changed to user-accessible directory
+LOG_FILE="$REACT_APP_DIR/react-deploy.log"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 
 # Default SERVER_NAME (can be overridden by .env file)
 SERVER_NAME="ec2-15-206-148-160.ap-south-1.compute.amazonaws.com"
 
-# Create necessary directories
-mkdir -p "$REACT_APP_DIR" "$BACKUP_DIR" "$NGINX_DIR"
+# Create necessary directories with sudo
+log "Creating necessary directories"
+sudo mkdir -p "$REACT_APP_DIR" "$BACKUP_DIR" "$NGINX_DIR"
+sudo chown -R $USER:$USER "$REACT_APP_DIR" "$BACKUP_DIR"
+sudo chmod -R 755 "$REACT_APP_DIR" "$BACKUP_DIR"
 
 # Create and set permissions for log file
-touch "$LOG_FILE"
-chmod 644 "$LOG_FILE"
+sudo touch "$LOG_FILE"
+sudo chown $USER:$USER "$LOG_FILE"
+sudo chmod 644 "$LOG_FILE"
 
 # Logging function
 log() {
-    echo "[$(date +'%Y-%m-%d %H:%M:%S')] $1" | tee -a "$LOG_FILE"
+    echo "[$(date +'%Y-%m-%d %H:%M:%S')] $1" | sudo tee -a "$LOG_FILE"
 }
 
 # Error handling
@@ -45,12 +49,6 @@ if [ -z "$SERVER_NAME" ]; then
     log "Warning: SERVER_NAME not set in .env, using default: $SERVER_NAME"
 fi
 
-# Create necessary directories with proper permissions
-log "Creating necessary directories"
-sudo mkdir -p "$REACT_APP_DIR" "$BACKUP_DIR" "$NGINX_DIR"
-sudo chown -R $USER:$USER "$REACT_APP_DIR" "$BACKUP_DIR"
-sudo chmod -R 755 "$REACT_APP_DIR" "$BACKUP_DIR"
-
 # Backup current deployment
 backup_current() {
     log "Creating backup of current deployment"
@@ -63,18 +61,29 @@ backup_current() {
 # Verify Node.js and npm installation
 verify_dependencies() {
     log "Verifying Node.js and npm installation"
+    
+    # Check and install git
+    if ! command -v git &> /dev/null; then
+        log "Git not found. Installing..."
+        sudo apt-get update
+        sudo apt-get install -y git
+    fi
+    
+    # Check and install Node.js
     if ! command -v node &> /dev/null; then
         log "Node.js not found. Installing..."
         curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
         sudo apt-get install -y nodejs
     fi
     
+    # Check and install npm
     if ! command -v npm &> /dev/null; then
         log "npm not found. Installing..."
         sudo apt-get install -y npm
     fi
     
     # Log versions
+    log "Git version: $(git --version)"
     log "Node.js version: $(node --version)"
     log "npm version: $(npm --version)"
 }
@@ -90,22 +99,38 @@ update_system() {
 deploy_app() {
     log "Starting deployment process"
     
-    # Clone or update repository
-    if [ -d "$REACT_APP_DIR/.git" ]; then
-        log "Updating existing repository"
-        cd "$REACT_APP_DIR"
-        git fetch origin
-        git reset --hard origin/main || handle_error $LINENO
-    else
-        log "Cloning repository"
-        cd /var/www
-        git clone https://github.com/mathsenseacademy/eduapp eduapp || handle_error $LINENO
-        cd eduapp
+    # Remove existing directory if it exists
+    if [ -d "$REACT_APP_DIR" ]; then
+        log "Removing existing directory: $REACT_APP_DIR"
+        sudo rm -rf "$REACT_APP_DIR"
+    fi
+    
+    # Create parent directory if it doesn't exist
+    sudo mkdir -p "$(dirname "$REACT_APP_DIR")"
+    sudo chown $USER:$USER "$(dirname "$REACT_APP_DIR")"
+    
+    # Clone the repository
+    log "Cloning repository"
+    cd /var/www
+    git clone https://github.com/mathsenseacademy/eduapp "$REACT_APP_DIR" || handle_error $LINENO
+    cd "$REACT_APP_DIR"
+    
+    # Verify we're in the correct directory
+    if [ ! -f "package.json" ]; then
+        log "Error: package.json not found in $(pwd)"
+        handle_error $LINENO
     fi
     
     # Install dependencies and build
     log "Installing dependencies"
-    npm ci || handle_error $LINENO  # Use npm ci instead of npm install for more reliable builds
+    # Clear npm cache
+    npm cache clean --force
+    
+    # Try npm ci first, fall back to npm install if it fails
+    npm ci || {
+        log "npm ci failed, trying npm install"
+        npm install || handle_error $LINENO
+    }
     
     log "Building application"
     npm run build || handle_error $LINENO
@@ -124,6 +149,17 @@ configure_nginx() {
     log "Configuring Nginx"
     local NGINX_CONF="/etc/nginx/sites-available/react-app"
     
+    # Remove existing configuration if it exists
+    if [ -f "$NGINX_CONF" ]; then
+        sudo rm "$NGINX_CONF"
+    fi
+    
+    # Remove existing symlink if it exists
+    if [ -L "/etc/nginx/sites-enabled/react-app" ]; then
+        sudo rm "/etc/nginx/sites-enabled/react-app"
+    fi
+    
+    # Create new configuration
     sudo tee "$NGINX_CONF" > /dev/null << EOL
 server {
     listen 80;
@@ -162,10 +198,8 @@ server {
 }
 EOL
 
-    # Create symlink if it doesn't exist
-    if [ ! -L "/etc/nginx/sites-enabled/react-app" ]; then
-        sudo ln -s "$NGINX_CONF" /etc/nginx/sites-enabled/
-    fi
+    # Create symlink
+    sudo ln -s "$NGINX_CONF" /etc/nginx/sites-enabled/
     
     # Test Nginx configuration
     sudo nginx -t || handle_error $LINENO
@@ -175,6 +209,9 @@ EOL
 # Verify deployment
 verify_deployment() {
     log "Verifying deployment"
+    # Wait for Nginx to restart
+    sleep 5
+    
     # Check if the application is accessible
     if ! curl -s -f "http://$SERVER_NAME" > /dev/null; then
         log "Error: Application not accessible after deployment"
@@ -196,7 +233,7 @@ main() {
     # Copy build files with proper permissions
     log "Copying build files"
     sudo rm -rf "$NGINX_DIR"/*
-    sudo cp -r build/* "$NGINX_DIR"/
+    sudo cp -r "$REACT_APP_DIR/build/"* "$NGINX_DIR"/
     sudo chown -R www-data:www-data "$NGINX_DIR"
     sudo chmod -R 755 "$NGINX_DIR"
     
