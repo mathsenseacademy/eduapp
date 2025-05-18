@@ -99,8 +99,8 @@ deploy_app() {
     else
         log "Cloning repository"
         cd /var/www
-        git clone https://github.com/mathsenseacademy/eduapp react-app || handle_error $LINENO
-        cd react-app
+        git clone https://github.com/mathsenseacademy/eduapp eduapp || handle_error $LINENO
+        cd eduapp
     fi
     
     # Install dependencies and build
