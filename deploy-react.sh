@@ -5,7 +5,7 @@ set -e
 set -o pipefail
 
 # Configuration
-REACT_APP_DIR="/var/www/react-app"
+REACT_APP_DIR="/var/www/eduapp"
 NGINX_DIR="/var/www/html"
 BACKUP_DIR="/var/www/backups"
 LOG_FILE="$REACT_APP_DIR/react-deploy.log"  # Changed to user-accessible directory
