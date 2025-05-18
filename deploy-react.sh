@@ -10,6 +10,10 @@ NGINX_DIR="/var/www/html"
 BACKUP_DIR="/var/www/backups"
 LOG_FILE="/var/log/react-deploy.log"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+SERVER_NAME=ec2-15-206-148-160.ap-south-1.compute.amazonaws.com
+# Create log file with proper permissions
+touch "$LOG_FILE"
+chmod 644 "$LOG_FILE"
 
 # Logging function
 log() {
