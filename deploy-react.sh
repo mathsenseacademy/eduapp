@@ -14,6 +14,11 @@ TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 # Default SERVER_NAME (can be overridden by .env file)
 SERVER_NAME="ec2-15-206-148-160.ap-south-1.compute.amazonaws.com"
 
+# Logging function
+log() {
+    echo "[$(date +'%Y-%m-%d %H:%M:%S')] $1" | sudo tee -a "$LOG_FILE"
+}
+
 # Create necessary directories with sudo
 log "Creating necessary directories"
 sudo mkdir -p "$REACT_APP_DIR" "$BACKUP_DIR" "$NGINX_DIR"
@@ -24,11 +29,6 @@ sudo chmod -R 755 "$REACT_APP_DIR" "$BACKUP_DIR"
 sudo touch "$LOG_FILE"
 sudo chown $USER:$USER "$LOG_FILE"
 sudo chmod 644 "$LOG_FILE"
-
-# Logging function
-log() {
-    echo "[$(date +'%Y-%m-%d %H:%M:%S')] $1" | sudo tee -a "$LOG_FILE"
-}
 
 # Error handling
 handle_error() {
