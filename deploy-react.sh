@@ -162,6 +162,12 @@ deploy_app() {
         handle_error $LINENO
     fi
     
+    # Verify static directory exists in build
+    if [ ! -d "build/static" ]; then
+        log "Error: static directory not found in build"
+        handle_error $LINENO
+    fi
+    
     log "Build completed successfully"
 }
 
@@ -184,11 +190,19 @@ configure_nginx() {
         sudo rm "/etc/nginx/sites-enabled/react-app"
     fi
     
+    # Remove default nginx site if it exists
+    if [ -L "/etc/nginx/sites-enabled/default" ]; then
+        sudo rm "/etc/nginx/sites-enabled/default"
+    fi
+    
     # Create new configuration
     sudo tee "$NGINX_CONF" > /dev/null << EOL
 server {
-    listen 80;
+    listen 80 default_server;
     server_name $SERVER_NAME;
+    
+    root /var/www/html;
+    index index.html;
     
     # Security headers
     add_header X-Frame-Options "SAMEORIGIN";
@@ -201,24 +215,30 @@ server {
     gzip on;
     gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
     
-    # Cache control
+    # Serve static files
     location /static/ {
+        root /var/www/html;
+        try_files \$uri \$uri/ =404;
         expires 1y;
         add_header Cache-Control "public, no-transform";
     }
     
+    # Serve other static assets
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$ {
+        root /var/www/html;
+        try_files \$uri =404;
+        expires 1y;
+        add_header Cache-Control "public, no-transform";
+    }
+    
+    # Main application - handle all routes
     location / {
-        root $NGINX_DIR;
-        index index.html;
+        root /var/www/html;
         try_files \$uri \$uri/ /index.html;
-        
-        # Security headers
-        add_header X-Frame-Options "SAMEORIGIN";
-        add_header X-XSS-Protection "1; mode=block";
     }
     
     # Error pages
-    error_page 404 /404.html;
+    error_page 404 /index.html;
     error_page 500 502 503 504 /50x.html;
 }
 EOL
@@ -227,24 +247,67 @@ EOL
     sudo ln -s "$NGINX_CONF" /etc/nginx/sites-enabled/
     
     # Test Nginx configuration
-    sudo nginx -t || handle_error $LINENO
+    if ! sudo nginx -t; then
+        log "Error: Nginx configuration test failed"
+        handle_error $LINENO
+    fi
     log "Nginx configuration verified"
 }
 
 # Verify deployment
-#verify_deployment() {
- #   log "Verifying deployment"
+verify_deployment() {
+    log "Verifying deployment"
+    
     # Wait for Nginx to restart
-  #  sleep 5
+    sleep 5
+    
+    # Check if Nginx is running
+    if ! systemctl is-active --quiet nginx; then
+        log "Error: Nginx is not running"
+        handle_error $LINENO
+    fi
+    
+    # Check if the build directory exists and has content
+    if [ ! -f "$NGINX_DIR/index.html" ]; then
+        log "Error: index.html not found in $NGINX_DIR"
+        handle_error $LINENO
+    fi
+    
+    # Check if static directory exists and has content
+    if [ ! -d "$NGINX_DIR/static" ]; then
+        log "Error: static directory not found in $NGINX_DIR"
+        handle_error $LINENO
+    fi
+    
+    # List contents of the static directory for verification
+    log "Contents of static directory:"
+    ls -la "$NGINX_DIR/static" | sudo tee -a "$LOG_FILE"
     
     # Check if the application is accessible
-   # if ! curl -s -f "http://$SERVER_NAME" > /dev/null; then
-   
-   #     log "Error: Application not accessible after deployment"
-   #     handle_error $LINENO
-   # fi
-   # log "Deployment verification successful"
-#}
+    local max_retries=3
+    local retry_count=0
+    local success=false
+    
+    while [ $retry_count -lt $max_retries ] && [ "$success" = false ]; do
+        if curl -s -f "http://$SERVER_NAME" > /dev/null; then
+            success=true
+            log "Application is accessible"
+        else
+            retry_count=$((retry_count + 1))
+            log "Attempt $retry_count: Application not accessible, retrying..."
+            sleep 5
+        fi
+    done
+    
+    if [ "$success" = false ]; then
+        log "Error: Application not accessible after $max_retries attempts"
+        log "Checking Nginx error logs:"
+        sudo tail -n 20 /var/log/nginx/error.log
+        handle_error $LINENO
+    fi
+    
+    log "Deployment verification successful"
+}
 
 # Main deployment process
 main() {
@@ -260,12 +323,30 @@ main() {
     log "Copying build files"
     sudo rm -rf "$NGINX_DIR"/*
     sudo cp -r "$REACT_APP_DIR/build/"* "$NGINX_DIR"/
+    
+    # Verify the static directory exists
+    if [ ! -d "$NGINX_DIR/static" ]; then
+        log "Error: static directory not found in build"
+        handle_error $LINENO
+    fi
+    
+    # Set proper permissions
     sudo chown -R www-data:www-data "$NGINX_DIR"
     sudo chmod -R 755 "$NGINX_DIR"
     
+    # Verify build files were copied
+    if [ ! -f "$NGINX_DIR/index.html" ]; then
+        log "Error: Failed to copy build files"
+        handle_error $LINENO
+    fi
+    
+    # List contents of the static directory for verification
+    log "Contents of static directory:"
+    ls -la "$NGINX_DIR/static" | sudo tee -a "$LOG_FILE"
+    
     configure_nginx
     sudo systemctl restart nginx
-   # verify_deployment
+    verify_deployment
     
     log "Deployment completed successfully"
 }
