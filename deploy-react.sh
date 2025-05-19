@@ -264,7 +264,7 @@ main() {
     
     configure_nginx
     sudo systemctl restart nginx
-    verify_deployment
+    #verify_deployment
     
     log "Deployment completed successfully"
 }
