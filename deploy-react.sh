@@ -13,7 +13,7 @@ LOG_FILE="$LOG_DIR/eduapp.log"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 
 # Default SERVER_NAME (can be overridden by .env file)
-SERVER_NAME="ec2-15-206-148-160.ap-south-1.compute.amazonaws.com"
+SERVER_NAME="15.206.148.160"  # Using IP address instead of full domain name
 
 # Create log directory and file first
 sudo mkdir -p "$LOG_DIR"
@@ -98,6 +98,24 @@ update_system() {
     sudo apt-get install -y nginx
 }
 
+# Configure Nginx main configuration
+configure_nginx_main() {
+    log "Configuring Nginx main settings"
+    local NGINX_MAIN_CONF="/etc/nginx/nginx.conf"
+    
+    # Backup the original configuration
+    sudo cp "$NGINX_MAIN_CONF" "${NGINX_MAIN_CONF}.bak"
+    
+    # Add or update server_names_hash_bucket_size
+    if ! grep -q "server_names_hash_bucket_size" "$NGINX_MAIN_CONF"; then
+        sudo sed -i '/http {/a \    server_names_hash_bucket_size 128;' "$NGINX_MAIN_CONF"
+    else
+        sudo sed -i 's/server_names_hash_bucket_size.*/server_names_hash_bucket_size 128;/' "$NGINX_MAIN_CONF"
+    fi
+    
+    log "Nginx main configuration updated"
+}
+
 # Deploy application
 deploy_app() {
     log "Starting deployment process"
@@ -150,6 +168,10 @@ deploy_app() {
 # Configure Nginx
 configure_nginx() {
     log "Configuring Nginx"
+    
+    # Configure main Nginx settings first
+    configure_nginx_main
+    
     local NGINX_CONF="/etc/nginx/sites-available/react-app"
     
     # Remove existing configuration if it exists
