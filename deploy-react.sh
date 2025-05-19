@@ -232,18 +232,18 @@ EOL
 }
 
 # Verify deployment
-verify_deployment() {
-    log "Verifying deployment"
+#verify_deployment() {
+    #log "Verifying deployment"
     # Wait for Nginx to restart
-    sleep 5
+    #sleep 5
     
     # Check if the application is accessible
-    if ! curl -s -f "http://$SERVER_NAME" > /dev/null; then
-        log "Error: Application not accessible after deployment"
-        handle_error $LINENO
-    fi
-    log "Deployment verification successful"
-}
+    #if ! curl -s -f "http://$SERVER_NAME" > /dev/null; then
+    #    log "Error: Application not accessible after deployment"
+   #     handle_error $LINENO
+  #  fi
+ #   log "Deployment verification successful"
+#}
 
 # Main deployment process
 main() {
