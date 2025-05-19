@@ -233,16 +233,17 @@ EOL
 
 # Verify deployment
 #verify_deployment() {
-    #log "Verifying deployment"
+ #   log "Verifying deployment"
     # Wait for Nginx to restart
-    #sleep 5
+  #  sleep 5
     
     # Check if the application is accessible
-    #if ! curl -s -f "http://$SERVER_NAME" > /dev/null; then
-    #    log "Error: Application not accessible after deployment"
+   # if ! curl -s -f "http://$SERVER_NAME" > /dev/null; then
+   
+   #     log "Error: Application not accessible after deployment"
    #     handle_error $LINENO
-  #  fi
- #   log "Deployment verification successful"
+   # fi
+   # log "Deployment verification successful"
 #}
 
 # Main deployment process
@@ -264,7 +265,7 @@ main() {
     
     configure_nginx
     sudo systemctl restart nginx
-    #verify_deployment
+   # verify_deployment
     
     log "Deployment completed successfully"
 }
