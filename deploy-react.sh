@@ -8,27 +8,24 @@ set -o pipefail
 REACT_APP_DIR="/var/www/eduapp"
 NGINX_DIR="/var/www/html"
 BACKUP_DIR="/var/www/backups"
-LOG_FILE="$REACT_APP_DIR/eduapp.log"
+LOG_DIR="/var/log/eduapp"
+LOG_FILE="$LOG_DIR/eduapp.log"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 
 # Default SERVER_NAME (can be overridden by .env file)
 SERVER_NAME="ec2-15-206-148-160.ap-south-1.compute.amazonaws.com"
 
+# Create log directory and file first
+sudo mkdir -p "$LOG_DIR"
+sudo touch "$LOG_FILE"
+sudo chown -R $USER:$USER "$LOG_DIR"
+sudo chmod -R 755 "$LOG_DIR"
+sudo chmod 644 "$LOG_FILE"
+
 # Logging function
 log() {
     echo "[$(date +'%Y-%m-%d %H:%M:%S')] $1" | sudo tee -a "$LOG_FILE"
 }
-
-# Create necessary directories with sudo
-log "Creating necessary directories"
-sudo mkdir -p "$REACT_APP_DIR" "$BACKUP_DIR" "$NGINX_DIR"
-sudo chown -R $USER:$USER "$REACT_APP_DIR" "$BACKUP_DIR"
-sudo chmod -R 755 "$REACT_APP_DIR" "$BACKUP_DIR"
-
-# Create and set permissions for log file
-sudo touch "$LOG_FILE"
-sudo chown $USER:$USER "$LOG_FILE"
-sudo chmod 644 "$LOG_FILE"
 
 # Error handling
 handle_error() {
@@ -37,6 +34,12 @@ handle_error() {
     exit 1
 }
 trap 'handle_error $LINENO' ERR
+
+# Create necessary directories
+log "Creating necessary directories"
+sudo mkdir -p "$REACT_APP_DIR" "$BACKUP_DIR" "$NGINX_DIR"
+sudo chown -R $USER:$USER "$REACT_APP_DIR" "$BACKUP_DIR"
+sudo chmod -R 755 "$REACT_APP_DIR" "$BACKUP_DIR"
 
 # Load environment variables if exists
 if [ -f .env ]; then
@@ -103,11 +106,11 @@ deploy_app() {
     if [ -d "$REACT_APP_DIR" ]; then
         log "Removing existing directory: $REACT_APP_DIR"
         sudo rm -rf "$REACT_APP_DIR"
+        # Recreate the directory
+        sudo mkdir -p "$REACT_APP_DIR"
+        sudo chown $USER:$USER "$REACT_APP_DIR"
+        sudo chmod 755 "$REACT_APP_DIR"
     fi
-    
-    # Create parent directory if it doesn't exist
-    sudo mkdir -p "$(dirname "$REACT_APP_DIR")"
-    sudo chown $USER:$USER "$(dirname "$REACT_APP_DIR")"
     
     # Clone the repository
     log "Cloning repository"
