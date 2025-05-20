@@ -1,7 +1,7 @@
 // src/components/Hero/Hero.js
 import React from 'react';
 import './Hero.css';
-import heroImg from '../../assets/hero-boy-transparent.png';
+import heroImg from '../../assets/hero-boy-transparent2.png';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 const Hero = () => {

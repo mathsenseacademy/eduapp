@@ -1,53 +1,45 @@
-.programs-section {
-  padding: 4rem 2rem;
+/* Full-width background */
+.programs-section-wrapper {
   background-color: #f0f4ff;
+  padding: 4rem 0;
   font-family: "Poppins", sans-serif;
 }
 
+/* Section title */
 .title {
   color: #1a237e;
   font-weight: 600;
-  text-align: center;
+  text-align: left;
   margin-bottom: 2rem;
 }
 
-/* Card container */
+/* Card layout */
 .program-card {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  background: #fff;
   border-radius: 12px;
-  padding: 1.25rem;
-  background-color: #fff;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Card hover effect */
-.program-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
-}
-
-/* Internal layout: icon + text side by side */
-.program-inner {
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: row;
+  gap: 1rem;
   height: 100%;
-  gap: 1.5rem;
+  transition: transform 0.3s ease;
 }
 
-/* Icon style */
+.program-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Icon styles */
 .program-icon-box {
-  width: 60px;
-  height: 60px;
-  min-width: 60px;
   background-color: #e8eaf6;
   border-radius: 50%;
+  width: 60px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .program-icon {
@@ -55,59 +47,69 @@
   height: 30px;
 }
 
-/* Text + Button column */
+/* Text column */
 .program-text {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   flex: 1;
 }
 
 .program-text h3 {
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 1rem;
   color: #1a237e;
   margin-bottom: 0.5rem;
+  font-weight: 600;
 }
 
 .program-text p {
   font-size: 0.95rem;
   color: #555;
   flex-grow: 1;
-}
-
-/* Button aligned to bottom */
-.program-btn-wrapper {
-  margin-top: 1rem;
+  margin-bottom: 0.8rem;
 }
 
 .enroll-btn {
-  background-color: #3949ab !important;
-  text-transform: none;
-  font-weight: 500;
-  font-size: 0.9rem;
-  padding: 0.4rem 1rem;
+  background: linear-gradient(135deg, #3949ab, #5c6bc0);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.6rem 1.4rem;
+  border: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(92, 107, 192, 0.25);
 }
 
 .enroll-btn:hover {
-  background-color: #283593 !important;
+  background: linear-gradient(135deg, #283593, #3f51b5);
+  box-shadow: 0 6px 18px rgba(40, 53, 147, 0.3);
+  transform: translateY(-2px);
 }
 
-/* Responsive Fix */
+
+/* Responsive image fix */
+.banner-img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Stack on mobile */
 @media (max-width: 768px) {
-  .program-inner {
-    flex-direction: column;
-    align-items: center;
+  .title {
     text-align: center;
+  }
+
+  .program-card {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
   }
 
   .program-text {
     align-items: center;
   }
 
-  .program-btn-wrapper {
-    display: flex;
-    justify-content: center;
-    width: 100%;
+  .enroll-btn {
+    margin-top: 1rem;
   }
 }
