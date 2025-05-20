@@ -64,6 +64,12 @@
   font-weight: 800;
   text-shadow: 0 0 5px rgba(255, 87, 34, 0.3);
 }
+.titleHighlite {
+  color: #0d097d;
+  font-weight: 800;
+  text-shadow: 0 0 5px rgba(255, 87, 34, 0.3);
+  text-decoration: underline;
+}
 
 .emphasize {
   color: #00796b;

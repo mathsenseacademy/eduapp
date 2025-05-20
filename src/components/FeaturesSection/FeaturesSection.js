@@ -6,7 +6,7 @@ import gradIcon from "../../assets/hatIcon.png";
 import bookIcon from "../../assets/bookIcon.png";
 import clockIcon from "../../assets/watchIcon.png";
 import graphIcon from "../../assets/graphIcon.png";
-import featureIllustration from "../../assets/features-illustration-left.png";
+import featureIllustration from "../../assets/features-illustration-left1.png";
 
 const FeaturesSection = () => {
   const { t } = useTranslation();

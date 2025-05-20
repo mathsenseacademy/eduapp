@@ -1,5 +1,5 @@
 .features {
-  padding: 4rem 2rem;
+  padding: 2rem ;
   background-color: #ffffff;
   font-family: "Poppins", sans-serif;
 }
@@ -20,7 +20,7 @@
 
 .features-image img {
   max-width: 100%;
-  height: auto;
+  height: auto; max-height: 600px; 
 }
 
 .features-content {

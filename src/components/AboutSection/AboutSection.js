@@ -1,6 +1,6 @@
 import React from 'react';
 import './AboutSection.css';
-import aboutImg from '../../assets/about-image.jpg'; // Replace with actual image
+import aboutImg from '../../assets/aboutUs.png'; // Replace with actual image
 
 const AboutSection = () => {
   return (

@@ -19,7 +19,7 @@
     "imageAlt": "Happy kid learning math"
   },
   "features": {
-  "heading": "Why Choose <span class='highlight'>Math</span> <span class='grade'>Senseacademy</span>?",
+  "heading": "Why <span class='child-word'>Choose</span> <br/><span class='titleHighlite '>Math Senseacademy</span>?",
   "expertTutors": {
     "title": "<span class='emphasize'>Expert Tutors</span>",
     "description": "All our instructors are <span class='highlight'>math experts</span> with <span class='child-word'>years of experience</span>."
@@ -41,19 +41,19 @@
   "heading": "Explore <span class='highlight'>Our Programs</span>",
   "items": [
     {
-      "title": "<span class='grade'>Grade 1–3 Math</span>",
+      "title": "Grade 1–3 Math",
       "description": "Foundations in <span class='highlight'>addition</span>, <span class='highlight'>subtraction</span>, and <span class='child-word'>number sense</span>."
     },
     {
-      "title": "<span class='grade'>Grade 4–6 Math</span>",
+      "title": "Grade 4–6 Math",
       "description": "<span class='highlight'>Multiplication</span>, <span class='highlight'>division</span>, and early <span class='child-word'>algebra</span>."
     },
     {
-      "title": "<span class='grade'>Grade 7–8 Math</span>",
+      "title": "Grade 7–8 Math",
       "description": "Pre-Algebra and <span class='highlight'>Geometry</span> essentials."
     },
     {
-      "title": "<span class='grade'>High School Math</span>",
+      "title": "High School Math",
       "description": "<span class='highlight'>Algebra</span>, <span class='highlight'>Geometry</span>, and <span class='child-word'>SAT/ACT prep</span>."
     }
   ]

@@ -6,7 +6,7 @@ import icon1 from "../../assets/grade1-3.png";
 import icon2 from "../../assets/grade4-6.png";
 import icon3 from "../../assets/grade7-8.png";
 import icon4 from "../../assets/highschool.png";
-import bannerImg from "../../assets/transparent_icon_5.png"; // transparent boy
+import bannerImg from "../../assets/transparent_icon_6.png"; // transparent boy
 
 const ProgramsSection = () => {
   const { t } = useTranslation();

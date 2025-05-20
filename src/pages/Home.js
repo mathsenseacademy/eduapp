@@ -20,9 +20,9 @@ const Home = () => {
       <FeaturesSection />
       <ProgramsSection />
       <AboutSection />
-      <TestimonialSection />
+      {/* <TestimonialSection />
       <ExpertSection />
-      <BlogPreviewSection />
+      <BlogPreviewSection /> */}
       <ContactCTA />
       {/* <Footer /> */}
     </>
