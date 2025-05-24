@@ -15,6 +15,7 @@ import ContactCTA from '../components/ContactCTA/ContactCTA';
 const Home = () => {
   return (
     <>
+    {/* <section data-scroll-section> */}
       {/* <Header /> */}
       <Hero />
       <FeaturesSection />
@@ -25,6 +26,7 @@ const Home = () => {
       <BlogPreviewSection /> */}
       <ContactCTA />
       {/* <Footer /> */}
+      {/* </section> */}
     </>
   );
 };

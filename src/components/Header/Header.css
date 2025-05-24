@@ -31,6 +31,49 @@
   transform: scale(1.05);
   background: #fb8c00;
 }
+.navbar {
+  background-color: transparent !important;
+  transition: top 0.4s ease, background-color 0.4s ease;
+  top: 0;
+  z-index: 1000;
+}
+
+.sticky-shadow {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.nav-hidden {
+  top: -100px;
+  position: fixed;
+  width: 100%;
+}
+
+.sticky-register-btn {
+  animation: fadeSlideIn 0.6s ease forwards;
+  position: fixed;
+  right: 1rem;
+  bottom: 2rem;
+  font-weight: 600;
+  color: #fff;
+  background: #ff9800;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, background 0.3s ease;
+  z-index: 999;
+  white-space: nowrap;
+}
+
+.sticky-register-btn:hover {
+  transform: scale(1.05);
+  background: #fb8c00;
+}
+
+
+
 
 @keyframes fadeSlideIn {
   from {

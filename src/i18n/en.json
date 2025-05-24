@@ -5,8 +5,6 @@
   "experts": "Our Experts",
   "blog": "Blog",
   "contact": "Contact",
-  "courses": "Courses",
-"courses": "Courses",
   "analytical": "Mini Solvers (Class 1–2)",
   "ml": "Young Explorers (Class 3–4)",
   "olympiad": "Trailblazers (Class 5)",
@@ -42,24 +40,61 @@
     "description": "Courses designed to meet each student’s <span class='highlight'>unique needs</span> and <span class='child-word'>learning style</span>."
   }
 },
-"programs": {
-  "heading": "Explore <span class='highlight'>Our Programs</span>",
-  "items": [
-    {
-      "title": "Grade 1–3 Math",
-      "description": "Foundations in <span class='highlight'>addition</span>, <span class='highlight'>subtraction</span>, and <span class='child-word'>number sense</span>."
-    },
-    {
-      "title": "Grade 4–6 Math",
-      "description": "<span class='highlight'>Multiplication</span>, <span class='highlight'>division</span>, and early <span class='child-word'>algebra</span>."
-    },
-    {
-      "title": "Grade 7–8 Math",
-      "description": "Pre-Algebra and <span class='highlight'>Geometry</span> essentials."
-    },
-    {
-      "title": "High School Math",
-      "description": "<span class='highlight'>Algebra</span>, <span class='highlight'>Geometry</span>, and <span class='child-word'>SAT/ACT prep</span>."
-    }
-  ]
-}}
+
+  "programs": {
+    "heading": "Explore <span class='highlight'>Our Programs</span>",
+    "items": [
+      {
+        "title": "Mini Solvers (Class 1–2)",
+        "focusArea": "Foundation in <span class='highlight'>numbers</span>, <span class='highlight'>patterns</span>, <span class='highlight'>logic</span>",
+        "description": "Foundations in <span class='highlight'>addition</span>, <span class='highlight'>subtraction</span>, and <span class='child-word'>number sense</span>."
+      },
+      {
+        "title": "Young Explorers (Class 3–4)",
+        "focusArea": "<span class='highlight'>Word problems</span>, intro to <span class='highlight'>Olympiad</span>",
+        "description": "Explore <span class='highlight'>problem solving</span> through puzzles and early Olympiad topics."
+      },
+      {
+        "title": "Trailblazers (Class 5)",
+        "focusArea": "<span class='highlight'>Deeper logic</span>, NMTC & SOF start",
+        "description": "Strengthen logic and dive into <span class='highlight'>NMTC</span> and <span class='highlight'>SOF</span> preparation."
+      },
+      {
+        "title": "Math Builders (Class 6)",
+        "focusArea": "Olympiad Level 1, <span class='highlight'>NMTC Primary</span>",
+        "description": "Hands-on training for <span class='highlight'>Olympiad Level 1</span> and <span class='highlight'>NMTC Primary</span> category."
+      },
+      {
+        "title": "Math Challengers (Class 7)",
+        "focusArea": "Olympiad Level 2, <span class='highlight'>AMC 8 prep</span>",
+        "description": "Tackling complex problems, <span class='highlight'>AMC 8</span> and <span class='highlight'>Olympiad Level 2</span> topics."
+      },
+      {
+        "title": "AMC Jumpers (Class 8)",
+        "focusArea": "<span class='highlight'>NMTC</span>, AMC 8/10, ISI base",
+        "description": "Advance toward <span class='highlight'>AMC 10</span> and strengthen <span class='highlight'>NMTC</span> and <span class='child-word'>ISI</span> fundamentals."
+      },
+      {
+        "title": "JEE/ISI Starters (Class 9)",
+        "focusArea": "Strong problem solving, <span class='highlight'>algebra focus</span>",
+        "description": "Develop <span class='highlight'>algebraic</span> problem-solving skills and <span class='child-word'>exam strategies</span>."
+      },
+      {
+        "title": "Board + Math Wiz (Class 10)",
+        "focusArea": "Board + JEE Main + Olympiad/ISI",
+        "description": "Master <span class='highlight'>board math</span> while preparing for <span class='child-word'>JEE Main</span> and <span class='highlight'>Olympiads</span>."
+      },
+      {
+        "title": "JEE Intensive (Class 11)",
+        "focusArea": "JEE Adv, ISI Math + <span class='highlight'>RMO base</span>",
+        "description": "Focus on <span class='highlight'>JEE Advanced</span>, <span class='highlight'>ISI Math</span> and <span class='highlight'>RMO fundamentals</span>."
+      },
+      {
+        "title": "Final Sprint (Class 12)",
+        "focusArea": "JEE + ISI last mile + <span class='highlight'>revision</span>",
+        "description": "Final round of <span class='highlight'>mock tests</span>, <span class='highlight'>concept clarity</span>, and <span class='child-word'>exam polish</span>."
+      }
+    ]
+  }
+}
+

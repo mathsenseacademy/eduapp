@@ -32,15 +32,29 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+
     const handleScroll = () => {
       const navbar = document.querySelector(".navbar");
+
+      // Shadow and sticky behavior
       if (window.scrollY > 20) {
         navbar.classList.add("sticky-shadow");
       } else {
         navbar.classList.remove("sticky-shadow");
       }
 
+      // Sticky register button
       setShowStickyRegister(window.scrollY > 300);
+
+      // Scroll direction check
+      if (window.scrollY < lastScrollY) {
+        navbar.classList.remove("nav-hidden");
+      } else {
+        navbar.classList.add("nav-hidden");
+      }
+
+      lastScrollY = window.scrollY;
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -77,7 +91,7 @@ const Header = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg fixed-top bg-white shadow-sm px-3">
+    <nav className="navbar navbar-expand-lg fixed-top px-3">
       <div className="container-fluid justify-content-between align-items-center d-flex">
         <div className="d-flex align-items-center gap-4">
           <motion.div
@@ -95,56 +109,16 @@ const Header = () => {
               {t("courses")}
             </button>
             <ul className={`dropdown-menu ${dropdownOpen ? "show" : ""}`}>
-              <li>
-                <Link to="/courses/analytical-maths" className="dropdown-item">
-                  {t("analytical")}
-                </Link>
-              </li>
-              <li>
-                <Link to="/courses/ml-python" className="dropdown-item">
-                  {t("ml")}
-                </Link>
-              </li>
-              <li>
-                <Link to="/courses/olympiad" className="dropdown-item">
-                  {t("olympiad")}
-                </Link>
-              </li>
-              <li>
-                <Link to="/courses/stats" className="dropdown-item">
-                  {t("stats")}
-                </Link>
-              </li>
-              <li>
-                <Link to="/courses/algorithms" className="dropdown-item">
-                  {t("algorithms")}
-                </Link>
-              </li>
-              <li>
-                <Link to="/courses/vedic-math" className="dropdown-item">
-                  {t("vedic")}
-                </Link>
-              </li>
-              <li>
-                <Link to="/courses/3d-animation" className="dropdown-item">
-                  {t("animation")}
-                </Link>
-              </li>
-              <li>
-                <Link to="/courses/class-10" className="dropdown-item">
-                  {t("course10")}
-                </Link>
-              </li>
-              <li>
-                <Link to="/courses/class-11" className="dropdown-item">
-                  {t("course11")}
-                </Link>
-              </li>
-              <li>
-                <Link to="/courses/class-12" className="dropdown-item">
-                  {t("course12")}
-                </Link>
-              </li>
+              <li><Link to="/courses/analytical-maths" className="dropdown-item">{t("analytical")}</Link></li>
+              <li><Link to="/courses/ml-python" className="dropdown-item">{t("ml")}</Link></li>
+              <li><Link to="/courses/olympiad" className="dropdown-item">{t("olympiad")}</Link></li>
+              <li><Link to="/courses/stats" className="dropdown-item">{t("stats")}</Link></li>
+              <li><Link to="/courses/algorithms" className="dropdown-item">{t("algorithms")}</Link></li>
+              <li><Link to="/courses/vedic-math" className="dropdown-item">{t("vedic")}</Link></li>
+              <li><Link to="/courses/3d-animation" className="dropdown-item">{t("animation")}</Link></li>
+              <li><Link to="/courses/class-10" className="dropdown-item">{t("course10")}</Link></li>
+              <li><Link to="/courses/class-11" className="dropdown-item">{t("course11")}</Link></li>
+              <li><Link to="/courses/class-12" className="dropdown-item">{t("course12")}</Link></li>
             </ul>
           </div>
 
@@ -170,64 +144,28 @@ const Header = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div
-          className="collapse navbar-collapse justify-content-end mt-3 mt-lg-0"
-          id="mainNav"
-        >
+        <div className="collapse navbar-collapse justify-content-end mt-3 mt-lg-0" id="mainNav">
           <ul className="navbar-nav align-items-center gap-3 mb-2 mb-lg-0">
-            <li className="nav-item">
-              <Link to="/" className="nav-link">
-                {t("home")}
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/about" className="nav-link">
-                {t("about")}
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/experts" className="nav-link">
-                {t("experts")}
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/blog" className="nav-link">
-                {t("blog")}
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/contact" className="nav-link">
-                {t("contact")}
-              </Link>
-            </li>
+            <li className="nav-item"><Link to="/" className="nav-link">{t("home")}</Link></li>
+            <li className="nav-item"><Link to="/about" className="nav-link">{t("about")}</Link></li>
+            <li className="nav-item"><Link to="/experts" className="nav-link">{t("experts")}</Link></li>
+            <li className="nav-item"><Link to="/blog" className="nav-link">{t("blog")}</Link></li>
+            <li className="nav-item"><Link to="/contact" className="nav-link">{t("contact")}</Link></li>
           </ul>
 
           <div className="position-relative mt-2 mt-lg-0">
             {adminUser ? (
               <div className="d-flex align-items-center gap-2">
-                <span className="text-success fw-semibold">
-                  Admin ID: {adminUser.admin_id}
-                </span>
-                <button
-                  className="btn btn-outline-danger"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </button>
+                <span className="text-success fw-semibold">Admin ID: {adminUser.admin_id}</span>
+                <button className="btn btn-outline-danger" onClick={handleLogout}>Logout</button>
               </div>
             ) : (
               <>
-                <button
-                  className="btn btn-outline-primary"
-                  onClick={handleLoginToggle}
-                >
+                <button className="btn btn-outline-primary" onClick={handleLoginToggle}>
                   {t("login")}
                 </button>
                 {showLogin && (
-                  <form
-                    onSubmit={handleLogin}
-                    className="login-form p-3 border bg-white shadow rounded position-absolute end-0 mt-2"
-                  >
+                  <form onSubmit={handleLogin} className="login-form p-3 border bg-white shadow rounded position-absolute end-0 mt-2">
                     <input
                       type="text"
                       className="form-control mb-2"
@@ -244,19 +182,11 @@ const Header = () => {
                       onChange={(e) => setPassword(e.target.value)}
                       required
                     />
-                    <button type="submit" className="btn btn-primary w-100">
-                      Login
-                    </button>
-                    {loginError && (
-                      <p className="text-danger mt-2">{loginError}</p>
-                    )}
+                    <button type="submit" className="btn btn-primary w-100">Login</button>
+                    {loginError && <p className="text-danger mt-2">{loginError}</p>}
                     <p className="register-link mt-2 text-center">
                       Don't have an account?{" "}
-                      <span
-                        onClick={() => navigate("/register")}
-                        className="text-primary"
-                        style={{ cursor: "pointer" }}
-                      >
+                      <span onClick={() => navigate("/register")} className="text-primary" style={{ cursor: "pointer" }}>
                         Register
                       </span>
                     </p>
