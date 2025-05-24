@@ -10,13 +10,48 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  /* Fade out after the animation completes */
+  animation: fadeOut 1s ease forwards;
+  animation-delay: 4.2s; /* 3s pulse + ~1.2s transition */
 }
 
+/* Fade out animation */
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* Initial logo pulse before transition */
+.pulse-wrapper {
+  animation: logoPulse 3s ease-in-out;
+}
+
+@keyframes logoPulse {
+  0%, 100% {
+    transform: scale(1.5);
+  }
+  50% {
+    transform: scale(2.2);
+  }
+}
+
+/* Video logo styles */
+.loader-logo {
+  width: 200px;
+  height: auto;
+  border-radius: 12px;
+  transition: all 0.8s ease;
+}
+
+/* Loader text and math icons */
 .math-loader {
   display: flex;
   gap: 1rem;
-  font-size: 3rem;
-  animation: bounce 1.2s infinite ease-in-out;
+  font-size: 2rem;
+  margin-top: 1.5rem;
 }
 
 .math-loader span {

@@ -8,6 +8,8 @@ import clockIcon from "../../assets/watchIcon.png";
 import graphIcon from "../../assets/graphIcon.png";
 import featureIllustration from "../../assets/features-illustration-left1.png";
 
+import { motion } from 'framer-motion';
+
 const FeaturesSection = () => {
   const { t } = useTranslation();
 
@@ -45,11 +47,18 @@ const FeaturesSection = () => {
           <h2 dangerouslySetInnerHTML={{ __html: t("features.heading") }} />
           <div className="feature-cards">
             {features.map((feature, index) => (
-              <div className="feature-card" key={index}>
+              // <div className="feature-card" key={index}>
+                <motion.div
+  whileInView={{ opacity: 1, y: 0 }}
+  initial={{ opacity: 0, y: 50 }}
+  transition={{ duration: 0.6, delay: index * 0.1 }}
+  className="feature-card"
+  key={index}
+>
                 <img src={feature.icon} alt={`Feature ${index + 1}`} />
                 <h3 dangerouslySetInnerHTML={{ __html: feature.title }} />
                 <p dangerouslySetInnerHTML={{ __html: feature.description }} />
-              </div>
+                </motion.div>
             ))}
           </div>
         </div>

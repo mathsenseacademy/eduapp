@@ -8,7 +8,7 @@ const AdminPanel = () => {
     const fetchStudents = async () => {
       try {
         const token = localStorage.getItem('accessToken');
-        const response = await axios.get('http://127.0.0.1:7000/administrator/students/', {
+        const response = await axios.get('http://192.168.99.47:8000/administrator/students/', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
