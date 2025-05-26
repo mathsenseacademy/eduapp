@@ -26,11 +26,11 @@ useEffect(() => {
 }, []);
 
   // replace with real user data
-  const user = {
-    name: "Admin User",
-    email: "admin@example.com",
-    avatar: "https://i.pravatar.cc/150?img=3",
-  };
+  // const user = {
+  //   name: "Admin User",
+  //   email: "admin@example.com",
+  //   avatar: "https://i.pravatar.cc/150?img=3",
+  // };
 
   /* header shadow ---------------------------------------------------- */
   useEffect(() => {
