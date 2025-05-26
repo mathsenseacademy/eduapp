@@ -1,0 +1,91 @@
+/* dimmed backdrop */
+.profile-backdrop {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 1100;
+}
+
+/* centered card */
+.profile-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 320px;
+  max-width: 92%;
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 12px;
+  transform: translate(-50%, -50%);
+  z-index: 1110;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* X button */
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 1.4rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* header section */
+.profile-header {
+  text-align: center;
+}
+.profile-avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+
+/* form */
+.pwd-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.pwd-form input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* buttons */
+.save-btn,
+.logout-btn-full {
+  width: 100%;
+  padding: 0.55rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.save-btn {
+  background: #007bff;
+  color: #fff;
+}
+.save-btn:hover {
+  background: #0062d6;
+}
+
+.logout-btn-full {
+  background: #dc3545;
+  color: #fff;
+}
+.logout-btn-full:hover {
+  background: #c82333;
+}
+
+.username {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #555;
+}

@@ -1,0 +1,69 @@
+
+/* Header Logo */
+.logo-img {
+  width: 60px;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+/* Sticky Register Button */
+.sticky-register-btn {
+  animation: fadeSlideIn 0.6s ease forwards;
+  position: fixed;
+  right: 1rem;
+  bottom: 2rem;
+  font-weight: 600;
+  color: #fff;
+  background: #ff9800;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, background 0.3s ease;
+  z-index: 999;
+  white-space: nowrap;
+}
+.sticky-register-btn:hover {
+  transform: scale(1.05);
+  background: #fb8c00;
+}
+
+/* Header Base */
+.navbar {
+  background-color: white;
+  transition: background-color 0.4s ease;
+  z-index: 1050;
+}
+
+/* Shadow Effect */
+.sticky-shadow {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Animation */
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Page Padding Offset for Fixed Header */
+.pt-header {
+  padding-top: 85px;
+}
+
+/* Manual Sticky Fix */
+.navbar.fixed-top {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1050;
+}

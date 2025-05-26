@@ -19,9 +19,14 @@ body {
   margin: 0;
   padding: 0;
 }
-
-html,
-body {
+.pt-header {
+  padding-top: 85px;
+}
+  /*[data-scroll-container] {
+  min-height: 100vh;  keeps content visible if Loco destroyed 
+} */
+/*html,
+ body {
   height: 100%;
   overflow: hidden;
 }
@@ -30,4 +35,4 @@ body {
   min-height: 100vh;
   overflow: hidden;
   position: relative;
-}
+} */

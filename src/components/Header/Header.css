@@ -1,8 +1,17 @@
+/* Header Logo */
 .logo-img {
   width: 60px;
   height: auto;
   transition: transform 0.3s ease;
 }
+
+/* Login Form */
+.login-form {
+  width: 250px;
+  z-index: 1050;
+}
+
+/* Register Link */
 .register-link span {
   color: #d81b60;
   cursor: pointer;
@@ -12,45 +21,8 @@
   text-decoration: none;
 }
 
-.sticky-register-btn {
-  animation: fadeSlideIn 0.6s ease forwards;
-  margin-left: 1rem;
-  font-weight: 600;
-  color: #fff;
-  background: #ff9800;
-  border: none;
-  padding: 0.5rem 1.2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease, background 0.3s ease;
-  z-index: 999;
-  white-space: nowrap;
-}
-
-.sticky-register-btn:hover {
-  transform: scale(1.05);
-  background: #fb8c00;
-}
-.navbar {
-  background-color: transparent !important;
-  transition: top 0.4s ease, background-color 0.4s ease;
-  top: 0;
-  z-index: 1000;
-}
-
-.sticky-shadow {
-  background-color: rgba(255, 255, 255, 0.95) !important;
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.nav-hidden {
-  top: -100px;
-  position: fixed;
-  width: 100%;
-}
-
-.sticky-register-btn {
+/* Sticky Register Button */
+/* .sticky-register-btn {
   animation: fadeSlideIn 0.6s ease forwards;
   position: fixed;
   right: 1rem;
@@ -66,15 +38,73 @@
   z-index: 999;
   white-space: nowrap;
 }
+.sticky-register-btn:hover {
+  transform: scale(1.05);
+  background: #fb8c00;
+} */
 
+/* === Sticky Register Button (inside header, not floating) === */
+.sticky-register-btn {
+  /* take it OUT of the bottom-right corner */
+  position: relative;   
+  right: auto;
+  bottom: auto;
+  font-weight: 600;
+  color: #fff;
+  background: #ff9800;
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
+  transition: transform 0.3s ease, background 0.3s ease;
+  animation: fadeSlideIn 0.6s ease forwards;
+}
 .sticky-register-btn:hover {
   transform: scale(1.05);
   background: #fb8c00;
 }
 
+/* OPTIONAL: add a little left margin so it’s not glued to the dropdown */
+.sticky-register-btn {
+  margin-left: 1rem;
+}
 
 
+/* Header Base */
+.navbar {
+  background: rgba(0, 123, 255, 0.25);   /* bootstrap-blue @ 25 % opacity */
+  backdrop-filter: blur(10px);           /* soft glass effect */
+  -webkit-backdrop-filter: blur(10px);   /* Safari */
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
 
+/* when the page is scrolled >20 px (sticky-shadow class is added in JS) */
+.sticky-shadow {
+  background: rgba(0, 123, 255, 0.55);   /* same blue, just a bit more solid */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.navbar.fixed-top {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1050;
+}
+
+/* Shadow Effect */
+/* .sticky-shadow {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+} */
+
+/* Slide Up/Down Nav */
+/* .nav-hidden {
+  transform: translateY(-100%);
+} */
+
+/* Animation */
 @keyframes fadeSlideIn {
   from {
     opacity: 0;
@@ -86,25 +116,11 @@
   }
 }
 
-.login-form {
-  width: 250px;
-  z-index: 1050;
-}
-
-.register-link span {
-  color: #d81b60;
-  cursor: pointer;
-  text-decoration: underline;
-}
-.register-link span:hover {
-  text-decoration: none;
-}
-
+/* Nav Link Hover */
 .navbar-nav .nav-item {
   position: relative;
   overflow: hidden;
 }
-
 .navbar-nav .nav-item::after {
   content: '';
   position: absolute;
@@ -115,28 +131,30 @@
   background-color: #0d6efd;
   transition: width 0.4s ease-in-out;
 }
-
 .navbar-nav .nav-item:hover::after {
   width: 100%;
 }
 
+/* Mobile Styles */
 @media (max-width: 768px) {
   .logo-img {
     width: 48px;
   }
-
   .sticky-register-btn {
     font-size: 0.8rem;
     padding: 0.3rem 0.8rem;
   }
 }
-@keyframes fadeSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+
+/* Page Padding Offset for Fixed Header */
+.pt-header {
+  padding-top: 85px;
+}
+
+.language-select {
+  min-width: 70px;
+  cursor: pointer;
+}
+.language-select:focus {
+  box-shadow: none;
 }

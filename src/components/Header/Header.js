@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { jwtDecode } from "jwt-decode";
@@ -8,6 +8,7 @@ import logo from "../../assets/logo.png";
 import "./Header.css";
 
 const Header = () => {
+  /* ───────── state ───────── */
   const [showLogin, setShowLogin] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [username, setUsername] = useState("");
@@ -16,99 +17,106 @@ const Header = () => {
   const [adminUser, setAdminUser] = useState(null);
   const [showStickyRegister, setShowStickyRegister] = useState(false);
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
+  const loginBoxRef = useRef(null); // <- popup ref
+
+  /* ── auth token once ── */
   useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-    if (token) {
+    const tok = localStorage.getItem("accessToken");
+    if (tok)
       try {
-        const decoded = jwtDecode(token);
-        setAdminUser(decoded);
-      } catch (err) {
-        console.error("Invalid token:", err);
+        setAdminUser(jwtDecode(tok));
+      } catch {
+        console.error("Invalid token");
       }
-    }
   }, []);
 
+  /* ── sticky shadow ── */
   useEffect(() => {
-    let lastScrollY = window.scrollY;
+    const nav = document.querySelector(".navbar");
+    const onScroll = () =>
+      nav.classList.toggle("sticky-shadow", window.scrollY > 20);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
-    const handleScroll = () => {
-      const navbar = document.querySelector(".navbar");
+  /* ── show register when hero leaves view ── */
+  useEffect(() => {
+    const hero = document.querySelector("#hero");
+    if (!hero) return;
+    const ob = new IntersectionObserver(
+      ([e]) => setShowStickyRegister(!e.isIntersecting),
+      { threshold: 0.1 }
+    );
+    ob.observe(hero);
+    return () => ob.disconnect();
+  }, []);
 
-      // Shadow and sticky behavior
-      if (window.scrollY > 20) {
-        navbar.classList.add("sticky-shadow");
-      } else {
-        navbar.classList.remove("sticky-shadow");
+  /* ── outside-click to close login ── */
+  useEffect(() => {
+    if (!showLogin) return;
+
+    const handleClick = (e) => {
+      if (
+        loginBoxRef.current &&
+        !loginBoxRef.current.contains(e.target) &&           // click outside form
+        !e.target.closest(".login-toggle-btn")               // and not on toggle
+      ) {
+        setShowLogin(false);
       }
-
-      // Sticky register button
-      setShowStickyRegister(window.scrollY > 300);
-
-      // Scroll direction check
-      if (window.scrollY < lastScrollY) {
-        navbar.classList.remove("nav-hidden");
-      } else {
-        navbar.classList.add("nav-hidden");
-      }
-
-      lastScrollY = window.scrollY;
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [showLogin]);
 
+  /* ── handlers ── */
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
-  const handleLoginToggle = () => setShowLogin(!showLogin);
+  const toggleLogin    = () => setShowLogin(!showLogin);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.post("administrator/login/", {
+      const { data } = await api.post("administrator/login/", {
         username,
         password,
       });
-      const { access } = response.data;
-      localStorage.setItem("accessToken", access);
-      const decoded = jwtDecode(access);
-      setAdminUser(decoded);
+      localStorage.setItem("accessToken", data.access);
+      setAdminUser(jwtDecode(data.access));
       setShowLogin(false);
       setLoginError(null);
       navigate("/admin");
-    } catch (error) {
+    } catch {
       setLoginError("Login failed. Check your credentials.");
-      console.error(error);
     }
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("accessToken");
-    setAdminUser(null);
-    navigate("/");
-  };
+  /* ── language list ── */
+  const languages = [
+    { code: "en", label: "EN" },
+    { code: "hi", label: "हिंदी" },
+    { code: "bn", label: "বাংলা" },
+  ];
 
+  /* ───────── render ───────── */
   return (
     <nav className="navbar navbar-expand-lg fixed-top px-3">
-      <div className="container-fluid justify-content-between align-items-center d-flex">
+      <div className="container-fluid justify-content-between d-flex">
+        {/* left */}
         <div className="d-flex align-items-center gap-4">
-          <motion.div
-            layoutId="shared-logo"
-            transition={{ type: "spring", stiffness: 60, damping: 15 }}
-          >
+          <motion.div layoutId="shared-logo" transition={{ type: "spring", stiffness: 60, damping: 15 }}>
             <img src={logo} alt="Math Senseacademy" className="logo-img" />
           </motion.div>
 
+          {/* courses dropdown */}
           <div className="nav-item dropdown">
-            <button
-              className="btn btn-outline-danger dropdown-toggle"
-              onClick={toggleDropdown}
-            >
+            <button className="btn btn-outline-danger dropdown-toggle" onClick={toggleDropdown}>
               {t("courses")}
             </button>
             <ul className={`dropdown-menu ${dropdownOpen ? "show" : ""}`}>
+              {/* …course links… */}
               <li><Link to="/courses/analytical-maths" className="dropdown-item">{t("analytical")}</Link></li>
               <li><Link to="/courses/ml-python" className="dropdown-item">{t("ml")}</Link></li>
               <li><Link to="/courses/olympiad" className="dropdown-item">{t("olympiad")}</Link></li>
@@ -122,12 +130,13 @@ const Header = () => {
             </ul>
           </div>
 
+          {/* sticky register */}
           {showStickyRegister && (
             <motion.button
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="btn sticky-register-btn"
+              transition={{ duration: 0.4 }}
+              className="sticky-register-btn"
               onClick={() => navigate("/student/register")}
             >
               {t("hero.registerButton")}
@@ -135,17 +144,28 @@ const Header = () => {
           )}
         </div>
 
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#mainNav"
-        >
+        {/* burger */}
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
           <span className="navbar-toggler-icon"></span>
         </button>
 
+        {/* right */}
         <div className="collapse navbar-collapse justify-content-end mt-3 mt-lg-0" id="mainNav">
           <ul className="navbar-nav align-items-center gap-3 mb-2 mb-lg-0">
+            <li className="nav-item">
+              <select
+                className="form-select form-select-sm language-select"
+                value={i18n.language}
+                onChange={(e) => i18n.changeLanguage(e.target.value)}
+              >
+                {languages.map((l) => (
+                  <option key={l.code} value={l.code}>
+                    {l.label}
+                  </option>
+                ))}
+              </select>
+            </li>
+
             <li className="nav-item"><Link to="/" className="nav-link">{t("home")}</Link></li>
             <li className="nav-item"><Link to="/about" className="nav-link">{t("about")}</Link></li>
             <li className="nav-item"><Link to="/experts" className="nav-link">{t("experts")}</Link></li>
@@ -153,19 +173,24 @@ const Header = () => {
             <li className="nav-item"><Link to="/contact" className="nav-link">{t("contact")}</Link></li>
           </ul>
 
+          {/* auth */}
           <div className="position-relative mt-2 mt-lg-0">
             {adminUser ? (
-              <div className="d-flex align-items-center gap-2">
-                <span className="text-success fw-semibold">Admin ID: {adminUser.admin_id}</span>
-                <button className="btn btn-outline-danger" onClick={handleLogout}>Logout</button>
-              </div>
+              <button className="btn btn-outline-success" onClick={() => navigate("/admin")}>
+                Go to Admin Section
+              </button>
             ) : (
               <>
-                <button className="btn btn-outline-primary" onClick={handleLoginToggle}>
+                <button className="btn btn-outline-primary login-toggle-btn" onClick={toggleLogin}>
                   {t("login")}
                 </button>
+
                 {showLogin && (
-                  <form onSubmit={handleLogin} className="login-form p-3 border bg-white shadow rounded position-absolute end-0 mt-2">
+                  <form
+                    ref={loginBoxRef}
+                    onSubmit={handleLogin}
+                    className="login-form p-3 border bg-white shadow rounded position-absolute end-0 mt-2"
+                  >
                     <input
                       type="text"
                       className="form-control mb-2"
@@ -182,13 +207,13 @@ const Header = () => {
                       onChange={(e) => setPassword(e.target.value)}
                       required
                     />
-                    <button type="submit" className="btn btn-primary w-100">Login</button>
+                    <button type="submit" className="btn btn-primary w-100">
+                      Login
+                    </button>
                     {loginError && <p className="text-danger mt-2">{loginError}</p>}
                     <p className="register-link mt-2 text-center">
-                      Don't have an account?{" "}
-                      <span onClick={() => navigate("/register")} className="text-primary" style={{ cursor: "pointer" }}>
-                        Register
-                      </span>
+                      {`Don't have an account? `}
+                      <span onClick={() => navigate("/register")}>Register</span>
                     </p>
                   </form>
                 )}

@@ -17,7 +17,8 @@ const Home = () => {
     <>
     {/* <section data-scroll-section> */}
       {/* <Header /> */}
-      <Hero />
+      <section id="hero" className="hero-section"> <Hero /></section>
+     
       <FeaturesSection />
       <ProgramsSection />
       <AboutSection />

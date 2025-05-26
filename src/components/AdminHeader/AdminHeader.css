@@ -1,0 +1,50 @@
+/* translucent blue glass */
+.admin-navbar {
+  background: rgba(0, 123, 255, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1050;
+}
+.sticky-shadow {
+  background: rgba(0, 123, 255, 0.55);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.admin-nav-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 1.4rem;
+}
+
+.admin-logo {
+  width: 55px;
+}
+
+.admin-nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.admin-nav-links a,
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.admin-nav-links a:hover,
+.logout-btn:hover {
+  transform: translateY(-2px);
+}

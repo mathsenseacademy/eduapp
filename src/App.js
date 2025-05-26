@@ -1,36 +1,34 @@
-import React, { useEffect, useState, useRef } from "react";
-import { Routes, Route } from "react-router-dom";
+// src/App.js
+import React, { useEffect, useState } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { LayoutGroup } from "framer-motion";
+
 import Header from "./components/Header/Header";
+import AdminHeader from "./components/AdminHeader/AdminHeader";
 import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import StudentRegister from "./pages/StudentRegister";
-import SiteSettings from "./components/SiteSettings/siteSettings";
+// import SiteSettings from "./components/SiteSettings/siteSettings";
 import AdminPanel from "./components/AdminPanel/AdminPanel";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Loader from "./components/Loader/Loader";
-import LocomotiveScroll from "locomotive-scroll";
-import "locomotive-scroll/dist/locomotive-scroll.css";
+
+import useLocoScroll from "./hooks/useLocoScroll";
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const scrollRef = useRef(null);
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith("/admin");
 
+  /* fake pre-loader -------------------------------------------------- */
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000);
-    return () => clearTimeout(timer);
+    const t = setTimeout(() => setLoading(false), 2000);
+    return () => clearTimeout(t);
   }, []);
+  /* ----------------------------------------------------------------- */
 
-  useEffect(() => {
-    if (!loading && scrollRef.current) {
-      const scroll = new LocomotiveScroll({
-        el: scrollRef.current,
-        smooth: true,
-      });
-      return () => scroll.destroy();
-    }
-  }, [loading]);
+  const scrollRef = useLocoScroll(loading);
 
   return (
     <LayoutGroup>
@@ -38,15 +36,20 @@ function App() {
         <Loader />
       ) : (
         <>
+          {/* pick the correct header */}
+          {isAdminRoute ? <AdminHeader /> : <Header />}
+
+          {/* Locomotive wrapper */}
           <div data-scroll-container ref={scrollRef}>
-            <div data-scroll-section>
-              <Header />
+            <div data-scroll-section className="pt-header">
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/student/register" element={<StudentRegister />} />
+
+                {/* admin routes */}
                 <Route
-                  path="/admin"
+                  path="/admin/*"
                   element={
                     <ProtectedRoute>
                       <AdminPanel />
@@ -54,10 +57,12 @@ function App() {
                   }
                 />
               </Routes>
+
               <Footer />
             </div>
           </div>
-          <SiteSettings />
+
+          {/* <SiteSettings /> */}
         </>
       )}
     </LayoutGroup>
