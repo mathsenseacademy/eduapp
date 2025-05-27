@@ -47,6 +47,10 @@ if [ -f .env ]; then
     source .env
 fi
 
+# Set memory limits for Node.js
+export NODE_OPTIONS="--max-old-space-size=4096"
+export NODE_ENV=production
+
 # Verify required environment variables
 if [ -z "$SERVER_NAME" ]; then
     log "Warning: SERVER_NAME not set in .env, using default: $SERVER_NAME"
@@ -153,8 +157,27 @@ deploy_app() {
         npm install || handle_error $LINENO
     }
     
-    log "Building application"
-    npm run build || handle_error $LINENO
+    # Build the application with memory optimization and retry
+    log "Building application with memory optimization..."
+    for i in {1..3}; do
+        # Clear cache and build with increased memory
+        rm -rf node_modules/.cache
+        NODE_OPTIONS="--max-old-space-size=4096" npm run build && break || {
+            log "Build failed, attempt $i/3"
+            sleep 10
+            # Try cleaning up more resources
+            if [ $i -lt 3 ]; then
+                log "Cleaning up resources before retry..."
+                npm cache clean --force
+                rm -rf node_modules
+                npm ci
+            fi
+        }
+        if [ $i -eq 3 ]; then
+            log "Failed to build application after 3 attempts"
+            exit 1
+        fi
+    done || handle_error $LINENO
     
     # Verify build directory exists
     if [ ! -d "build" ]; then
@@ -318,11 +341,6 @@ main() {
     verify_dependencies
     update_system
     deploy_app
-    
-    # Copy build files with proper permissions
-    log "Copying build files"
-    sudo rm -rf "$NGINX_DIR"/*
-    sudo cp -r "$REACT_APP_DIR/build/"* "$NGINX_DIR"/
     
     # Verify the static directory exists
     if [ ! -d "$NGINX_DIR/static" ]; then
