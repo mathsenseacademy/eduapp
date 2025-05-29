@@ -1,57 +1,43 @@
-# .github/workflows/deploy.yml
-name: Deploy React via CodeDeploy
+- name: Deploy to EC2
+  env:
+    PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY }}
+    HOST: ${{ secrets.EC2_HOST }}
+    USER: ${{ secrets.EC2_USER }}
+  run: |
+   echo "$PRIVATE_KEY" > github-ec2.pem && chmod 600 github-ec2.pem
+    ssh -i github-ec2.pem ${USER}@${HOST} '
+   # export NVM_DIR="$HOME/.nvm"
+   # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    #if ! command -v nvm &> /dev/null; then
+     # curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+      #[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    #fi
+    #nvm install node
 
-on:
-  push:
-    branches: [ main ]
+    #npm install -g pm2
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+    REPO_DIR="$HOME/"
+    if [ -d "$REPO_DIR/.git" ]; then
+      cd "$REPO_DIR"
+      git pull origin main
+    else
+      git clone https://github.com/mathsenseacademy/eduapp.git "$REPO_DIR"
+      cd "$REPO_DIR"
+    fi
+    
+    npm install
+    npm i -S react-scripts
+    npm start
+    #REPO_DIR_2="$HOME/github-aws-ec2/simple-web-server"
+    #if [ -d "$REPO_DIR_2/.git" ]; then
+     # cd "$REPO_DIR_2"
+     # git pull origin main
+    #else
+     # git clone https://github.com/your-org/simple-web-server.git "$REPO_DIR_2"
+      #cd "$REPO_DIR_2"
+    #fi
+    #npm install
 
-    steps:
-      # 1️⃣ Checkout your code
-      - name: Checkout repo
-        uses: actions/checkout@v3
-
-      # 2️⃣ Configure AWS credentials for later steps
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4   # sets AWS_* env vars :contentReference[oaicite:0]{index=0}
-        with:
-          aws-access-key-id:     ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region:            ap-south-1
-
-      # 3️⃣ Bundle your app (skip .git + node_modules)
-      - name: Create ZIP bundle
-        run: |
-          mkdir bundle
-          rsync -av --exclude='.git' --exclude='node_modules' ./ ./bundle
-          cd bundle
-          zip -r ../eduapp.zip .
-          cd ..
-
-      # 4️⃣ Upload the bundle to S3
-      - name: Upload to S3
-        uses: jakejarvis/s3-sync-action@master
-        with:
-          args: --acl private
-        env:
-          AWS_S3_BUCKET:         ${{ secrets.S3_BUCKET }}
-          AWS_ACCESS_KEY_ID:     ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION:            ap-south-1
-          SOURCE_DIR:            .
-          DEST_DIR:              deploy/eduapp
-
-      # 5️⃣ Trigger an AWS CodeDeploy deployment
-      - name: Trigger CodeDeploy
-        uses: webfactory/create-aws-codedeploy-deployment/create-deployment@v0.5.1  # correct action :contentReference[oaicite:1]{index=1}
-        with:
-          application-name:           eduapp
-          deployment-group:           eduapp-deploy-group
-          deployment-config-name:     CodeDeployDefault.OneAtATime
-          deployment-description:     "Auto deploy React"
-          bundle-type:                zip
-          s3-bucket:                  ${{ secrets.S3_BUCKET }}
-          s3-key:                     deploy/eduapp/eduapp.zip
+   # pm2 restart eduapp --update-env || pm2 start server.js --name eduapp
+    #'
+    rm -f github-ec2.pem  # Cleanup key
