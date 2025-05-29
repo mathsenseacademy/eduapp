@@ -84,6 +84,8 @@ const Header = () => {
         password,
       });
       localStorage.setItem("accessToken", data.access);
+      /* ⭐ …and an unmistakable “this came from the admin login” flag */
+   localStorage.setItem("userType", "admin");
       setAdminUser(jwtDecode(data.access));
       setShowLogin(false);
       setLoginError(null);

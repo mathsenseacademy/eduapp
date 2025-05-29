@@ -68,8 +68,8 @@ useEffect(() => {
 
           <ul className="admin-nav-links">
             <li>
-              <Link to="/admin/users">
-                <FaUsers /> <span>Users</span>
+              <Link to="/admin/student">
+                <FaUsers /> <span>Students</span>
               </Link>
             </li>
             <li>
