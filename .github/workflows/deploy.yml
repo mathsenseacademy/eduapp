@@ -1,113 +1,57 @@
+# .github/workflows/deploy.yml
 name: Deploy React via CodeDeploy
 
 on:
   push:
-    branches: [ main ]     # deploy when main is updated
+    branches: [ main ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣  Pull source
-      - uses: actions/checkout@v3
+      # 1️⃣ Checkout your code
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-      # 2️⃣  Create clean ZIP bundle (skip .git & node_modules)
-      - name: Create bundle
+      # 2️⃣ Configure AWS credentials for later steps
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4   # sets AWS_* env vars :contentReference[oaicite:0]{index=0}
+        with:
+          aws-access-key-id:     ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region:            ap-south-1
+
+      # 3️⃣ Bundle your app (skip .git + node_modules)
+      - name: Create ZIP bundle
         run: |
           mkdir bundle
           rsync -av --exclude='.git' --exclude='node_modules' ./ ./bundle
-          cd bundle && zip -r ../eduapp.zip . && cd ..
+          cd bundle
+          zip -r ../eduapp.zip .
+          cd ..
 
-      # 3️⃣  Upload to S3
+      # 4️⃣ Upload the bundle to S3
       - name: Upload to S3
         uses: jakejarvis/s3-sync-action@master
         with:
           args: --acl private
         env:
-          AWS_S3_BUCKET: ${{ secrets.S3_BUCKET }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_S3_BUCKET:         ${{ secrets.S3_BUCKET }}
+          AWS_ACCESS_KEY_ID:     ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ap-south-1
-          SOURCE_DIR: .
-          DEST_DIR: deploy/eduapp
+          AWS_REGION:            ap-south-1
+          SOURCE_DIR:            .
+          DEST_DIR:              deploy/eduapp
 
-      # 4️⃣  Trigger CodeDeploy
+      # 5️⃣ Trigger an AWS CodeDeploy deployment
       - name: Trigger CodeDeploy
-        uses: webfactory/code-deploy-action@v1
+        uses: webfactory/create-aws-codedeploy-deployment/create-deployment@v0.5.1  # correct action :contentReference[oaicite:1]{index=1}
         with:
-          application-name: eduapp
-          deployment-group: eduapp-deploy-group
-          deployment-config-name: CodeDeployDefault.OneAtATime
-          deployment-description: "Auto deploy React"
-          bundle-type: zip
-          s3-bucket: ${{ secrets.S3_BUCKET }}
-          s3-key: deploy/eduapp/eduapp.zip
-        env:
-          AWS_REGION: ap-south-1
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-
-
-# # Suggested updates for both deploy-django.yml and deploy-react.yml:
-
-# name: Deploy Django/React App
-
-# on:
-#   push:
-#     branches:
-#       - main
-#    #   - develop  # Add develop branch for staging
-#   pull_request:
-#     branches:
-#       - main
-#   #    - develop
-
-# jobs:
-#   test:  # Add testing job
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v4  # Update to latest version
-#       - name: Set up Python/Node.js
-#         uses: actions/setup-python@v4  # or actions/setup-node@v4
-#       - name: Install dependencies
-#         run: |
-#           # Add dependency installation steps
-#       - name: Run tests
-#         run: |
-#           # Add test commands
-
-#   lint:  # Add linting job
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v4
-#       - name: Run linters
-#         run: |
-#           # Add linting commands
-
-#   deploy:
-#     needs: [test, lint]  # Add dependencies
-#     runs-on: ubuntu-latest
-#     environment: production  # Add environment
-#     steps:
-#       - uses: actions/checkout@v4
-      
-#       - name: Configure SSH
-#         uses: webfactory/ssh-agent@v0.8.0  # Use established action
-#         with:
-#           ssh-private-key: ${{ secrets.EC2_PRIVATE_KEY }}
-      
-#       - name: Add host key
-#         run: |
-#           mkdir -p ~/.ssh
-#           ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
-      
-#       - name: Deploy to EC2
-#         env:
-#           EC2_HOST: ${{ secrets.EC2_HOST }}
-#           EC2_USER: ${{ secrets.EC2_USER }}
-#         run: |
-#           # Add deployment verification
-#           ssh $EC2_USER@$EC2_HOST "bash -s" < ./deploy-react.sh
-#           # Add health check
-#           curl -f ${{ secrets.EC2_HOST }}/health || exit 1
+          application-name:           eduapp
+          deployment-group:           eduapp-deploy-group
+          deployment-config-name:     CodeDeployDefault.OneAtATime
+          deployment-description:     "Auto deploy React"
+          bundle-type:                zip
+          s3-bucket:                  ${{ secrets.S3_BUCKET }}
+          s3-key:                     deploy/eduapp/eduapp.zip
