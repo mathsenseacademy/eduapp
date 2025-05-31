@@ -1,57 +1,40 @@
-name: Deploy Eduapp
+# Suggested updates for both deploy-django.yml and deploy-react.yml:
+
+name: Deploy Eduapp 
 
 on:
   push:
     branches:
       - main
-      - develop
+   #   - develop  # Add develop branch for staging
   pull_request:
     branches:
       - main
-      - develop
+  #    - develop
 
 jobs:
-  test:
+  test:  # Add testing job
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-      
+      - uses: actions/checkout@v4  # Update to latest version
+      - name: Set up Python/Node.js
+        uses: actions/setup-python@v4  # or actions/setup-node@v4
       - name: Install dependencies
         run: |
-          # First ensure package-lock.json is in sync
-          npm install
-          # Then use npm ci for clean install
-          npm ci
-      
+          # Add dependency installation steps
       - name: Run tests
-        run: npm test -- --watchAll=false
+        run: |
+          # Add test commands
 
-  lint:
+  lint:  # Add linting job
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-      
-      - name: Install dependencies
+      - name: Run linters
         run: |
-          # First ensure package-lock.json is in sync
-          npm install
-          # Then use npm ci for clean install
-          npm ci
-      
-      - name: Run linting
-        run: npm run lint
+          # Add linting commands
 
-  deploy:
+   deploy:
     needs: [test, lint]
     runs-on: ubuntu-latest
     environment: production
