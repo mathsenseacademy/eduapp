@@ -22,22 +22,27 @@ jobs:
       run: |
         npm install
         npm install -g pm2
-        
+
     - name: Setup SSH
       run: |
-        echo "${{ secrets.EC2_PRIVATE_KEY }}" > deploy_key.pem
-        chmod 600 deploy_key.pem
+        # Create SSH directory
         mkdir -p ~/.ssh
-        ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+        chmod 700 ~/.ssh
+        
+        # Write the private key
+        printf "%s" "${{ secrets.EC2_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        
+        # Add host to known hosts
+        ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts 2>/dev/null
         
     - name: Deploy to EC2
       env:
-        PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY }}
         HOST: ${{ secrets.EC2_HOST }}
         USER: ${{ secrets.EC2_USER }}
       run: |
         # Setup NVM and Node.js on remote server
-        ssh -i deploy_key.pem ${USER}@${HOST} '
+        ssh -o StrictHostKeyChecking=no ${USER}@${HOST} '
           export NVM_DIR="$HOME/.nvm"
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" || {
             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
@@ -84,4 +89,6 @@ jobs:
         
     - name: Cleanup
       if: always()
-      run: rm -f deploy_key.pem
+      run: |
+        rm -f ~/.ssh/id_rsa
+        rm -f ~/.ssh/known_hosts
