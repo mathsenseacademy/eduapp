@@ -14,16 +14,16 @@ const AdminHeader = () => {
   const profileBtnRef = useRef(null);
   const [adminUser, setAdminUser] = useState(null);
 
-/* when token present or after login */
-useEffect(() => {
-  const tok = localStorage.getItem("accessToken");
-  if (!tok) return;
-  try {
-    setAdminUser(jwtDecode(tok));   // token should include username / email
-  } catch {
-    console.error("invalid token");
-  }
-}, []);
+  /* when token present or after login */
+  useEffect(() => {
+    const tok = localStorage.getItem("accessToken");
+    if (!tok) return;
+    try {
+      setAdminUser(jwtDecode(tok)); // token should include username / email
+    } catch {
+      console.error("invalid token");
+    }
+  }, []);
 
   // replace with real user data
   // const user = {
@@ -58,18 +58,24 @@ useEffect(() => {
       <nav className="admin-navbar fixed-top">
         <div className="admin-nav-content">
           <Link to="/" className="admin-logo-link">
-  <motion.img
-    layoutId="shared-logo"
-    src={logo}
-    alt="Math Senseacademy"
-    className="admin-logo"
-  />
-</Link>
+            <motion.img
+              layoutId="shared-logo"
+              src={logo}
+              alt="Math Senseacademy"
+              className="admin-logo"
+            />
+          </Link>
 
           <ul className="admin-nav-links">
             <li>
               <Link to="/admin/student">
                 <FaUsers /> <span>Students</span>
+              </Link>
+            </li>
+            <li>
+              {" "}
+              <Link to="/admin/courses">
+                <FaFileAlt /> <span>Courses</span>
               </Link>
             </li>
             <li>
@@ -99,17 +105,17 @@ useEffect(() => {
         anchor={anchor}
       /> */}
       <ProfileModal
-  show={showProfile}
-  onClose={() => setShowProfile(false)}
-  onLogout={handleLogout}
-  anchor={anchor}
-  user={{
-    name: adminUser?.name || "Admin",
-    email: adminUser?.email || "no-email@example.com",
-    username: adminUser?.username || adminUser?.admin_id, // whichever field you have
-    avatar: adminUser?.avatar || "https://i.pravatar.cc/150",
-  }}
-/>
+        show={showProfile}
+        onClose={() => setShowProfile(false)}
+        onLogout={handleLogout}
+        anchor={anchor}
+        user={{
+          name: adminUser?.name || "Admin",
+          email: adminUser?.email || "no-email@example.com",
+          username: adminUser?.username || adminUser?.admin_id, // whichever field you have
+          avatar: adminUser?.avatar || "https://i.pravatar.cc/150",
+        }}
+      />
     </>
   );
 };

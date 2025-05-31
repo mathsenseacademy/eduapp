@@ -1,26 +1,10 @@
-// // src/api/api.js
-// import axios from 'axios';
-
-// const api = axios.create({
-//   // baseURL: 'http://192.168.99.47:8000/',
-//   // baseURL: 'http://127.0.0.1:7000/',
-//   baseURL:'http://3.108.119.201:7000/',
-//   headers: {
-//     'Content-Type': 'application/json',
-//   },
-// });
-
-// export default api;
-
-
 import axios from "axios";
 
 /* ------------------------------------------------
    AXIOS INSTANCE
    ------------------------------------------------ */
 const api = axios.create({
-  // baseURL: "http://3.108.119.201:7000/", 
-  baseURL: "http://mathsenseacademy.com:7000/",  // ✔ your live server
+  baseURL: "http://mathsenseacademy.com:7000/",
   headers: { "Content-Type": "application/json" },
 });
 
@@ -31,15 +15,19 @@ api.interceptors.request.use((cfg) => {
   return cfg;
 });
 
-/* ---- response: auto-logout on 401 -------------------------------- */
+/* ---- response: auto-logout on 401 *only if* we sent a token -------- */
 api.interceptors.response.use(
   (res) => res,
   (err) => {
-    if (err.response?.status === 401) {
-      /* token invalid / expired on the server side */
+    const status = err.response?.status;
+    const sentAuth = !!err.config?.headers?.Authorization;
+
+    // Only force a logout if this request actually included our JWT
+    if (status === 401 && sentAuth) {
       localStorage.removeItem("accessToken");
       window.location.href = "/register?expired=1";
     }
+
     return Promise.reject(err);
   }
 );
