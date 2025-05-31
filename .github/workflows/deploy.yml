@@ -1,38 +1,54 @@
-# Suggested updates for both deploy-django.yml and deploy-react.yml:
-
-name: Deploy Eduapp 
+name: Deploy Eduapp
 
 on:
   push:
     branches:
       - main
-   #   - develop  # Add develop branch for staging
+      - develop  # Add develop branch for staging
   pull_request:
     branches:
       - main
-  #    - develop
+      - develop
 
 jobs:
   test:  # Add testing job
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4  # Update to latest version
-      - name: Set up Python/Node.js
-        uses: actions/setup-python@v4  # or actions/setup-node@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
       - name: Install dependencies
         run: |
-          # Add dependency installation steps
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
       - name: Run tests
         run: |
-          # Add test commands
+          python manage.py test
 
   lint:  # Add linting job
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
       - name: Run linters
         run: |
-          # Add linting commands
+          pip install flake8
+          flake8 .
 
   deploy:
     needs: [test, lint]  # Add dependencies
@@ -62,6 +78,6 @@ jobs:
           
           # Execute deployment with timeout
           ssh -o ConnectTimeout=10 $EC2_USER@$EC2_HOST "bash -s" < ./scripts/deploy-react.sh &
-          
+
           # Wait for deployment with timeout (5 minutes max)
-          timeout 300 bash -c 'while ! curl -s -f ${{ secrets.EC2_HOST }}/health; do sleep 5; done' || exit 1
+          timeout 300 bash -c 'while ! curl -s -f http://$EC2_HOST/health; do sleep 5; done' || exit 1
