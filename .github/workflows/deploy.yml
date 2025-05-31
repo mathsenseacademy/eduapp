@@ -1,101 +1,60 @@
-name: Deploy to EC2
+name: Deploy Eduapp 
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+   #   - develop  # Add develop branch for staging
+  pull_request:
+    branches:
+      - main
+  #    - develop
 
 jobs:
-  deploy:
+  test:  # Add testing job
     runs-on: ubuntu-latest
-    environment: production
-    
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - uses: actions/checkout@v4  # Update to latest version
+      - name: Set up Python/Node.js
+        uses: actions/setup-python@v4  # or actions/setup-node@v4
+      - name: Install dependencies
+        run: |
+          # Add dependency installation steps
+      - name: Run tests
+        run: |
+          # Add test commands
+
+  lint:  # Add linting job
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run linters
+        run: |
+          # Add linting commands
+
+  deploy:
+    needs: [test, lint]  # Add dependencies
+    runs-on: ubuntu-latest
+    environment: production  # Add environment
+    steps:
+      - uses: actions/checkout@v4
       
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
-        
-    - name: Install dependencies
-      run: |
-        npm install
-        npm install -g pm2
-    - name: Debug SSH Setup
-      run: |
-        echo "EC2_HOST: ${{ secrets.EC2_HOST }}"
-        echo "Testing connectivity..."
-        ssh -o StrictHostKeyChecking=no -o ConnectTimeout=10 ${USER}@${HOST} echo "Connected successfully"
-    - name: Setup SSH
-      run: |
-        # Create SSH directory
-        mkdir -p ~/.ssh
-        chmod 700 ~/.ssh
-        
-        # Write the private key
-        printf "%s" "${{ secrets.EC2_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        
-        # Add host to known hosts
-        ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts 2>/dev/null
-        
-    - name: Deploy to EC2
-      env:
-        HOST: ${{ secrets.EC2_HOST }}
-        USER: ${{ secrets.EC2_USER }}
-      run: |
-        # Setup NVM and Node.js on remote server
-        ssh -o StrictHostKeyChecking=no ${USER}@${HOST} '
-          export NVM_DIR="$HOME/.nvm"
-          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" || {
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-          }
-          
-          # Install Node.js if not present
-          if ! command -v node &> /dev/null; then
-            nvm install 18
-            nvm use 18
-          fi
-          
-          # Install PM2 globally if not present
-          if ! command -v pm2 &> /dev/null; then
-            npm install -g pm2
-          fi
-          
-          # Setup application directory
-          REPO_DIR="$HOME/app"
-          if [ -d "$REPO_DIR/.git" ]; then
-            cd "$REPO_DIR"
-            git fetch origin
-            git reset --hard origin/main
-          else
-            git clone https://github.com/mathsenseacademy/eduapp.git "$REPO_DIR"
-            cd "$REPO_DIR"
-          fi
-          
-          # Install dependencies and build
-          npm install
-          npm run build
-          
-          # Start or restart the application
-          if pm2 list | grep -q "eduapp"; then
-            pm2 restart eduapp --update-env
-          else
-            pm2 start npm --name "eduapp" -- start
-          fi
-          
-          # Save PM2 process list
-          pm2 save
-        '
-        
-    - name: Cleanup
-      if: always()
-      run: |
-        rm -f ~/.ssh/id_rsa
-        rm -f ~/.ssh/known_hosts
-
-
-
+      - name: Configure SSH
+        uses: webfactory/ssh-agent@v0.8.0  # Use established action
+        with:
+          ssh-private-key: ${{ secrets.EC2_PRIVATE_KEY }}
+      
+      - name: Add host key
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+      
+      - name: Deploy to EC2
+        env:
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_USER: ${{ secrets.EC2_USER }}
+        run: |
+          # Add deployment verification
+          ssh $EC2_USER@$EC2_HOST "bash -s" < ./scripts/deploy-react.sh
+          # Add health check
+          curl -f ${{ secrets.EC2_HOST }}/health || exit 1
