@@ -22,7 +22,11 @@ jobs:
       run: |
         npm install
         npm install -g pm2
-
+    - name: Debug SSH Setup
+      run: |
+        echo "EC2_HOST: ${{ secrets.EC2_HOST }}"
+        echo "Testing connectivity..."
+        ssh -o StrictHostKeyChecking=no -o ConnectTimeout=10 ${USER}@${HOST} echo "Connected successfully"
     - name: Setup SSH
       run: |
         # Create SSH directory
@@ -92,3 +96,6 @@ jobs:
       run: |
         rm -f ~/.ssh/id_rsa
         rm -f ~/.ssh/known_hosts
+
+
+
