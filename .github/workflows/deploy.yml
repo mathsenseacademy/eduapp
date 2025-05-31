@@ -1,3 +1,5 @@
+# Suggested updates for both deploy-django.yml and deploy-react.yml:
+
 name: Deploy Eduapp 
 
 on:
@@ -54,7 +56,12 @@ jobs:
           EC2_HOST: ${{ secrets.EC2_HOST }}
           EC2_USER: ${{ secrets.EC2_USER }}
         run: |
-          # Add deployment verification
-          ssh $EC2_USER@$EC2_HOST "bash -s" < ./scripts/deploy-react.sh
-          # Add health check
-          curl -f ${{ secrets.EC2_HOST }}/health || exit 1
+          # Compress and transfer build files
+          tar -czf build.tar.gz build/
+          scp -o ConnectTimeout=10 build.tar.gz $EC2_USER@$EC2_HOST:/tmp/
+          
+          # Execute deployment with timeout
+          ssh -o ConnectTimeout=10 $EC2_USER@$EC2_HOST "bash -s" < ./deploy-react.sh &
+          
+          # Wait for deployment with timeout (5 minutes max)
+          timeout 300 bash -c 'while ! curl -s -f ${{ secrets.EC2_HOST }}/health; do sleep 5; done' || exit 1
