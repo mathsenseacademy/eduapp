@@ -29,7 +29,7 @@ jobs:
           npm ci
       
       - name: Run tests
-        run: npm test
+        run: npm test -- --watchAll=false
 
   lint:
     runs-on: ubuntu-latest
