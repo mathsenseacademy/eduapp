@@ -22,7 +22,11 @@ jobs:
           cache: 'npm'
       
       - name: Install dependencies
-        run: npm ci
+        run: |
+          # First ensure package-lock.json is in sync
+          npm install
+          # Then use npm ci for clean install
+          npm ci
       
       - name: Run tests
         run: npm test
@@ -38,7 +42,11 @@ jobs:
           cache: 'npm'
       
       - name: Install dependencies
-        run: npm ci
+        run: |
+          # First ensure package-lock.json is in sync
+          npm install
+          # Then use npm ci for clean install
+          npm ci
       
       - name: Run linting
         run: npm run lint
@@ -57,7 +65,11 @@ jobs:
           cache: 'npm'
       
       - name: Install dependencies
-        run: npm ci
+        run: |
+          # First ensure package-lock.json is in sync
+          npm install
+          # Then use npm ci for clean install
+          npm ci
       
       - name: Build application
         run: npm run build
