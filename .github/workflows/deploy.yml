@@ -61,7 +61,7 @@ jobs:
           scp -o ConnectTimeout=10 build.tar.gz $EC2_USER@$EC2_HOST:/tmp/
           
           # Execute deployment with timeout
-          ssh -o ConnectTimeout=10 $EC2_USER@$EC2_HOST "bash -s" < ./deploy-react.sh &
+          ssh -o ConnectTimeout=10 $EC2_USER@$EC2_HOST "bash -s" < ./scripts/deploy-react.sh &
           
           # Wait for deployment with timeout (5 minutes max)
           timeout 300 bash -c 'while ! curl -s -f ${{ secrets.EC2_HOST }}/health; do sleep 5; done' || exit 1
