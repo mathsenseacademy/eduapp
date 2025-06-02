@@ -12,13 +12,14 @@ import AboutSection from '../components/AboutSection/AboutSection';
 import ContactCTA from '../components/ContactCTA/ContactCTA';
 // import Footer from '../components/Footer/Footer';
 
-const Home = () => {
+const Home = ({ heroRef, sentinelRef }) => {
   return (
     <>
     {/* <section data-scroll-section> */}
       {/* <Header /> */}
-      <section id="hero" className="hero-section"> <Hero /></section>
-     
+      <section id="hero" className="hero-section" ref={heroRef}> <Hero /></section>
+       {/* 1-pixel sentinel marks end of hero */}
+      <div ref={sentinelRef} style={{ height: 1 }} />
       <FeaturesSection />
       <ProgramsSection />
       <AboutSection />

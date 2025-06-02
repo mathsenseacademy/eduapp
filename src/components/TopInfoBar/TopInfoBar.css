@@ -1,0 +1,29 @@
+.top-info-bar {
+  height: 40px;
+  background: #00264d;            /* deep navy */
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  padding: 0 1.5rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;                   /* above header */
+  transition: transform 0.35s ease;
+}
+
+.top-info-bar.hide {
+  transform: translateY(-100%);
+}
+
+.top-info-bar.show {
+  transform: translateY(0);
+}
+
+.top-info-bar a {
+  color: #fff;
+  margin-left: 0.75rem;
+}
