@@ -27,8 +27,8 @@ const Footer = () => {
         {/* Column 3: Contact Info */}
         <div className="footer-section">
           <h4>Contact Us</h4>
-          <p>Email: info@mathclub.com</p>
-          <p>Phone: +1 (123) 456-7890</p>
+          <p>Email: info@mathsenseacademy.com</p>
+          <p>Phone: +91 9062428472 </p>
         </div>
       </div>
 
