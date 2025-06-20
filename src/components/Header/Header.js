@@ -2,37 +2,34 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { jwtDecode } from "jwt-decode";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import api from "../../api/api";
 import { getActiveCourses } from "../../api/courseApi";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/logoWithName.png";
 import "./Header.css";
 
 const Header = () => {
   /* ───────── state ───────── */
-  const [showLogin, setShowLogin]         = useState(false);
-  const [dropdownOpen, setDropdownOpen]   = useState(false);
-  const [courses, setCourses]             = useState([]);
-  const [coursesLoading, setCoursesLoading] = useState(true);
-  const [username, setUsername]           = useState("");
-  const [password, setPassword]           = useState("");
-  const [loginError, setLoginError]       = useState(null);
-  const [adminUser, setAdminUser]         = useState(null);
+  const [showLogin, setShowLogin]             = useState(false);
+  const [coursesOpen, setCoursesOpen]         = useState(false);
+  const [courses, setCourses]                 = useState([]);
+  const [coursesLoading, setCoursesLoading]   = useState(true);
+  const [username, setUsername]               = useState("");
+  const [password, setPassword]               = useState("");
+  const [loginError, setLoginError]           = useState(null);
+  const [adminUser, setAdminUser]             = useState(null);
   const [showStickyRegister, setShowStickyRegister] = useState(false);
 
-  const { t, i18n }  = useTranslation();
-  const navigate      = useNavigate();
-  const loginBoxRef   = useRef(null);
+  const { t, i18n } = useTranslation();
+  const navigate     = useNavigate();
+  const loginBoxRef  = useRef(null);
 
   /* ── load active courses ── */
   useEffect(() => {
     setCoursesLoading(true);
     getActiveCourses()
       .then(res => setCourses(res.data))
-      .catch(err => {
-        console.error("Could not load courses:", err);
-        setCourses([]);
-      })
+      .catch(() => setCourses([]))
       .finally(() => setCoursesLoading(false));
   }, []);
 
@@ -40,30 +37,27 @@ const Header = () => {
   useEffect(() => {
     const tok = localStorage.getItem("accessToken");
     if (!tok) return;
-    try { setAdminUser(jwtDecode(tok)); } catch { console.error("Invalid token"); }
+    try { setAdminUser(jwtDecode(tok)); } catch {/* ignore */}
   }, []);
 
-  /* ── add shadow after small scroll ── */
+  /* ── header shadow after small scroll ── */
   useEffect(() => {
     const nav = document.querySelector(".navbar");
-    const onScroll = () => nav.classList.toggle("sticky-shadow", window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    const handle = () => nav.classList.toggle("sticky-shadow", window.scrollY > 20);
+    window.addEventListener("scroll", handle);
+    return () => window.removeEventListener("scroll", handle);
   }, []);
 
-  /* ── show sticky register when HERO leaves ── */
+  /* ── sticky register when HERO leaves view ── */
   useEffect(() => {
     const hero = document.querySelector("#hero");
     if (!hero) return;
-    const ob = new IntersectionObserver(
-      ([e]) => setShowStickyRegister(!e.isIntersecting),
-      { threshold: 0.1 }
-    );
+    const ob = new IntersectionObserver(([e]) => setShowStickyRegister(!e.isIntersecting), { threshold: 0.1 });
     ob.observe(hero);
     return () => ob.disconnect();
   }, []);
 
-  /* ── close login on outside click ── */
+  /* ── close login popup on outside click ── */
   useEffect(() => {
     if (!showLogin) return;
     function handleClick(e) {
@@ -80,9 +74,6 @@ const Header = () => {
   }, [showLogin]);
 
   /* ── handlers ── */
-  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
-  const toggleLogin    = () => setShowLogin(!showLogin);
-
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -101,7 +92,7 @@ const Header = () => {
   const languages = [
     { code: "en", label: "EN" },
     { code: "hi", label: "हिंदी" },
-    { code: "bn", label: "বাংলা" },
+    { code: "bn", label: "বাংলা" }
   ];
 
   /* ───────── render ───────── */
@@ -111,44 +102,53 @@ const Header = () => {
 
         {/* ── left section ── */}
         <div className="d-flex align-items-center gap-4">
-          <motion.div
-            layoutId="shared-logo"
-            transition={{ type: "spring", stiffness: 60, damping: 15 }}
-          >
+          <motion.div layoutId="shared-logo" transition={{ type: "spring", stiffness: 60, damping: 15 }}>
             <img src={logo} alt="Math Sense Academy" className="logo-img" />
           </motion.div>
 
-          {/* courses dropdown */}
-          <div className="nav-item dropdown">
-            <button
-              className="btn btn-outline-danger dropdown-toggle"
-              onClick={toggleDropdown}
-            >
+          {/* ─────── Courses pop-up dropdown ─────── */}
+          <div
+            className="nav-item courses-wrapper"
+            onMouseEnter={() => setCoursesOpen(true)}
+            onMouseLeave={() => setCoursesOpen(false)}
+          >
+            <button className="btn btn-outline-danger dropdown-toggle">
               {t("courses")}
             </button>
 
-            <ul className={`dropdown-menu ${dropdownOpen ? "show" : ""}`}>
-              {coursesLoading ? (
-                <li><span className="dropdown-item text-muted">Loading…</span></li>
-              ) : courses.length ? (
-                courses.map(c => (
-                  <li key={c.id}>
-                    <Link
-                      to={`/courses/${c.id}`}
-                      className="dropdown-item"
-                      onClick={() => setDropdownOpen(false)}
-                    >
-                      {c.course_name}
-                    </Link>
-                  </li>
-                ))
-              ) : (
-                <li><span className="dropdown-item text-muted">No courses available</span></li>
+            <AnimatePresence>
+              {coursesOpen && (
+                <motion.ul
+                  key="course-popup"
+                  className="courses-popup"
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.25, ease: "easeOut" }}
+                >
+                  {coursesLoading ? (
+                    <li className="px-3 py-2 text-muted">Loading…</li>
+                  ) : courses.length ? (
+                    courses.map(c => (
+                      <li key={c.id}>
+                        <Link
+                          to={`/courses/${c.id}`}
+                          className="course-link"
+                          onClick={() => setCoursesOpen(false)}
+                        >
+                          {c.course_name}
+                        </Link>
+                      </li>
+                    ))
+                  ) : (
+                    <li className="px-3 py-2 text-muted">No courses available</li>
+                  )}
+                </motion.ul>
               )}
-            </ul>
+            </AnimatePresence>
           </div>
 
-          {/* sticky register button inside header */}
+          {/* sticky register inside header */}
           {showStickyRegister && (
             <motion.button
               initial={{ opacity: 0, y: -10 }}
@@ -175,23 +175,24 @@ const Header = () => {
         {/* ── right nav ── */}
         <div id="mainNav" className="collapse navbar-collapse justify-content-end mt-3 mt-lg-0">
           <ul className="navbar-nav align-items-center gap-3 mb-2 mb-lg-0">
+            {/* language switcher */}
             <li className="nav-item">
               <select
                 className="form-select form-select-sm language-select"
                 value={i18n.language}
                 onChange={(e) => i18n.changeLanguage(e.target.value)}
               >
-                {languages.map(l => (
-                  <option key={l.code} value={l.code}>{l.label}</option>
-                ))}
+                {languages.map(l => <option key={l.code} value={l.code}>{l.label}</option>)}
               </select>
             </li>
+
+            {/* main links */}
             {[
               { to: "/",        label: t("home")     },
               { to: "/about",   label: t("about")    },
               { to: "/experts", label: t("experts")  },
               { to: "/blog",    label: t("blog")     },
-              { to: "/contact", label: t("contact")  },
+              { to: "/contact", label: t("contact")  }
             ].map(link => (
               <li key={link.to} className="nav-item">
                 <Link to={link.to} className="nav-link">{link.label}</Link>
@@ -202,18 +203,12 @@ const Header = () => {
           {/* ── auth box ── */}
           <div className="position-relative mt-2 mt-lg-0">
             {adminUser ? (
-              <button
-                className="btn btn-outline-success"
-                onClick={() => navigate("/admin")}
-              >
+              <button className="btn btn-outline-success" onClick={() => navigate("/admin")}>
                 Go to Admin Section
               </button>
             ) : (
               <>
-                <button
-                  className="btn btn-outline-primary login-toggle-btn"
-                  onClick={toggleLogin}
-                >
+                <button className="btn btn-outline-primary login-toggle-btn" onClick={() => setShowLogin(!showLogin)}>
                   {t("login")}
                 </button>
 

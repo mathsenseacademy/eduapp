@@ -1,14 +1,14 @@
 import React from "react";
 import "./FeaturesSection.css";
 import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
 
 import gradIcon from "../../assets/hatIcon.png";
 import bookIcon from "../../assets/bookIcon.png";
 import clockIcon from "../../assets/watchIcon.png";
 import graphIcon from "../../assets/graphIcon.png";
-import featureIllustration from "../../assets/features-illustration-left1.png";
-
-import { motion } from 'framer-motion';
+import logo from "../../assets/logoWithName.png";
+import mentor from "../../assets/teacher.png";
 
 const FeaturesSection = () => {
   const { t } = useTranslation();
@@ -16,52 +16,84 @@ const FeaturesSection = () => {
   const features = [
     {
       icon: gradIcon,
-      title: t("features.expertTutors.title"),
-      description: t("features.expertTutors.description"),
+      title: "Expert Tutors",
+      desc: "All our instructors are math experts with years of experience.",
     },
     {
       icon: bookIcon,
-      title: t("features.interactiveClasses.title"),
-      description: t("features.interactiveClasses.description"),
+      title: "Interactive Classes",
+      desc: "Fun, engaging sessions that keep kids excited about learning.",
     },
     {
       icon: clockIcon,
-      title: t("features.flexibleScheduling.title"),
-      description: t("features.flexibleScheduling.description"),
+      title: "Flexible Scheduling",
+      desc: "Weekend and evening classes available to fit your schedule.",
     },
     {
       icon: graphIcon,
-      title: t("features.personalizedLearning.title"),
-      description: t("features.personalizedLearning.description"),
+      title: "Personalized Learning",
+      desc: "Courses designed to meet each student’s unique needs and learning style.",
     },
   ];
 
+  // Directional animation variants per index
+  const getDirection = (idx) => {
+    const directions = [
+      { x: -60, y: 0 }, // left
+      { x: 60, y: 0 },  // right
+      { x: 0, y: 60 },  // bottom
+      { x: 0, y: -60 }, // top
+    ];
+    return directions[idx % directions.length];
+  };
+
   return (
-    <section className="features">
-      <div className="features-container">
-        <div className="features-image">
-          <img src={featureIllustration} alt="Learning Illustration" />
+    <section className="why-section">
+      <div className="why-header">
+        <h2>
+          <span>Why Choose</span>
+          <img src={logo} alt="Mathsense Academy" />
+        </h2>
+      </div>
+
+      <div className="why-grid-wrapper">
+        <div className="why-grid">
+          {features.map((item, idx) => {
+            const direction = getDirection(idx);
+            return (
+              <motion.div
+                className="why-card"
+                key={idx}
+                initial={{ opacity: 0, ...direction }}
+                whileInView={{ opacity: 1, x: 0, y: 0 }}
+                transition={{
+                  duration: 0.8,
+                  delay: idx * 0.2,
+                  ease: [0.25, 0.8, 0.25, 1],
+                }}
+                viewport={{ once: true }}
+              >
+                <img src={item.icon} alt={item.title} />
+                <h3>{item.title}</h3>
+                <p>{item.desc}</p>
+              </motion.div>
+            );
+          })}
         </div>
 
-        <div className="features-content">
-          <h2 dangerouslySetInnerHTML={{ __html: t("features.heading") }} />
-          <div className="feature-cards">
-            {features.map((feature, index) => (
-              // <div className="feature-card" key={index}>
-                <motion.div
-  whileInView={{ opacity: 1, y: 0 }}
-  initial={{ opacity: 0, y: 50 }}
-  transition={{ duration: 0.6, delay: index * 0.1 }}
-  className="feature-card"
-  key={index}
+        <motion.div
+  className="why-mentor"
+  initial={{ opacity: 0, y: 100, filter: "blur(12px)" }}
+  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+  transition={{
+    duration: 1.5,
+    ease: [0.22, 1, 0.36, 1], // dramatic float
+  }}
+  viewport={{ once: true }}
 >
-                <img src={feature.icon} alt={`Feature ${index + 1}`} />
-                <h3 dangerouslySetInnerHTML={{ __html: feature.title }} />
-                <p dangerouslySetInnerHTML={{ __html: feature.description }} />
-                </motion.div>
-            ))}
-          </div>
-        </div>
+  <img src={mentor} alt="Mentor" />
+</motion.div>
+
       </div>
     </section>
   );

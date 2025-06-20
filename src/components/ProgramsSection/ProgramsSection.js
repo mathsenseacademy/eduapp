@@ -1,115 +1,194 @@
-import React, { useRef } from "react";
+// // ProgramsSection.js
+
+
+// import React from "react";
+// import "./ProgramsSection.css";
+// import cardImage from "../../assets/class1-2.png";
+// import heroImage from "../../assets/our-programs-hero.png";
+
+// const programs = Array.from({ length: 9 }, (_, idx) => ({
+//   title: "Wander and Wonder",
+//   grade: "Class 10",
+//   image: cardImage,
+//   bgColor: idx % 3 === 0 ? "#dabcf9" : idx % 3 === 1 ? "#fc884f" : "#8dd4c0",
+// }));
+
+// export default function ProgramsSection() {
+//   return (
+//     <section className="programs-section ">
+//       <h2 className="section-heading">
+//         <span className="star-badge spin">★</span> Our Programs
+//       </h2>
+
+//       <div className="row">
+//         {/* Left side image col-6 */}
+//         <div className="col-md-6 d-flex justify-content-center">
+//           <img
+//             src={heroImage}
+//             alt="Our Program Hero"
+//             className="img-fluid programs-hero-img"
+//           />
+//         </div>
+
+//         {/* Right side stacked 3 cards in col-2 */}
+//         <div className="col-md-6 d-flex flex-column">
+//           {programs.slice(0, 4).map((p, i) => (
+//             <div
+//               className="program-card mb-3"
+//               key={i}
+//               style={{ backgroundColor: p.bgColor }}
+//             >
+//               <div className="card-image">
+//                 <img src={p.image} alt={p.title} />
+//               </div>
+//               <div className="card-text">
+//                 <h4>{p.title}</h4>
+//                 <p>{p.grade}</p>
+//               </div>
+//               <div className="card-arrow">→</div>
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+
+//       <div className="row mt-3">
+//         {/* Remaining 6 cards in col-2s */}
+//         {programs.slice(3).map((p, i) => (
+//           <div className="col-md-6 mb-3" key={i}>
+//             <div
+//               className="program-card"
+//               style={{ backgroundColor: p.bgColor }}
+//             >
+//               <div className="card-image">
+//                 <img src={p.image} alt={p.title} />
+//               </div>
+//               <div className="card-text">
+//                 <h4>{p.title}</h4>
+//                 <p>{p.grade}</p>
+//               </div>
+//               <div className="card-arrow">→</div>
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+
+//       <div className="text-center mt-4">
+//         <button className="more-btn">More Courses Here</button>
+//       </div>
+//     </section>
+//   );
+// }
+
+
+import React from "react";
 import "./ProgramsSection.css";
-import { useTranslation } from "react-i18next";
+import cardImage from "../../assets/class1-2.png";
+import heroImage from "../../assets/our-programs-hero.png";
 
-import icon1 from "../../assets/grade1-3.png";
-import icon2 from "../../assets/grade4-6.png";
-import icon3 from "../../assets/grade7-8.png";
-import icon4 from "../../assets/highschool.png";
-
-const COLS = 10;
-const ROWS = 10;
+// 1) import your JSON
+import en from "../../i18n/en.json";
 
 export default function ProgramsSection() {
-  const { t } = useTranslation();
-  const programs = t("programs.items", { returnObjects: true });
-  const icons = [icon1, icon2, icon3, icon4];
-
-  /* build card rows (unchanged) */
-  const pattern = [2, 3, 3, 2];
-  let k = 0;
-  const rows = pattern.map((cnt, r) => {
-    const list = [];
-    for (let i = 0; i < cnt && k < programs.length; i++, k++) {
-      const p = programs[k];
-      list.push(
-        <div className="program-card" key={k}>
-          <div className="program-icon-box">
-            <img src={icons[k % icons.length]} alt="" className="program-icon" />
-          </div>
-          <div className="program-text">
-            <h5 dangerouslySetInnerHTML={{ __html: p.title }} />
-            <p  dangerouslySetInnerHTML={{ __html: p.description }} />
-            <button className="btn btn-primary enroll-btn">Enroll&nbsp;Now</button>
-          </div>
-        </div>
-      );
-    }
-    return (
-      <div className={`card-row row-${r}`} key={r}>
-        {list}
-      </div>
-    );
-  });
-
-  /* pixel-grid hover behaviour */
-  const gridRef = useRef(null);
-  const prevIndices = useRef([]);
-
-  const highlight = (centerIdx) => {
-    const tiles = gridRef.current.children;
-    /* clear previous */
-    prevIndices.current.forEach(({ i, cls }) => tiles[i]?.classList.remove(cls));
-    const current = [];
-
-    /* helper to add class if in range */
-    const add = (row, col, cls) => {
-      if (row >= 0 && row < ROWS && col >= 0 && col < COLS) {
-        const idx = row * COLS + col;
-        tiles[idx]?.classList.add(cls);
-        current.push({ i: idx, cls });
-      }
-    };
-
-    const row = Math.floor(centerIdx / COLS);
-    const col = centerIdx % COLS;
-
-    /* center */
-    add(row, col, "glow-center");
-
-    /* 8 neighbors */
-    for (let dr = -1; dr <= 1; dr++) {
-      for (let dc = -1; dc <= 1; dc++) {
-        if (dr === 0 && dc === 0) continue;
-        add(row + dr, col + dc, "glow");
-      }
-    }
-    prevIndices.current = current;
-  };
-
-  const handleMove = (e) => {
-    const grid = gridRef.current;
-    const rect = grid.getBoundingClientRect();
-    const col = Math.floor(((e.clientX - rect.left) / rect.width) * COLS);
-    const row = Math.floor(((e.clientY - rect.top)  / rect.height) * ROWS);
-    highlight(row * COLS + col);
-  };
-
-  const clear = () => {
-    prevIndices.current.forEach(({ i, cls }) =>
-      gridRef.current.children[i].classList.remove(cls)
-    );
-    prevIndices.current = [];
-  };
-
-  const tiles = Array.from({ length: COLS * ROWS }, (_, i) => <span key={i} />);
+  // 2) pull items array
+  const programs = en.programs.items;
 
   return (
-    <section className="programs-section-wrapper">
-      <div
-        className="programs-section-gradient"
-        onMouseMove={handleMove}
-        onMouseLeave={clear}
-      >
-        {/* glow grid */}
-        <div ref={gridRef} className="pixel-grid">{tiles}</div>
+    <section className="programs-section">
+      <h2 className="section-heading">
+        <span className="star-badge spin">★</span> Our Programs
+      </h2>
 
-        {/* real content */}
-        <h2
-          className="mb-4 title"
-          dangerouslySetInnerHTML={{ __html: t("programs.heading") }}
-        />
-        <div className="programs-container">{rows}</div>
+      <div className="row">
+        {/* Left hero */}
+        <div className="col-md-6 d-flex justify-content-center">
+          <img
+            src={heroImage}
+            alt="Our Program Hero"
+            className="img-fluid programs-hero-img"
+          />
+        </div>
+
+        {/* First 4 cards stacked */}
+        <div className="col-md-6 d-flex flex-column">
+          {programs.slice(0, 4).map((p, i) => {
+            const bg = i % 3 === 0
+              ? "#dabcf9"
+              : i % 3 === 1
+              ? "#fc884f"
+              : "#8dd4c0";
+            return (
+              <div
+                key={i}
+                className="program-card mb-3"
+                style={{ backgroundColor: bg }}
+              >
+                <div className="card-image">
+                  <img src={cardImage} alt={p.title} />
+                </div>
+                <div className="card-text">
+                  <h4
+  className="card-title"
+  dangerouslySetInnerHTML={{ __html: p.title }}
+/>
+<p
+  className="focus-area"
+  dangerouslySetInnerHTML={{ __html: p.focusArea }}
+/>
+<p
+  className="description"
+  dangerouslySetInnerHTML={{ __html: p.description }}
+/>
+
+                </div>
+                <div className="card-arrow">→</div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="row mt-3">
+        {/* Remaining cards */}
+        {programs.slice(4).map((p, i) => {
+          const idx = i + 4; // for correct color rotation
+          const bg = idx % 3 === 0
+            ? "#dabcf9"
+            : idx % 3 === 1
+            ? "#fc884f"
+            : "#8dd4c0";
+          return (
+            <div className="col-md-6 mb-3" key={idx}>
+              <div
+                className="program-card"
+                style={{ backgroundColor: bg }}
+              >
+                <div className="card-image">
+                  <img src={cardImage} alt={p.title} />
+                </div>
+                <div className="card-text">
+                 <h4
+  className="card-title"
+  dangerouslySetInnerHTML={{ __html: p.title }}
+/>
+<p
+  className="focus-area"
+  dangerouslySetInnerHTML={{ __html: p.focusArea }}
+/>
+<p
+  className="description"
+  dangerouslySetInnerHTML={{ __html: p.description }}
+/>
+
+                </div>
+                <div className="card-arrow">→</div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="text-center mt-4">
+        <button className="more-btn">More Courses Here</button>
       </div>
     </section>
   );

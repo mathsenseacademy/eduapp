@@ -1,72 +1,97 @@
-.features {
-  padding: 2rem ;
-  background-color: #ffffff;
+.why-section {
+  background: #fff;
+  padding:0.5rem 2rem;
   font-family: "Poppins", sans-serif;
 }
 
-.features-container {
+.why-header h2 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #875714;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 3rem;
-}
-
-.features-image {
-  flex: 1;
-  min-width: 320px;
+  gap: 1rem;
+  flex-wrap: wrap;
   text-align: center;
 }
-
-.features-image img {
-  max-width: 100%;
-  height: auto; max-height: 600px; 
+.why-header h2 img {
+  height: 150px;
 }
 
-.features-content {
-  flex: 1;
-  min-width: 320px;
-}
-
-.features-content h2 {
-  font-size: 2.5rem;
-  color: #1a237e;
-  margin-bottom: 2rem;
-  text-align: left;
-}
-
-.feature-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+.why-grid-wrapper {
+  display: flex;
+  flex-wrap: wrap;
   gap: 2rem;
+  align-items: center;
+  justify-content: center;
+  /* margin-top: 1.5rem; */
 }
 
-.feature-card {
-  background-color: #f5f7fa;
-  padding: 1.5rem;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s ease-in-out;
+/* === Feature Cards Grid === */
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  /* gap: rem; */
+  flex: 2;
 }
 
- .feature-card:hover {
-    transform: translateY(-5px);
-  }
+.why-card {
+  padding: 2rem;
+  /* border-radius: 12px; */
+  color: #fff;
+  text-align: left;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.why-card:nth-child(1),
+.why-card:nth-child(4) {
+  background-color: #0b6477;
+}
+.why-card:nth-child(2),
+.why-card:nth-child(3) {
+  background-color: #fab554;
+  color: #7d4900;
+}
 
-.feature-card img {
-  width: 50px;
+.why-card img {
+  width: 48px;
   height: auto;
-  margin-bottom: 1rem;
+  align-self: center;
 }
 
-.feature-card h3 {
-  color: #1a237e;
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
+.why-card h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-align: center;
 }
 
-.feature-card p {
-  font-size: 0.95rem;
-  color: #555;
+.why-card p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* === Right-side mentor image === */
+.why-mentor {
+  flex: 1;
+  text-align: center;
+}
+.why-mentor img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .why-section {
+    padding: 3rem 1.25rem;
+  }
+  .why-header h2 {
+    font-size: 2rem;
+  }
+  .why-mentor {
+    margin-top: 2rem;
+  }
 }

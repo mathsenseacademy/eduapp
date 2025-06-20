@@ -1,233 +1,74 @@
-/* Header Logo */
+/* ───────────────────  BRAND TOKENS  ─────────────────── */
+/* Feel free to centralise these in App.css or index.css */
+:root {
+  --clr-green:        #0b6477;
+  --clr-green-dark:   #084f5d;
+  --clr-yellow:       #fab554;
+  --clr-yellow-dark:  #d99c43;   /* hover shade for buttons */
+  --clr-brown:        #875714;
+  --clr-brown-light:  #a16c2b;
+}
+
+/* ───────────────────  LOGO  ─────────────────────────── */
 .logo-img {
   width: 60px;
   height: auto;
   transition: transform 0.3s ease;
 }
 
-/* Login Form */
+/* ───────────────────  LOGIN DROPDOWN  ───────────────── */
 .login-form {
   width: 250px;
   z-index: 1050;
 }
 
-/* Register Link */
+/* ───────── Register-link inside login dropdown ──────── */
 .register-link span {
-  color: #d81b60;
+  color: var(--clr-yellow);
   cursor: pointer;
   text-decoration: underline;
 }
-.register-link span:hover {
-  text-decoration: none;
-}
+.register-link span:hover { text-decoration: none; }
 
-/* Sticky Register Button */
-/* .sticky-register-btn {
-  animation: fadeSlideIn 0.6s ease forwards;
-  position: fixed;
-  right: 1rem;
-  bottom: 2rem;
-  font-weight: 600;
-  color: #fff;
-  background: #ff9800;
-  border: none;
-  padding: 0.5rem 1.2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease, background 0.3s ease;
-  z-index: 999;
-  white-space: nowrap;
-}
-.sticky-register-btn:hover {
-  transform: scale(1.05);
-  background: #fb8c00;
-} */
-
-/* === Sticky Register Button (inside header, not floating) === */
-.sticky-register-btn {
-  /* take it OUT of the bottom-right corner */
-  position: relative;   
-  right: auto;
-  bottom: auto;
-  font-weight: 600;
-  color: #fff;
-  background: #ff9800;
-  padding: 0.5rem 1.2rem;
-  border: none;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  white-space: nowrap;
-  transition: transform 0.3s ease, background 0.3s ease;
-  animation: fadeSlideIn 0.6s ease forwards;
-}
-.sticky-register-btn:hover {
-  transform: scale(1.05);
-  background: #fb8c00;
-}
-
-/* OPTIONAL: add a little left margin so it’s not glued to the dropdown */
-.sticky-register-btn {
-  margin-left: 1rem;
-}
-
-
-/* Header Base */
-.navbar {
-  background: rgba(0, 123, 255, 0.25);   /* bootstrap-blue @ 25 % opacity */
-  backdrop-filter: blur(10px);           /* soft glass effect */
-  -webkit-backdrop-filter: blur(10px);   /* Safari */
-  transition: background 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* when the page is scrolled >20 px (sticky-shadow class is added in JS) */
-.sticky-shadow {
-  background: rgba(0, 123, 255, 0.55);   /* same blue, just a bit more solid */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-.navbar.fixed-top {
-  position: fixed !important;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1050;
-}
-
-/* Shadow Effect */
-/* .sticky-shadow {
-  background-color: rgba(255, 255, 255, 0.95) !important;
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-} */
-
-/* Slide Up/Down Nav */
-/* .nav-hidden {
-  transform: translateY(-100%);
-} */
-
-/* Animation */
-@keyframes fadeSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Nav Link Hover */
-.navbar-nav .nav-item {
-  position: relative;
-  overflow: hidden;
-}
-.navbar-nav .nav-item::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 2px;
-  width: 0%;
-  background-color: #0d6efd;
-  transition: width 0.4s ease-in-out;
-}
-.navbar-nav .nav-item:hover::after {
-  width: 100%;
-}
-
-/* Mobile Styles */
-@media (max-width: 768px) {
-  .logo-img {
-    width: 48px;
-  }
-  .sticky-register-btn {
-    font-size: 0.8rem;
-    padding: 0.3rem 0.8rem;
-  }
-}
-
-/* Page Padding Offset for Fixed Header */
-.pt-header {
-  padding-top: 85px;
-}
-
-.language-select {
-  min-width: 70px;
-  cursor: pointer;
-}
-.language-select:focus {
-  box-shadow: none;
-}
-
-
-/* =============== LOGO =============== */
-.logo-img {
-  width: 60px;
-  height: auto;
-  transition: transform 0.3s ease;
-}
-
-/* =============== LOGIN FORM =============== */
-.login-form {
-  width: 250px;
-  z-index: 1050;
-}
-
-/* Register Link */
-.register-link span {
-  color: #d81b60;
-  cursor: pointer;
-  text-decoration: underline;
-}
-.register-link span:hover {
-  text-decoration: none;
-}
-
-/* =============== STICKY REGISTER BUTTON (inside header) =============== */
+/* ───────────────────  CTA BUTTON  ───────────────────── */
 .sticky-register-btn {
   position: relative;
   margin-left: 1rem;
   font-weight: 600;
-  color: #fff;
-  background: #ff9800;
+  color: #ffffff;
+  background: var(--clr-yellow);
   padding: 0.5rem 1.2rem;
   border: none;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   white-space: nowrap;
   transition: transform 0.3s ease, background 0.3s ease;
   animation: fadeSlideIn 0.6s ease forwards;
 }
 .sticky-register-btn:hover {
   transform: scale(1.05);
-  background: #fb8c00;
+  background: var(--clr-yellow-dark);
 }
 
-/* =============== HEADER BASE =============== */
+/* ───────────────────  HEADER BASE  ──────────────────── */
 .navbar {
-  background: rgba(0, 123, 255, 0.25);  /* bootstrap blue @ 25% */
+  background: #0b6477;/* green @ 25 % */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   transition: background 0.3s ease, box-shadow 0.3s ease, top 0.35s ease;
 }
 
-/* ---------- slide-up logic ---------- */
-.navbar.fixed-top {
-  top: 0;                          /* default: flush with top */
-}
+/* push-down logic handled in JS – keep class hook */
+.navbar.fixed-top { top: 0; }
+html.info-bar-visible .navbar.fixed-top { top: 40px; }
 
-/* When the info bar is visible, push header down 40 px (bar height) */
-html.info-bar-visible .navbar.fixed-top {
-  top: 40px;
-}
-
-/* Shadow when scrolling a bit */
+/* stronger tint + shadow after scrolling 20 px */
 .sticky-shadow {
-  background: rgba(0, 123, 255, 0.55);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background: rgba(11, 100, 119, 0.55); /* green @ 55 % */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
-/* =============== NAV LINK HOVER =============== */
+/* ───────────────────  NAV LINK EFFECT  ──────────────── */
 .navbar-nav .nav-item {
   position: relative;
   overflow: hidden;
@@ -239,45 +80,89 @@ html.info-bar-visible .navbar.fixed-top {
   left: 0;
   height: 2px;
   width: 0%;
-  background-color: #0d6efd;
+  background-color: var(--clr-yellow);
   transition: width 0.4s ease-in-out;
 }
-.navbar-nav .nav-item:hover::after {
-  width: 100%;
+.navbar-nav .nav-item:hover::after { width: 100%; }
+
+/* ——— link tint on hover / active ——— */
+.navbar-nav .nav-link {
+  color: #ffffff;                    /* default white */
+    transition: color 0.25s ease, text-shadow 0.25s ease;
 }
 
-/* =============== MOBILE =============== */
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-item.active .nav-link {
+  color: var(--clr-yellow);     
+ text-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+}
+
+
+/* ───────────────────  LANGUAGE DROPDOWN  ───────────── */
+.language-select {
+  min-width: 70px;
+  cursor: pointer;
+}
+.language-select:focus { box-shadow: none; }
+
+/* ───────────────────  HELPER: PAGE OFFSET  ─────────── */
+.pt-header { padding-top: 85px; }
+
+/* ───────────────────  ANIMATIONS  ───────────────────── */
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(-15px); }
+  to   { opacity: 1; transform: translateY(0);      }
+}
+
+/* ───────────────────  MOBILE  (< 768 px)  ──────────── */
 @media (max-width: 768px) {
-  .logo-img {
-    width: 48px;
-  }
+  .logo-img            { width: 48px; }
   .sticky-register-btn {
     font-size: 0.8rem;
     padding: 0.3rem 0.8rem;
   }
 }
 
-/* =============== PAGE OFFSET HELPERS =============== */
-.pt-header {
-  padding-top: 85px;               /* stays 85 — header top now animated */
+
+/* ─── courses pop-up dropdown ─── */
+.courses-wrapper { position: relative; }
+
+.courses-popup {
+  list-style: none;
+  margin: 0;
+  padding: 0.6rem 0;
+  position: absolute;
+  top: 100%;     /* just under the button */
+  left: 0;
+  min-width: 220px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.15);
+  z-index: 1050;
 }
 
-.language-select {
-  min-width: 70px;
-  cursor: pointer;
-}
-.language-select:focus {
-  box-shadow: none;
+/* arrow pointer */
+.courses-popup::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 30px;   /* tweak to center under button */
+  width: 12px;
+  height: 12px;
+  background: #ffffff;
+  transform: rotate(45deg);
+  box-shadow: -2px -2px 4px rgba(0,0,0,0.04);
 }
 
-/* Animation keyframes */
-@keyframes fadeSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.course-link {
+  display: block;
+  padding: 0.45rem 1rem;
+  font-weight: 500;
+  color: var(--clr-brown);
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.course-link:hover {
+  background: var(--clr-yellow-tint);
+  color: var(--clr-green);
 }

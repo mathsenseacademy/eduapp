@@ -1,51 +1,90 @@
+/* needs the :root palette loaded globally:
+   :root {
+     --clr-green:  #0b6477;
+     --clr-yellow: #fab554;
+     --clr-brown:  #875714;
+   }
+*/
+
+/* ─────────────────────  SECTION  ───────────────────── */
 .contact-cta {
-    background-color: #1a237e;
-    color: #fff;
-    padding: 4rem 2rem;
-    text-align: center;
-  }
-  
-  .contact-cta h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-  
-  .contact-cta p {
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
-  }
-  
-  .cta-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-  }
-  
-  .btn {
-    text-decoration: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 6px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-  }
-  
-  .btn-primary {
-    background-color: #fff;
-    color: #1a237e;
-  }
-  
-  .btn-primary:hover {
-    background-color: #f0f4ff;
-  }
-  
-  .btn-outline {
-    border: 2px solid #fff;
-    color: #fff;
-  }
-  
-  .btn-outline:hover {
-    background-color: #3949ab;
-    border-color: #3949ab;
-  }
-  
+  /* diagonal gradient: brown → green */
+  background: linear-gradient(135deg, var(--clr-brown) 0%, var(--clr-green) 100%);
+  color: #ffffff;
+  text-align: center;
+  padding: 4rem 2rem;
+  overflow: hidden;                     /* hides wobble overflow */
+}
+
+.cta-headline {
+  font-size: clamp(1.6rem, 4vw + 0.5rem, 2.4rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.25;
+}
+
+.cta-sub {
+  font-size: 1.1rem;
+  margin-bottom: 2.2rem;
+  max-width: 620px;
+  margin-inline: auto;
+}
+
+/* ─────────────────────  BUTTONS  ───────────────────── */
+.cta-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.btn {
+  position: relative;
+  text-decoration: none;
+  padding: 0.8rem 2.1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+
+/* filled primary */
+.btn-fill {
+  background: var(--clr-yellow);
+  color: var(--clr-brown);
+}
+.btn-fill:hover {
+  background: #ffdca1;                 /* lighter yellow */
+}
+
+/* outline secondary */
+.btn-outline {
+  border: 2px solid #ffffff;
+  color: #ffffff;
+}
+.btn-outline:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: var(--clr-yellow);
+}
+
+/* animated arrow after text */
+.btn::after {
+  content: "→";
+  margin-left: 0.4rem;
+  transition: transform 0.25s ease;
+}
+.btn:hover::after { transform: translateX(4px); }
+
+/* gentle float / wobble */
+@keyframes wobbleAnim {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-3px); }
+}
+.wobble { animation: wobbleAnim 4s ease-in-out infinite; }
+
+/* ─────────────────────  MOBILE  (< 480 px)  ───────────────────── */
+@media (max-width: 479.98px) {
+  .contact-cta { padding: 3rem 1.25rem; }
+  .cta-sub     { font-size: 1rem; }
+  .btn         { width: 100%; }          /* stack full-width buttons */
+}

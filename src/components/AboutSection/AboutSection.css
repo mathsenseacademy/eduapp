@@ -1,52 +1,60 @@
-.about {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 4rem 2rem;
-    background-color: #ffffff;
-    flex-wrap: wrap;
+.about-section {
+  width: 100%;
+  padding: 4rem 1rem;
+  background-color: #fffdf6;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Remove Bootstrap gutter on this row */
+.about-section .row {
+  margin: 0;
+}
+
+/* TEXT SIDE */
+.text-block {
+  padding: 0 2rem;
+}
+.about-heading {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+.highlight {
+  color: #fc7c5f;
+}
+.text-block p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+.text-block ul {
+  padding-left: 1.2rem;
+  margin: 0;
+}
+.text-block li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+/* IMAGE SIDE */
+.image-block {
+  padding: 0;
+}
+.custom-image-wrapper {
+  width: 100%;
+  /* Maintain the aspect ratio of your shapeMask.png */
+  aspect-ratio: 1.25; /* e.g. if your mask is 1250×1000, use 1.25 */
+  overflow: hidden;
+  /* No need for extra CSS—mask is handled inline */
+}
+
+/* MOBILE FALLBACK: simple rounded rectangle */
+@media (max-width: 768px) {
+  .text-block {
+    padding: 0 1rem 2rem;
   }
-  
-  .about-image {
-    flex: 1;
-    min-width: 280px;
-    max-width: 500px;
-    padding: 1rem;
+  .custom-image-wrapper {
+    mask: none ;
+    -webkit-mask: none ;
+    border-radius: 1rem;
   }
-  
-  .about-image img {
-    width: 100%;
-    border-radius: 10px;
-  }
-  
-  .about-content {
-    flex: 1;
-    min-width: 300px;
-    padding: 1rem;
-  }
-  
-  .about-content h2 {
-    font-size: 2rem;
-    color: #1a237e;
-    margin-bottom: 1rem;
-  }
-  
-  .about-content p {
-    font-size: 1rem;
-    color: #444;
-    line-height: 1.6;
-    margin-bottom: 1rem;
-  }
-  
-  /* Responsive */
-  @media (max-width: 768px) {
-    .about {
-      flex-direction: column;
-      text-align: center;
-    }
-  
-    .about-image, .about-content {
-      max-width: 100%;
-    }
-  }
-  
+}

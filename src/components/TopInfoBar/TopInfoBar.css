@@ -1,29 +1,45 @@
+/* ─── uses   --clr-green  --clr-yellow  --clr-brown  from :root ─── */
+
 .top-info-bar {
   height: 40px;
-  background: #00264d;            /* deep navy */
-  color: #fff;
+  background: var(--clr-green);          /* primary brand colour */
+  color: #ffffff;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 0.9rem;
-  padding: 0 1.5rem;
+  line-height: 1;                        /* tighter */
+  padding: 0 1.25rem;
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 999;                   /* above header */
+  inset: 0 0 auto;                       /* shorthand for top / left / right */
+  z-index: 999;                          /* above header */
   transition: transform 0.35s ease;
 }
 
-.top-info-bar.hide {
-  transform: translateY(-100%);
-}
-
-.top-info-bar.show {
-  transform: translateY(0);
-}
+/* slide-up / slide-down */
+.top-info-bar.hide { transform: translateY(-100%); }
+.top-info-bar.show { transform: translateY(0); }
 
 .top-info-bar a {
-  color: #fff;
+  color: var(--clr-yellow);              /* accent link colour */
   margin-left: 0.75rem;
+  text-decoration: underline;
+}
+.top-info-bar a:hover { text-decoration: none; }
+
+/* ─── MOBILE  (< 576 px) ────────────────────────────────────────── */
+@media (max-width: 575.98px) {
+  .top-info-bar {
+    flex-direction: column;              /* stack elements */
+    height: auto;                        /* let it grow if text wraps */
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    text-align: center;
+  }
+  .top-info-bar a { display: inline-block; margin-left: 0.4rem; }
+}
+
+/* ─── TABLET  (576 px – 991 px) ─────────────────────────────────── */
+@media (min-width: 576px) and (max-width: 991.98px) {
+  .top-info-bar { font-size: 0.85rem; }
 }

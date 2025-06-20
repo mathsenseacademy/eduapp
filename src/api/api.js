@@ -6,6 +6,7 @@ import axios from "axios";
 const api = axios.create({
   // baseURL: "http://mathsenseacademy.com:7000/",
   baseURL:"https://api.mathsenseacademy.com",
+  // 'https://api.mathsenseacademy.com/'
   headers: { "Content-Type": "application/json" },
 });
 

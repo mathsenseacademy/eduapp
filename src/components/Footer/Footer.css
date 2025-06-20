@@ -1,52 +1,192 @@
-.footer {
-    background-color: #1a237e;
-    color: #ffffff;
-    padding: 3rem 2rem 1rem;
-    font-size: 0.95rem;
-  }
-  
-  .footer-content {
-    display: flex;
-    flex-wrap: wrap;
+.site-footer {
+  font-family: "Poppins", sans-serif;
+  color: #1a1a1a;
+  background: #f3f4ee; 
+}
+
+/* ── 1. Brand Collabs ───────────────────────────────────────── */
+.brand-collabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1.5rem 2rem 0;
+  background: transparent; 
+}
+.brand-collabs img {
+  max-height: 60px;
+  object-fit: contain;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+.brand-collabs img:hover {
+  opacity: 1;
+}
+
+/* ── 2. Main Footer (Newsletter + Links) ──────────────────── */
+.container{
+  background: linear-gradient(90deg, #fff37d 0%, #ff98e6 100%);
+
+}
+.footer-main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 3rem 2rem;
+  background: linear-gradient(90deg, #fff37d 0%, #ff98e6 100%);
+  gap: 2rem;
+}
+
+/* Newsletter column */
+.newsletter {
+  flex: 1 1 300px;
+  max-width: 400px;
+}
+.footer-logo {
+  max-width: 180px;
+  margin-bottom: 1rem;
+}
+.newsletter p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+.newsletter-form {
+  display: flex;
+  position: relative;
+}
+.newsletter-form input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border-radius: 50px;
+  border: 1px solid rgba(0,0,0,0.2);
+  outline: none;
+}
+.newsletter-form button {
+  width: 48px;
+  border: none;
+  background: #1a0a40;
+  color: #fff;
+  border-radius: 50%;
+  margin-left: -48px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.newsletter-form button:hover {
+  background: #2a1a60;
+}
+
+/* Links */
+.footer-links {
+  flex: 2 1 500px;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.link-col {
+  flex: 1 1 150px;
+}
+.link-col h4 {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+.link-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.link-col li {
+  margin-bottom: 0.5rem;
+}
+
+/* LINK STYLING + HOVER ANIMATION */
+.link-col a {
+  position: relative;
+  display: inline-block;
+  color: #1a1a1a;
+  text-decoration: none;
+  padding-bottom: 2px;
+  transition: color 0.3s ease;
+}
+.link-col a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: #d63384;  /* vibrant pink */
+  transition: width 0.3s ease;
+}
+.link-col a:hover {
+  color: #d63384;
+}
+.link-col a:hover::after {
+  width: 100%;
+}
+
+/* ── 3. Footer Bottom ─────────────────────────────────────── */
+.footer-bottom {
+  background: linear-gradient(90deg, #fff37d 0%, #ff98e6 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem ;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.footer-bottom .footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.footer-bottom span {
+  opacity: 0.7;
+}
+.footer-bottom a {
+  position: relative;
+  color: #1a1a1a;
+  text-decoration: none;
+  padding-bottom: 2px;
+  transition: color 0.3s ease;
+}
+.footer-bottom a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: none;
+  transition: width 0.3s ease;
+}
+.footer-bottom a:hover {
+  color: none;
+}
+.footer-bottom a:hover::after {
+  width: 100%;
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 991px) {
+  .footer-main .footer-container {
+    flex-direction: column;
     gap: 2rem;
-    justify-content: space-between;
   }
-  
-  .footer-section {
-    flex: 1;
-    min-width: 200px;
+  .footer-links {
+    justify-content: flex-start;
   }
-  
-  .footer-section h3,
-  .footer-section h4 {
-    color: #ffffff;
-    margin-bottom: 1rem;
-  }
-  
-  .footer-section ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .footer-section ul li {
-    margin-bottom: 0.5rem;
-  }
-  
-  .footer-section a {
-    color: #ffffff;
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-  
-  .footer-section a:hover {
-    color: #f0f4ff;
-  }
-  
-  .footer-bottom {
+}
+@media (max-width: 599px) {
+  .site-footer {
     text-align: center;
-    margin-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    padding-top: 1rem;
-    font-size: 0.85rem;
   }
-  
+  .footer-bottom .footer-container {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
