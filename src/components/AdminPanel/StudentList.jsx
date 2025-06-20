@@ -11,7 +11,8 @@ const StudentList = () => {
     (async () => {
       setLoading(true);
       try {
-        const { data } = await api.get("administrator/students/");
+        const { data } = await api.get("student/student_list/");
+        // const { data } = await api.get("administrator/students/");
         setStudents(data);
       } catch (err) {
         console.error("Error fetching students:", err);

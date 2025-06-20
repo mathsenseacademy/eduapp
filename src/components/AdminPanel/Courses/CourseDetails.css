@@ -1,0 +1,12 @@
+/* src/pages/CourseDetails.css */
+.course-details img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ensure spacing on small devices */
+@media (max-width: 576px) {
+  .course-details {
+    padding: 1rem;
+  }
+}

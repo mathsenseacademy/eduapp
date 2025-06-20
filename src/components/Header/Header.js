@@ -10,40 +10,53 @@ import "./Header.css";
 
 const Header = () => {
   /* ───────── state ───────── */
-  const [showLogin, setShowLogin]             = useState(false);
-  const [coursesOpen, setCoursesOpen]         = useState(false);
-  const [courses, setCourses]                 = useState([]);
-  const [coursesLoading, setCoursesLoading]   = useState(true);
-  const [username, setUsername]               = useState("");
-  const [password, setPassword]               = useState("");
-  const [loginError, setLoginError]           = useState(null);
-  const [adminUser, setAdminUser]             = useState(null);
+  const [showLogin, setShowLogin] = useState(false);
+  const [coursesOpen, setCoursesOpen] = useState(false);
+  const [courses, setCourses] = useState([]);
+  const [coursesLoading, setCoursesLoading] = useState(true);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState(null);
+  const [adminUser, setAdminUser] = useState(null);
+  const [isAdminLogin, setIsAdminLogin] = useState(true);
   const [showStickyRegister, setShowStickyRegister] = useState(false);
 
   const { t, i18n } = useTranslation();
-  const navigate     = useNavigate();
-  const loginBoxRef  = useRef(null);
+  const navigate = useNavigate();
+  const loginBoxRef = useRef(null);
 
   /* ── load active courses ── */
+  // useEffect(() => {
+  //   setCoursesLoading(true);
+  //   getActiveCourses()
+  //     .then(res => setCourses(res.data))
+  //     .catch(() => setCourses([]))
+  //     .finally(() => setCoursesLoading(false));
+  // }, []);
+
   useEffect(() => {
     setCoursesLoading(true);
     getActiveCourses()
-      .then(res => setCourses(res.data))
+      .then((courses) => setCourses(courses))
       .catch(() => setCourses([]))
       .finally(() => setCoursesLoading(false));
   }, []);
-
   /* ── decode token ── */
   useEffect(() => {
     const tok = localStorage.getItem("accessToken");
     if (!tok) return;
-    try { setAdminUser(jwtDecode(tok)); } catch {/* ignore */}
+    try {
+      setAdminUser(jwtDecode(tok));
+    } catch {
+      /* ignore */
+    }
   }, []);
 
   /* ── header shadow after small scroll ── */
   useEffect(() => {
     const nav = document.querySelector(".navbar");
-    const handle = () => nav.classList.toggle("sticky-shadow", window.scrollY > 20);
+    const handle = () =>
+      nav.classList.toggle("sticky-shadow", window.scrollY > 20);
     window.addEventListener("scroll", handle);
     return () => window.removeEventListener("scroll", handle);
   }, []);
@@ -52,7 +65,10 @@ const Header = () => {
   useEffect(() => {
     const hero = document.querySelector("#hero");
     if (!hero) return;
-    const ob = new IntersectionObserver(([e]) => setShowStickyRegister(!e.isIntersecting), { threshold: 0.1 });
+    const ob = new IntersectionObserver(
+      ([e]) => setShowStickyRegister(!e.isIntersecting),
+      { threshold: 0.1 }
+    );
     ob.observe(hero);
     return () => ob.disconnect();
   }, []);
@@ -76,14 +92,20 @@ const Header = () => {
   /* ── handlers ── */
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    // pick endpoint & post-login route based on checkbox
+    const endpoint = isAdminLogin ? "administrator/login/" : "student/login/"; // <-- adjust this if your student-login URL differs
+    const redirectTo = isAdminLogin ? "/admin" : "/student/dashboard";
+    const userType = isAdminLogin ? "admin" : "student";
+
     try {
-      const { data } = await api.post("administrator/login/", { username, password });
+      const { data } = await api.post(endpoint, { username, password });
       localStorage.setItem("accessToken", data.access);
-      localStorage.setItem("userType", "admin");
-      setAdminUser(jwtDecode(data.access));
+      localStorage.setItem("userType", userType);
+      setAdminUser(isAdminLogin ? jwtDecode(data.access) : null);
       setShowLogin(false);
       setLoginError(null);
-      navigate("/admin");
+      navigate(redirectTo);
     } catch {
       setLoginError("Login failed. Check your credentials.");
     }
@@ -92,17 +114,19 @@ const Header = () => {
   const languages = [
     { code: "en", label: "EN" },
     { code: "hi", label: "हिंदी" },
-    { code: "bn", label: "বাংলা" }
+    { code: "bn", label: "বাংলা" },
   ];
 
   /* ───────── render ───────── */
   return (
     <nav className="navbar navbar-expand-lg fixed-top px-3">
       <div className="container-fluid justify-content-between d-flex">
-
         {/* ── left section ── */}
         <div className="d-flex align-items-center gap-4">
-          <motion.div layoutId="shared-logo" transition={{ type: "spring", stiffness: 60, damping: 15 }}>
+          <motion.div
+            layoutId="shared-logo"
+            transition={{ type: "spring", stiffness: 60, damping: 15 }}
+          >
             <img src={logo} alt="Math Sense Academy" className="logo-img" />
           </motion.div>
 
@@ -129,7 +153,7 @@ const Header = () => {
                   {coursesLoading ? (
                     <li className="px-3 py-2 text-muted">Loading…</li>
                   ) : courses.length ? (
-                    courses.map(c => (
+                    courses.map((c) => (
                       <li key={c.id}>
                         <Link
                           to={`/courses/${c.id}`}
@@ -141,7 +165,9 @@ const Header = () => {
                       </li>
                     ))
                   ) : (
-                    <li className="px-3 py-2 text-muted">No courses available</li>
+                    <li className="px-3 py-2 text-muted">
+                      No courses available
+                    </li>
                   )}
                 </motion.ul>
               )}
@@ -173,7 +199,10 @@ const Header = () => {
         </button>
 
         {/* ── right nav ── */}
-        <div id="mainNav" className="collapse navbar-collapse justify-content-end mt-3 mt-lg-0">
+        <div
+          id="mainNav"
+          className="collapse navbar-collapse justify-content-end mt-3 mt-lg-0"
+        >
           <ul className="navbar-nav align-items-center gap-3 mb-2 mb-lg-0">
             {/* language switcher */}
             <li className="nav-item">
@@ -182,20 +211,26 @@ const Header = () => {
                 value={i18n.language}
                 onChange={(e) => i18n.changeLanguage(e.target.value)}
               >
-                {languages.map(l => <option key={l.code} value={l.code}>{l.label}</option>)}
+                {languages.map((l) => (
+                  <option key={l.code} value={l.code}>
+                    {l.label}
+                  </option>
+                ))}
               </select>
             </li>
 
             {/* main links */}
             {[
-              { to: "/",        label: t("home")     },
-              { to: "/about",   label: t("about")    },
-              { to: "/experts", label: t("experts")  },
-              { to: "/blog",    label: t("blog")     },
-              { to: "/contact", label: t("contact")  }
-            ].map(link => (
+              { to: "/", label: t("home") },
+              { to: "/about", label: t("about") },
+              { to: "/experts", label: t("experts") },
+              { to: "/blog", label: t("blog") },
+              { to: "/contact", label: t("contact") },
+            ].map((link) => (
               <li key={link.to} className="nav-item">
-                <Link to={link.to} className="nav-link">{link.label}</Link>
+                <Link to={link.to} className="nav-link">
+                  {link.label}
+                </Link>
               </li>
             ))}
           </ul>
@@ -203,12 +238,18 @@ const Header = () => {
           {/* ── auth box ── */}
           <div className="position-relative mt-2 mt-lg-0">
             {adminUser ? (
-              <button className="btn btn-outline-success" onClick={() => navigate("/admin")}>
+              <button
+                className="btn btn-outline-success"
+                onClick={() => navigate("/admin")}
+              >
                 Go to Admin Section
               </button>
             ) : (
               <>
-                <button className="btn btn-outline-primary login-toggle-btn" onClick={() => setShowLogin(!showLogin)}>
+                <button
+                  className="btn btn-outline-primary login-toggle-btn"
+                  onClick={() => setShowLogin(!showLogin)}
+                >
                   {t("login")}
                 </button>
 
@@ -218,12 +259,12 @@ const Header = () => {
                     onSubmit={handleLogin}
                     className="login-form p-3 border bg-white shadow rounded position-absolute end-0 mt-2"
                   >
-                    <input
+                                       <input
                       className="form-control mb-2"
                       type="text"
                       placeholder="Username"
                       value={username}
-                      onChange={e => setUsername(e.target.value)}
+                      onChange={(e) => setUsername(e.target.value)}
                       required
                     />
                     <input
@@ -231,14 +272,33 @@ const Header = () => {
                       type="password"
                       placeholder="Password"
                       value={password}
-                      onChange={e => setPassword(e.target.value)}
+                      onChange={(e) => setPassword(e.target.value)}
                       required
                     />
-                    <button type="submit" className="btn btn-primary w-100">Login</button>
-                    {loginError && <p className="text-danger mt-2">{loginError}</p>}
+                     {/* ── admin/student toggle ── */}
+                    <div className="form-check mb-2">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        id="adminCheck"
+                        checked={isAdminLogin}
+                        onChange={(e) => setIsAdminLogin(e.target.checked)}
+                      />
+                      <label className="form-check-label" htmlFor="adminCheck">
+                        Login as Admin
+                      </label>
+                    </div>
+                    <button type="submit" className="btn btn-primary w-100">
+                      Login
+                    </button>
+                    {loginError && (
+                      <p className="text-danger mt-2">{loginError}</p>
+                    )}
                     <p className="register-link mt-2 text-center">
-                      {`Don't have an account? `}
-                      <span onClick={() => navigate("/register")}>Register</span>
+                      Don’t have an account?{" "}
+                      <span onClick={() => navigate("/register")}>
+                        Register
+                      </span>
                     </p>
                   </form>
                 )}

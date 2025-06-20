@@ -26,21 +26,21 @@ export default function AllCourses() {
             <div
               className="card h-100 shadow-sm"
               style={{ cursor: "pointer" }}
-              onClick={() => navigate(`/admin/courses/edit/${c.course_ID}`)}  // ← absolute
+              onClick={() => navigate(`/admin/courses/edit/${c.ID}`)}  
             >
               <div className="card-body">
                 <h5 className="card-title">{c.course_name}</h5>
                 <p className="card-text">
                   <strong>Class:</strong> {c.class_level}
                   <br />
-                  <strong>Category:</strong> {c.category}
+                  {/* <strong>Category:</strong> {c.category} */}
                 </p>
               </div>
               <div className="card-footer">
                 {c.is_active ? (
-                  <span className="badge bg-success">Active</span>
-                ) : (
                   <span className="badge bg-secondary">Inactive</span>
+                ) : (
+                  <span className="badge bg-secondary bg-success"> Active</span>
                 )}
               </div>
             </div>

@@ -12,7 +12,8 @@ import StudentRegister from "./pages/StudentRegister";
 import AdminPanel from "./components/AdminPanel/AdminPanel";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Loader from "./components/Loader/Loader";
-
+import CourseDetails from "./components/AdminPanel/Courses/CourseDetails";
+import CoursePage from "./pages/CoursePage/CoursePage";
 import useLocoScroll from "./hooks/useLocoScroll";
 
 function App() {
@@ -60,6 +61,14 @@ function App() {
                 <Route
                   path="/student/register"
                   element={<StudentRegister />}
+                />
+
+
+                {/* course details route */}
+                <Route
+                  path="/courses/:id"
+                  // element={<CourseDetails />}
+                  element={<CoursePage />}
                 />
 
                 {/* admin */}
