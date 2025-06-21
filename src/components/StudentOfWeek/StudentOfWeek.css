@@ -1,0 +1,122 @@
+.sow-wrapper {
+  overflow: hidden;
+}
+
+/* HEADER */
+.sow-header-wrapper {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.sow-header {
+  display: inline-flex;
+  align-items: center;
+  background: #ffd600;
+  border: 2px solid #000;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+}
+.sow-badge {
+  background: #fb923c;
+  border: 2px solid #000;
+  border-radius: 0.25rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-right: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sow-badge img {
+  max-width: 1.5rem;
+  max-height: 1.5rem;
+}
+.sow-title {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.75rem;
+  text-transform: uppercase;
+}
+
+/* src/components/StudentOfWeek/StudentOfWeek.css */
+
+.sow-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 3rem 1rem;
+  flex-wrap: wrap;
+}
+
+/* Photo circle */
+.sow-photo-wrapper {
+  flex: 0 0 auto;
+  width: 10rem;
+  height: 10rem;
+  border: 3px solid #000;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #fff;
+  z-index: 1;
+}
+
+.sow-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Bubble */
+.sow-bubble-wrapper {
+  position: relative;
+  flex: 1 1 300px;
+  margin-left: -2rem; /* overlap slightly under the photo */
+}
+
+.sow-bubble {
+  background: #fdf5d7;
+  border: 1px solid #000;
+  border-radius: 4px;
+  padding: 1.5rem 2rem;
+  position: relative;
+}
+
+.sow-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -1rem;
+  left: 2.5rem;         /* aligns under photo */
+  width: 2rem;
+  height: 1rem;
+  border-bottom: 1px solid #000;
+}
+
+/* Text */
+.sow-text {
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.4;
+}
+
+.sow-highlight {
+  color: #fb923c;
+  font-weight: 600;
+}
+
+/* Responsive: stack vertically */
+@media (max-width: 767px) {
+  .sow-container {
+    flex-direction: column;
+  }
+  .sow-bubble-wrapper {
+    margin-left: 0;
+    margin-top: 1rem;
+    width: 100%;
+  }
+  .sow-bubble {
+    padding: 1rem;
+  }
+  .sow-bubble::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

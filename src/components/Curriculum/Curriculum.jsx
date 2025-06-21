@@ -1,78 +1,83 @@
-// src/components/Curriculum.jsx
+// src/components/Curriculum/Curriculum.jsx
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getPublicCourseDetails } from "../../api/courseApi";
 import curriculumIcon from "../../assets/bookIcon.png";
-import sampleImage from "../../assets/bookIcon.png";
 import "./Curriculum.css";
 
-const itemColors = [
-  "#5DD3F3", // blue
-  "#FB923C", // orange
-  "#F9A8D4", // pink
-  "#C4B5FD", // purple
-  "#34D399", // green
-  "#5DD3F3",
-  "#FB923C",
-  "#F9A8D4",
-];
-
-const Curriculum = () => {
+export default function Curriculum() {
   const { id } = useParams();
   const navigate = useNavigate();
+
   const [curriculums, setCurriculums] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [mediaSrc, setMediaSrc]     = useState("");
+  const [loading, setLoading]       = useState(true);
 
   useEffect(() => {
     getPublicCourseDetails(id)
-      .then(res => setCurriculums(res.data.curriculums || []))
-      .catch(err => {
-        console.error(err);
-        setCurriculums([]);
+      .then((res) => {
+        setCurriculums(res.data.curriculums || []);
+        setMediaSrc(res.data.course_video_path || res.data.course_image_path || "");
       })
+      .catch(console.error)
       .finally(() => setLoading(false));
   }, [id]);
 
   if (loading) {
     return (
       <div className="text-center my-5">
-        <div className="spinner-border text-primary" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
+        <div className="spinner-border text-primary" role="status" />
       </div>
     );
   }
 
   return (
     <div className="curriculum-page">
-      {/* <div className="curriculum-header d-flex align-items-center justify-content-center mb-4">
-        <div className="icon-wrapper me-2">
-          <img src={curriculumIcon} alt="Curriculum Icon" />
+      {/* Header */}
+      <div className="curriculum-header-wrapper">
+        <div className="curriculum-header">
+          <div className="icon-wrapper">
+            <img src={curriculumIcon} alt="Curriculum Icon" />
+          </div>
+          <h2>CURRICULUM</h2>
         </div>
-        <h2 className="m-0">CURRICULUM</h2>
-      </div> */}
+      </div>
 
-      <div className="container-fluid curriculum-content">
+      {/* Content */}
+      <div className="curriculum-content container-fluid">
         <div className="row align-items-center">
-          {/* left image/video placeholder */}
+          {/* Hexagon Media */}
           <div className="col-12 col-md-6 mb-4 mb-md-0">
-            <div className="image-wrapper">
-              <img
-                src={sampleImage}
-                alt="Curriculum visual"
-                className="img-fluid rounded"
-              />
+            <div className="media-wrapper">
+              {mediaSrc.endsWith(".mp4") ? (
+                <video
+                  controls
+                  src={mediaSrc}
+                  className="media-frame"
+                  poster="" /* optional poster */
+                />
+              ) : (
+                <img src={mediaSrc} alt="" className="media-frame" />
+              )}
+              <div className="play-overlay">
+                ▶︎
+              </div>
             </div>
           </div>
 
-          {/* dynamic curriculum list */}
+          {/* List */}
           <div className="col-12 col-md-6">
-            <ul className="curriculum-list list-unstyled p-0">
+            <ul className="curriculum-list">
               {curriculums.map((item, idx) => (
                 <li
                   key={item.curriculum_id}
-                  className="curriculum-item mb-2 p-2 text-center"
-                  style={{ backgroundColor: itemColors[idx % itemColors.length] }}
+                  className="curriculum-item"
+                  style={{
+                    backgroundColor:
+                      ["#5DD3F3", "#FB923C", "#F9A8D4", "#C4B5FD", "#34D399"][
+                        idx % 5
+                      ],
+                  }}
                 >
                   {item.curriculum_name}
                 </li>
@@ -81,9 +86,10 @@ const Curriculum = () => {
           </div>
         </div>
 
+        {/* Button */}
         <div className="text-center mt-4">
           <button
-            className="btn btn-outline-dark detailed-btn"
+            className=" detailed-btn"
             onClick={() => navigate("/student/register")}
           >
             DETAILED CURRICULUM
@@ -92,6 +98,4 @@ const Curriculum = () => {
       </div>
     </div>
   );
-};
-
-export default Curriculum;
+}
