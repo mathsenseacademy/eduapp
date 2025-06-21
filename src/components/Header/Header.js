@@ -6,6 +6,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import api from "../../api/api";
 import { getActiveCourses } from "../../api/courseApi";
 import logo from "../../assets/logoWithName.png";
+import StudentRegister from "../../pages/StudentRegister";
+
 import "./Header.css";
 
 const Header = () => {
@@ -20,6 +22,8 @@ const Header = () => {
   const [adminUser, setAdminUser] = useState(null);
   const [isAdminLogin, setIsAdminLogin] = useState(true);
   const [showStickyRegister, setShowStickyRegister] = useState(false);
+
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
 
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
@@ -94,7 +98,7 @@ const Header = () => {
     e.preventDefault();
 
     // pick endpoint & post-login route based on checkbox
-    const endpoint = isAdminLogin ? "administrator/login/" : "student/login/"; // <-- adjust this if your student-login URL differs
+    const endpoint = isAdminLogin ? "administrator/login/" : "student/login/"; 
     const redirectTo = isAdminLogin ? "/admin" : "/student/dashboard";
     const userType = isAdminLogin ? "admin" : "student";
 
@@ -119,6 +123,7 @@ const Header = () => {
 
   /* ───────── render ───────── */
   return (
+     <>
     <nav className="navbar navbar-expand-lg fixed-top px-3">
       <div className="container-fluid justify-content-between d-flex">
         {/* ── left section ── */}
@@ -181,7 +186,7 @@ const Header = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
               className="sticky-register-btn"
-              onClick={() => navigate("/student/register")}
+              onClick={() => setShowRegisterModal(true)}
             >
               {t("hero.registerButton")}
             </motion.button>
@@ -308,6 +313,10 @@ const Header = () => {
         </div>
       </div>
     </nav>
+    {showRegisterModal && (
+        <StudentRegister onClose={() => setShowRegisterModal(false)} />
+      )}
+       </>
   );
 };
 
