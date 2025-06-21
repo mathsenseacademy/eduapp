@@ -3,15 +3,30 @@
 .course-details-container {
   overflow: hidden;
 }
-
+.Left-section{
+  position: relative;
+  padding-left: 50px;
+}
 /* Base bubble */
 .bubble {
   position: relative;
   padding: 2rem 1.5rem;
-  border-radius: 1rem;
+  /* border-radius: 1rem; */
   color: #000;
 }
-
+.bubble__title{
+  font-size: 9.5rem;
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 75%;
+  height: 20rem;
+}
+/* .bubble__title {
+    font-size: 9rem;
+    width: 100%;
+    height: 20rem;
+  } */
 /* Purple bubble with cut top-right corner */
 .bubble--purple {
   background: #d9b1f9;
@@ -24,15 +39,42 @@
   );
 }
 
-.bubble--purple .bubble__title {
-  margin: 0;
-  font-size: 2rem;
-  font-weight: 700;
-  line-height: 1.2;
+.bubble--orange {
+  position: absolute;
+  top: 28rem;
 }
 
+.bubble--orange p{
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  height: 6rem;
+  /* border: 1px solid; */
+}
+
+.bubble--purple .bubble__btn {
+  font-size: 5.5rem;
+}
+.Left-bubbles {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-image: url(http://localhost:3000/static/media/coursedetail.3488eee458eace07aea6.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 42.5rem;
+  width: rem;
+  margin: 15px auto;
+  /* border: 2px solid; */
+  position: relative;
+  background-size: contain;
+background-repeat: no-repeat;
+  background-position: center;
+}
 /* Green bubble */
 .bubble--green {
+  
   background: #8ddac4;
   clip-path: polygon(
     0% 0%, 
@@ -62,11 +104,11 @@
 /* Circular arrow */
 .circle-arrow {
   position: absolute;
-  top: 50%;
-  right: -4rem;
+  top: 75%;
+  right: 3rem;
   transform: translateY(90%);
-  width: 3rem;
-  height: 3rem;
+  width: 4.5rem;
+  height: 4.5rem;
   border: 2px solid #000;
   border-radius: 50%;
   display: flex;
@@ -80,20 +122,21 @@
 /* Logo */
 .logo-wrapper {
   display: inline-block;
-  padding: 0 3rem;
+  padding: 0 1rem;
   border: 2px solid #fbd7a0;
   border-radius: 2rem;
   
 }
 
-.logo-img {
-  width: 100%;
-  max-height: 5rem;
+.hero-logo-img {
+  width: 25rem;
+  /* max-height: 5rem; */
+  margin: auto 6rem;
 }
 
 /* Student images */
 .students-wrapper .student-img {
-  width: 15rem;
+  width: 30rem;
   border-radius: 1rem;
   object-fit: cover;
 }
@@ -121,14 +164,84 @@
       0% 100%
     );
   }
-  .circle-arrow {
-    /* right: 20rem; */
+    .circle-arrow {
+    right: 20rem;
     width: 2.5rem;
     height: 2.5rem;
     font-size: 1rem;
-    top:20rem
+    top: 15rem;
+    left: 21.5rem;
   }
   .students-wrapper .student-img {
-    width: 6rem;
+    width: 20rem;
+  }
+
+  .Left-bubbles {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-image: url(http://localhost:3000/static/media/coursedetail.3488eee458eace07aea6.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 20.5rem;
+  width: rem;
+  margin: 15px auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  position: relative;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.bubble__title {
+  font-size: 3.5rem;
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 75%;
+  height: 20rem;
+}
+.bubble--orange {
+  position: absolute;
+  top: 13rem;
+}
+.bubble--orange p {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  height: 2rem;
+}
+.hero-logo-img {
+  width: 10rem;
+  max-height: 5rem;
+  margin: auto 6rem;
+}
+}
+
+@media only screen and (min-width: 1200px) {
+  
+  .bubble__title{
+  /* font-size: 10.5rem; */
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 75%;
+  height: 23rem;
+}
+.students-wrapper .student-img {
+  width: 40rem;
+  border-radius: 1rem;
+  object-fit: cover;
+}
+  .bubble--orange p {
+    font-size: 1.5rem;
+    height: 6rem;
+  }
+  .bubble--purple .bubble__btn {
+    font-size: 6.5rem;
   }
 }
+
+
