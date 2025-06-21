@@ -15,6 +15,9 @@
   flex-wrap: wrap;
   text-align: center;
 }
+.why-header{
+  width: 70%;
+}
 .why-header h2 img {
   height: 150px;
 }
@@ -22,7 +25,7 @@
 .why-grid-wrapper {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  /* gap: 2rem; */
   align-items: center;
   justify-content: center;
   /* margin-top: 1.5rem; */
