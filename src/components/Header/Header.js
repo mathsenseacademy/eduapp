@@ -5,7 +5,7 @@ import { jwtDecode } from "jwt-decode";
 import { motion, AnimatePresence } from "framer-motion";
 import api from "../../api/api";
 import { getActiveCourses } from "../../api/courseApi";
-import logo from "../../assets/logoWithName.png";
+import logo from "../../assets/logoWith_Name.svg";
 import StudentRegister from "../../pages/StudentRegister";
 
 import "./Header.css";

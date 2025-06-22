@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import StudentRegister from "../../pages/StudentRegister";
 import "./Hero.css";
 import heroImage from "../../assets/hero-1.png"; 
-import logo from "../../assets/logoWithName.png";
+import logo from "../../assets/logoWith_Name.svg";
 
 const Hero = () => {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
