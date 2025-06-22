@@ -111,10 +111,12 @@
   .curriculum-item {
     font-size: 0.9rem;
   }
-  .curriculum-header {
-    flex-direction: column;
-  }
+  
   .icon-wrapper {
     margin-bottom: 0.5rem;
+  }
+  .curriculum-header {
+    flex-direction: row;
+    width: 90%;
   }
 }
