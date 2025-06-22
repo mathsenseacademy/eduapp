@@ -231,7 +231,7 @@ background-repeat: no-repeat;
 @media only screen and (min-width: 1200px) {
   
   .bubble__title{
-  font-size: 7.5rem;
+  font-size: 5.5rem;
     white-space: wrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -252,10 +252,9 @@ background-repeat: no-repeat;
     font-size: 6.5rem;
   }
   .circle-arrow{
-    top: 117%;
     right: 6rem;
-    right: 2rem;
-    top: 108%;
+    left: 47rem;
+    top: 115%;
   }
 }
 

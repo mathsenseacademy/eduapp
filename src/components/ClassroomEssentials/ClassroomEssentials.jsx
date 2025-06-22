@@ -1,6 +1,7 @@
 // src/components/ClassroomEssentials/ClassroomEssentials.jsx
 import React, { useState } from "react";
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
+import classessentials from "../../assets/bookIcon.png";
 import "./ClassroomEssentials.css";
 
 const ITEMS = [
@@ -39,7 +40,15 @@ export default function ClassroomEssentials() {
 
   return (
     <section className="ce-container">
-      <h1 className="ce-title">Classroom essentials</h1>
+      {/* <h1 className="ce-title">Classroom essentials</h1> */}
+      <div className="curriculum-header-wrapper">
+              <div className="curriculum-header">
+                <div className="icon-wrapper">
+                  <img src={classessentials} alt="Curriculum Icon" />
+                </div>
+                <h2>Classroom essentials</h2>
+              </div>
+            </div>
       <div className="ce-subtitle">
         A 360° approach for excellence in school & beyond
       </div>
