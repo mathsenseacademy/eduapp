@@ -1,56 +1,60 @@
 // src/pages/CoursePage/CoursePage.jsx
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getPublicCourseDetails } from "../../api/courseApi";
 import CourseDetails from "../../components/AdminPanel/Courses/CourseDetails";
 import Curriculum    from "../../components/Curriculum/Curriculum";
-import Testimonial    from "../../components/TestimonialSection/TestimonialSection";
-import StudentOfWeek from '../../components/StudentOfWeek/StudentOfWeek'
-import "./CoursePage.css";
+import Testimonial   from "../../components/TestimonialSection/TestimonialSection";
+import StudentOfWeek from "../../components/StudentOfWeek/StudentOfWeek";
 import useLocoScroll from "../../hooks/useLocoScroll";
 
 export default function CoursePage() {
   const { id } = useParams();
-  const navigate = useNavigate();
-  const [data, setData] = useState(null);
+  const [data, setData]       = useState(null);
   const [loading, setLoading] = useState(true);
-
-  // grab loco so we can update once data is in place
-  const { loco } = useLocoScroll(false);
+  const { loco }              = useLocoScroll(false);
 
   useEffect(() => {
     getPublicCourseDetails(id)
-      .then((res) => setData(res.data))
+      .then(res => setData(res.data))
       .catch(console.error)
       .finally(() => {
         setLoading(false);
-        // now that CourseDetails + Curriculum + Footer are rendered:
         loco?.update();
       });
   }, [id, loco]);
 
-  if (loading) {
-    return (
-      <div className="course-page-spinner text-center my-5">
-        <div className="spinner-border text-primary" role="status" />
-      </div>
-    );
-  }
-  if (!data) {
-    return <div className="text-center my-5">Course not found.</div>;
-  }
+  if (loading) return <div>Loading…</div>;
+  if (!data)    return <div>Course not found.</div>;
+
+  // here student_of_the_week is just a string
+  const { 
+    course_name,
+    course_subtitle,
+    course_image_path,       // your Base64 or URL
+    description,
+    student_of_the_week      // e.g. "Andrew"
+  } = data;
 
   return (
-    <div className=" ">
+    <div>
       <CourseDetails
-        courseName={data.course_name}
-        subtitle={data.course_subtitle}
-        imagePath={data.course_image_path}
-        description={data.description}
+        courseName={course_name}
+        subtitle={course_subtitle}
+        imagePath={course_image_path}
+        description={description}
       />
+
       <Curriculum />
-      <StudentOfWeek/>
-      <Testimonial/>
+
+      {/* pass the student name and use the course image as their "photo" */}
+      <StudentOfWeek
+        name={student_of_the_week}
+        photo={course_image_path}
+        text={`In math class this week, ${student_of_the_week} achieved remarkable success with outstanding precision and creativity.`}
+      />
+
+      <Testimonial />
     </div>
   );
 }

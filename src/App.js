@@ -55,7 +55,8 @@ function App() {
                   }
                 />
               </Routes>
-              <Footer />
+               {isAdminRoute ? "":<Footer />}
+              
             </div>
           </div>
         </>

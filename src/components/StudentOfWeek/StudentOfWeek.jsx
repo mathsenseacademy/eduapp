@@ -1,15 +1,15 @@
 import React from "react";
 import "./StudentOfWeek.css";
-import bulbIcon from "../../assets/ideaIcon.png";  // your badge icon
+import bulbIcon from "../../assets/ideaIcon.png";  
 
 export default function StudentOfWeek({
-  name = "Andrew",
-  photo = "/placeholder-student.jpg",
-  text = "In math class this week, Andrew achieved remarkable success with outstanding precision and creativity."
+  name ,
+  photo ,
+  text 
 }) {
     const [before, after] = text.split(name);
   return (
-    <section className="sow-wrapper  my-5">
+    <section className="sow-wrapper my-5">
       {/* Header */}
       <div className="sow-header-wrapper">
         <div className="sow-header">
