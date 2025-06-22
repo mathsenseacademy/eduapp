@@ -97,4 +97,11 @@
   .why-mentor {
     margin-top: 2rem;
   }
+  .why-grid {
+  flex: auto;
+}
+.why-header h2 img {
+  height: 150px;
+  margin-left: 50%;
+}
 }
