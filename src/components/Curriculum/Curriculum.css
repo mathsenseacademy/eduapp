@@ -108,13 +108,18 @@
 
 
 @media (max-width: 767px) {
+  .ce-subtitle {
+  display: inline-block;
+  margin: 1rem 3.3rem;}
   .curriculum-item {
     font-size: 0.9rem;
   }
-  .curriculum-header {
-    flex-direction: column;
-  }
+  
   .icon-wrapper {
     margin-bottom: 0.5rem;
+  }
+  .curriculum-header {
+    flex-direction: row;
+    width: 90%;
   }
 }

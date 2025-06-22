@@ -50,8 +50,8 @@
 /* Photo circle */
 .sow-photo-wrapper {
   flex: 0 0 auto;
-  width: 10rem;
-  height: 10rem;
+  width: 30%;
+  height: 30%;
   border: 3px solid #000;
   border-radius: 50%;
   overflow: hidden;
@@ -78,6 +78,7 @@
   border-radius: 4px;
   padding: 1.5rem 2rem;
   position: relative;
+  min-height: 10rem;
 }
 
 .sow-bubble::after {

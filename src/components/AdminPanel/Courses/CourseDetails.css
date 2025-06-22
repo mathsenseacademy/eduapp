@@ -59,7 +59,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  background-image: url(http://localhost:3000/static/media/coursedetail.3488eee458eace07aea6.png);
+  background-image: url(../../../assets/coursedetail.svg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -180,7 +180,7 @@ background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  background-image: url(http://localhost:3000/static/media/coursedetail.3488eee458eace07aea6.png);
+  /* background-image: url(http://localhost:3000/static/media/coursedetail.3488eee458eace07aea6.png); */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -196,39 +196,47 @@ background-repeat: no-repeat;
 }
 
 .bubble__title {
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   white-space: wrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 75%;
-  height: 20rem;
+  /* width: 75%;
+  height: 20rem; */
+  font-family: "Cascadia Code", "Courier New", monospace;
 }
-.bubble--orange {
-  position: absolute;
-  top: 13rem;
-}
+  .bubble--orange {
+    position: absolute;
+    top: 13rem;
+    left: 1px;
+  }
 .bubble--orange p {
-  font-size: 0.8rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  height: 2rem;
+    font-size: 0.6rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    height: 2rem;
+    max-width: 70%;
+  
 }
 .hero-logo-img {
   width: 10rem;
   max-height: 5rem;
   margin: auto 6rem;
 }
+.ce-subtitle{
+  margin: 1rem 1.3rem;
+}
+
 }
 
 @media only screen and (min-width: 1200px) {
   
   .bubble__title{
-  /* font-size: 10.5rem; */
-  white-space: wrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 75%;
-  height: 23rem;
+  font-size: 5.5rem;
+    white-space: wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 75%;
+    height: 23rem;
 }
 .students-wrapper .student-img {
   width: 40rem;
@@ -236,12 +244,56 @@ background-repeat: no-repeat;
   object-fit: cover;
 }
   .bubble--orange p {
-    font-size: 1.5rem;
+    font-size: 1rem;
     height: 6rem;
+    width: 60%;
   }
   .bubble--purple .bubble__btn {
     font-size: 6.5rem;
   }
+  .circle-arrow{
+    right: 6rem;
+    left: 47rem;
+    top: 115%;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+
+  .Left-bubbles{
+    height: 25rem;
+  }
+  .students-wrapper .student-img {
+  width: 24rem;
+}
+.hero-logo-img {
+  width: 10rem;
+}
+.bubble__title {
+  font-size: 2.6rem;
+}
+.bubble--orange p {
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  height: 2.7rem;
+  width: 152%;
+}
+
+.bubble--orange {
+  position: absolute;
+  top: 14.3rem;
+  left: 0;
+  width: 56%;
+}
+.bubble__btn {
+  font-size: 0.9rem;
+}
+
+.circle-arrow {
+  position: absolute;
+  top: 59%;
+  right: -18px;}
 }
 
 

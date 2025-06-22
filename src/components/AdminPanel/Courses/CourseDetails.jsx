@@ -26,7 +26,7 @@ export default function CourseDetails() {
     <div className="course-details-container my-5">
       <div className="row align-items-center gx-0">
         {/* Left bubbles */}
-        <div className="col-12 col-md-6 position-relative mb-4 mb-md-0 Left-bubbles">
+        <div className="col-12 col-md-6 col-lg-6 position-relative mb-4 mb-md-0 Left-bubbles">
           {/* <div className="Left-bubbles"> */}
           <div className="Left-section">
             {/* Blue bubble */}
