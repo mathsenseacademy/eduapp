@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getPublicCourseDetails } from "../../api/courseApi";
 import curriculumIcon from "../../assets/bookIcon.png";
+import StudentRegister from "../../pages/StudentRegister";
+
 import "./Curriculum.css";
 
 export default function Curriculum() {
@@ -12,6 +14,7 @@ export default function Curriculum() {
   const [curriculums, setCurriculums] = useState([]);
   const [mediaSrc, setMediaSrc]     = useState("");
   const [loading, setLoading]       = useState(true);
+   const [showRegisterModal, setShowRegisterModal] = useState(false);
 
   useEffect(() => {
     getPublicCourseDetails(id)
@@ -90,12 +93,16 @@ export default function Curriculum() {
         <div className="text-center mt-4">
           <button
             className=" detailed-btn"
-            onClick={() => navigate("/student/register")}
+            onClick={() => setShowRegisterModal(true)}
           >
             DETAILED CURRICULUM
           </button>
         </div>
       </div>
+       {/* Student Registration Modal */}
+      {showRegisterModal && (
+        <StudentRegister onClose={() => setShowRegisterModal(false)} />
+      )}
     </div>
   );
 }

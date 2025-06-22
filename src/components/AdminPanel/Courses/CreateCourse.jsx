@@ -211,7 +211,7 @@ export default function CourseForm() {
           value={f.student_id_of_the_week}
           onChange={update}
           className="form-select"
-          required
+          
         >
           <option value="">Select...</option>
           {students.map((s) => (
