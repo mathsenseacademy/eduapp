@@ -98,7 +98,7 @@ export default function ProgramsSection() {
         <span className="star-badge spin">★</span> Our Programs
       </h2>
 
-      <div className="row">
+      <div className="row top-2-cards">
         {/* Left hero */}
         <div className="col-md-6 d-flex justify-content-center">
           <img
@@ -110,7 +110,7 @@ export default function ProgramsSection() {
 
         {/* First 4 cards stacked */}
         <div className="col-md-6 d-flex flex-column">
-          {programs.slice(0, 4).map((p, i) => {
+          {programs.slice(0, 2).map((p, i) => {
             const bg = i % 3 === 0
               ? "#dabcf9"
               : i % 3 === 1
@@ -120,7 +120,7 @@ export default function ProgramsSection() {
               <div
                 key={i}
                 className="program-card mb-3"
-                style={{ backgroundColor: bg }}
+                // style={{ backgroundColor: bg }}
               >
                 <div className="card-image">
                   <img src={cardImage} alt={p.title} />
@@ -140,14 +140,14 @@ export default function ProgramsSection() {
 />
 
                 </div>
-                <div className="card-arrow">→</div>
+                {/* <div className="card-arrow">→</div> */}
               </div>
             );
           })}
         </div>
       </div>
 
-      <div className="row mt-3">
+      <div className="row ">
         {/* Remaining cards */}
         {programs.slice(4).map((p, i) => {
           const idx = i + 4; // for correct color rotation
@@ -160,7 +160,7 @@ export default function ProgramsSection() {
             <div className="col-md-6 mb-3" key={idx}>
               <div
                 className="program-card"
-                style={{ backgroundColor: bg }}
+                // style={{ backgroundColor: bg }}
               >
                 <div className="card-image">
                   <img src={cardImage} alt={p.title} />
@@ -180,7 +180,7 @@ export default function ProgramsSection() {
 />
 
                 </div>
-                <div className="card-arrow">→</div>
+                {/* <div className="card-arrow">→</div> */}
               </div>
             </div>
           );
