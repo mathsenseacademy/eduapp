@@ -33,8 +33,8 @@ export default function CoursePage() {
     course_subtitle,
     course_image_path,
     description,
-    student_of_the_week,      // may be null
-    classroom_essentials = [] // default to empty array
+    student_of_the_week,      
+    classroom_essentials = [] 
   } = data;
 
   return (

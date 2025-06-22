@@ -121,6 +121,13 @@
   transform: translateY(-4px);
 }
 
+.program-card.clickable {
+  cursor: pointer;
+}
+.program-card.clickable:hover {
+  transform: scale(1.02);
+  transition: transform 0.2s ease;
+}
 .card-image img {
   /* height: 100px; */
   border-radius: 12px;

@@ -29,14 +29,14 @@ export default function ClassroomEssentials({ items }) {
 
       <div className="ce-panels">
         {items.map((item, i) => {
-          const key      = item.id ?? i;
+          const key      = item.classroom_essential_id ?? i;
           const isOpen   = openKey === key;
           const svgIndex = i % 3;
 
           return (
             <div key={key} className={`ce-panel ce-panel--${svgIndex}`}>
               <div className="ce-header" onClick={() => toggle(key)}>
-                <span>{item.title}</span>
+                <span>{item.classroom_essentials_name}</span>
                 {isOpen ? (
                   <AiOutlineUp className="ce-icon" />
                 ) : (
@@ -45,7 +45,7 @@ export default function ClassroomEssentials({ items }) {
               </div>
               {isOpen && (
                 <div className="ce-body">
-                  <p>{item.description}</p>
+                  <p>{item.classroom_essentials_description}</p>
                 </div>
               )}
             </div>
