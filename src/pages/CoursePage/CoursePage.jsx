@@ -7,7 +7,7 @@ import Curriculum    from "../../components/Curriculum/Curriculum";
 import Testimonial   from "../../components/TestimonialSection/TestimonialSection";
 import StudentOfWeek from "../../components/StudentOfWeek/StudentOfWeek";
 import useLocoScroll from "../../hooks/useLocoScroll";
-
+import ClassroomEssentials from "../../components/ClassroomEssentials/ClassroomEssentials"
 export default function CoursePage() {
   const { id } = useParams();
   const [data, setData]       = useState(null);
@@ -46,8 +46,7 @@ export default function CoursePage() {
       />
 
       <Curriculum />
-
-      {/* pass the student name and use the course image as their "photo" */}
+<ClassroomEssentials/>
       <StudentOfWeek
         name={student_of_the_week}
         photo={course_image_path}
