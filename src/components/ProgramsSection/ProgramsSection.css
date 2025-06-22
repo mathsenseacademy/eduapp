@@ -81,7 +81,7 @@
   padding: 1rem 1.2rem;
   display: flex;
   align-items: center;
-  background-image: url(../../../src/assets/Untitled_design.svg);
+  /* background-image: url(../../../src/assets/Untitled_design.svg); */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -90,6 +90,31 @@
   /* box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); */
   transition: transform 0.3s ease;
   position: relative;
+}
+.program-card:nth-child(3n + 1) {
+  background-image: url(../../../src/assets/Untitled_design.svg);
+}
+
+.program-card:nth-child(3n + 2) {
+  background-image: url(../../../src/assets/Untitled_design1.svg);
+}
+
+.program-card:nth-child(3n + 3) {
+  background-image: url(../../../src/assets/Untitled_design2.svg);
+}
+/* section 2 */
+.section-two:nth-child(3n + 1) .program-card{
+  
+  background-image: url(../../../src/assets/Untitled_design2.svg);
+}
+
+.section-two:nth-child(3n + 2) .program-card{
+   background-image: url(../../../src/assets/Untitled_design.svg);
+  
+}
+
+.section-two:nth-child(3n + 3) .program-card{
+ background-image: url(../../../src/assets/Untitled_design1.svg);
 }
 
 .program-card:hover {
@@ -291,3 +316,5 @@
   } */
 
 }
+
+
