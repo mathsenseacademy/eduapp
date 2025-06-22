@@ -157,9 +157,9 @@ export default function ProgramsSection() {
             ? "#fc884f"
             : "#8dd4c0";
           return (
-            <div className="col-md-6 mb-3" key={idx}>
+            <div className="col-md-6 mb-3 section-two" key={idx}>
               <div
-                className="program-card"
+                className="program-card "
                 // style={{ backgroundColor: bg }}
               >
                 <div className="card-image">
