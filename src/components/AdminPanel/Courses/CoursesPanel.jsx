@@ -10,6 +10,9 @@ import EditCourse   from "./EditCourse";
 
 import AllCurriculums    from "./Curriculum/AllCurriculums";
 import CreateCurriculum  from "./Curriculum/AddCurriculum";
+
+import AllClassroomEssentials from "./ClassroomEssentials/AllClassroomEssentials"
+import Essentials        from "./ClassroomEssentials/Essentials";
 import "./CoursesPanel.css";
 
 export default function CoursesPanel() {
@@ -20,9 +23,11 @@ const base = "/admin/courses";
 const tabs = [
   { to: `${base}/all`,    icon: <FaList />,  label: "Show All Courses" },
   { to: `${base}/curriculums`, icon: <FaBook />,  label: "All Curriculums" },
+  { to: `${base}/essentials`, icon: <FaBook />,  label: "All ClassroomEssential" },
   { to: `${base}/create`, icon: <FaPlus />,  label: "Add Course"        },
   { to: `${base}/curriculums/create`, icon: <FaBook />,  label: "Add Curriculum" },
-  { to: `${base}/edit`,   icon: <FaEdit />,  label: "Edit Course"       },
+   { to: `${base}/essentials/create`,    icon: <FaBook />,  label: "Essentials" },
+  // { to: `${base}/edit`,   icon: <FaEdit />,  label: "Edit Course"       },
 ];
 
 
@@ -58,7 +63,8 @@ const tabs = [
       <motion.div
         className="cp-content"
         initial={false}
-        animate={open ? { marginLeft: 240 } : { marginLeft: 0 }}
+        animate={open ? { marginLeft: 100 } : { marginLeft: 0  , x: -100  }}
+        // animate={open ? { x: 0 } : { x: -440 }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
         onClick={() => setOpen(false)}
       >
@@ -71,6 +77,11 @@ const tabs = [
          <Route path="curriculums" element={<AllCurriculums />} />
          <Route path="curriculums/create" element={<CreateCurriculum />} />
          {/* <Route path="curriculums/edit/:id" element={<EditCurriculum />} /> */}
+         {/* Classroom essentials */}
+   <Route path="essentials" element={<AllClassroomEssentials />} />
+   <Route path="essentials/create" element={<Essentials />} />
+   <Route path="essentials/edit/:id" element={<Essentials />} />
+
           <Route path="*"      element={<Navigate  replace />} />
         </Routes>
       </motion.div>

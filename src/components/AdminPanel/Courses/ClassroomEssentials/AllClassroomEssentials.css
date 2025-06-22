@@ -1,0 +1,20 @@
+.ace-wrapper {
+  padding: 1rem;
+}
+.ace-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.ace-table th,
+.ace-table td {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  text-align: left;
+}
+.ace-table th {
+  background: #f4f4f4;
+}
+.ace-error {
+  color: red;
+  padding: 1rem;
+}

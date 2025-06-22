@@ -6,8 +6,9 @@ import CourseDetails from "../../components/AdminPanel/Courses/CourseDetails";
 import Curriculum    from "../../components/Curriculum/Curriculum";
 import Testimonial   from "../../components/TestimonialSection/TestimonialSection";
 import StudentOfWeek from "../../components/StudentOfWeek/StudentOfWeek";
+import ClassroomEssentials from "../../components/ClassroomEssentials/ClassroomEssentials";
 import useLocoScroll from "../../hooks/useLocoScroll";
-import ClassroomEssentials from "../../components/ClassroomEssentials/ClassroomEssentials"
+
 export default function CoursePage() {
   const { id } = useParams();
   const [data, setData]       = useState(null);
@@ -27,13 +28,13 @@ export default function CoursePage() {
   if (loading) return <div>Loading…</div>;
   if (!data)    return <div>Course not found.</div>;
 
-  // here student_of_the_week is just a string
   const { 
     course_name,
     course_subtitle,
-    course_image_path,       // your Base64 or URL
+    course_image_path,
     description,
-    student_of_the_week      // e.g. "Andrew"
+    student_of_the_week,      // may be null
+    classroom_essentials = [] // default to empty array
   } = data;
 
   return (
@@ -46,11 +47,18 @@ export default function CoursePage() {
       />
 
       <Curriculum />
-<ClassroomEssentials/>
+
+      {/*
+        Pass your API array straight into the component.
+        We're calling the prop `items`, but you can name it whatever you like.
+      */}
+      <ClassroomEssentials items={classroom_essentials} />
+
       <StudentOfWeek
-        name={student_of_the_week}
+        name={student_of_the_week || "—"}
         photo={course_image_path}
-        text={`In math class this week, ${student_of_the_week} achieved remarkable success with outstanding precision and creativity.`}
+        text={`In math class this week, ${student_of_the_week ||
+          "our student"} achieved remarkable success with outstanding precision and creativity.`}
       />
 
       <Testimonial />

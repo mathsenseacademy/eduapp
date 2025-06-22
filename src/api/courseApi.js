@@ -49,3 +49,24 @@ export const getAllClassLevels = () =>
 // public: fetch all category levels
 export const getAllCategoryLevels = () =>
   api.get("/coursemanegment/show_all_category_levels/");
+// admin/public: fetch all classroom essentials
+export const getAllClassroomEssentials = () =>
+  api.get("/coursemanegment/show_all_classroom_essentials/");
+
+/** delete one classroom essential by ID */
+export const deleteClassroomEssential = (ID) =>
+  api.post("/coursemanegment/delete_classroom_essential/", { ID });
+
+// (optional) fetch one essential to prefill an edit form
+export const getClassroomEssentialById = (ID) =>
+  api.post("/coursemanegment/show_classroom_essential/", { ID });
+
+
+// create a new essential
+export const addClassroomEssential = (payload) =>
+  api.post("/coursemanegment/add_classroom_essentials/", payload);
+
+// update an existing essential
+export const editClassroomEssential = (payload) =>
+  api.post("/coursemanegment/edit_classroom_essentials/", payload);
+

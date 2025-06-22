@@ -1,0 +1,49 @@
+.essentials-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.essentials-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.essentials-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.essentials-row .field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.essentials-row textarea {
+  resize: vertical;
+  min-height: 3rem;
+}
+
+.remove-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #c00;
+  align-self: start;
+}
+
+.add-btn,
+.submit-btn {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+  
+.error {
+  color: #c00;
+  margin-top: 0.5rem;
+}
