@@ -57,12 +57,12 @@ const FeaturesSection = () => {
       </div>
 
       <div className="why-grid-wrapper">
-        <div className="why-grid">
+        <div className="why-grid row">
           {features.map((item, idx) => {
             const direction = getDirection(idx);
             return (
               <motion.div
-                className="why-card"
+                className="why-card col-md-6 col-lg-6 col-sm-6"
                 key={idx}
                 initial={{ opacity: 0, ...direction }}
                 whileInView={{ opacity: 1, x: 0, y: 0 }}
