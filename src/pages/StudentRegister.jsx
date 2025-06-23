@@ -13,7 +13,7 @@ const StudentRegister = ({ onClose }) => {
         { name: 'first_name', label: 'First Name', type: 'text', required: true },
         { name: 'middle_name', label: 'Middle Name', type: 'text', required: false },
         { name: 'last_name', label: 'Last Name', type: 'text', required: true },
-        { name: 'student_photo', label: 'Upload Image', type: 'file', required: true },
+        { name: 'student_photo_path', label: 'Upload Image', type: 'file', required: true },
       ],
     },
     {
@@ -127,7 +127,7 @@ const StudentRegister = ({ onClose }) => {
     if (missing) return showToast(`${missing.label} is required.`, 'danger');
 
     try {
-      await api.post('student/register/', formData);
+      // await api.post('student/register/', formData);
       showToast('Registered successfully! Please enter OTP.', 'success');
       setShowOtpModal(true);
     } catch (err) {

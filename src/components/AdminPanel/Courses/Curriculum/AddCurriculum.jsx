@@ -36,10 +36,10 @@ export default function AddCurriculum() {
     e.preventDefault();
     setError(null);
 
-    // if (!courseId) {
-    //   setError('Please select a course.');
-    //   return;
-    // }
+    if (!courseId) {
+      setError('Please select a course.');
+      return;
+    }
 
     try {
       // send one POST per curriculum name
@@ -48,7 +48,7 @@ export default function AddCurriculum() {
           api.post('/coursemanegment/add_course_curriculum/', {
             curriculum_name: name.trim(),
             course_id: Number(courseId),
-            course_id:3,
+            // course_id:3,
           })
         )
       );
