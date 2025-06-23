@@ -21,7 +21,11 @@
 .why-header h2 img {
   height: 150px;
 }
-
+.why-heade-subtitle {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #7d4900;
+}
 .why-grid-wrapper {
   display: flex;
   flex-wrap: wrap;
@@ -59,6 +63,9 @@
   color: #7d4900;
 }
 
+.why-card {
+ padding: 10% 3%;
+}
 .why-card img {
   width: 48px;
   height: auto;
@@ -74,6 +81,8 @@
 .why-card p {
   font-size: 1rem;
   line-height: 1.5;
+ 
+    
 }
 
 /* === Right-side mentor image === */
@@ -101,7 +110,7 @@
   flex: auto;
 }
 .why-header h2 img {
-  height: 150px;
-  margin-left: 50%;
+  height: 100px;
+  margin-left: 40%;
 }
 }

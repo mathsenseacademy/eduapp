@@ -54,6 +54,7 @@ const FeaturesSection = () => {
           <span>Why Choose</span>
           <img src={logo} alt="Mathsense Academy" />
         </h2>
+        <p className="why-heade-subtitle">At MathSense Academy, we help students from <strong>Grade 1 to 12</strong> build strong math skills through expert-led, engaging, and flexible learning</p>
       </div>
 
       <div className="why-grid-wrapper">

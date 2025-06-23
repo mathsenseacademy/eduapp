@@ -32,7 +32,7 @@ const Register = () => {
     setLoading(true);
 
     try {
-      await api.post("administrator/register/", formData);
+      // await api.post("administrator/register/", formData);
       navigate("/"); // or '/login' if that’s where you want to land next
     } catch (err) {
       setError("Registration failed. Try again.");

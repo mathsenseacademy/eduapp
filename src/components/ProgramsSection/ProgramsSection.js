@@ -54,9 +54,10 @@ export default function ProgramsSection() {
                 <img src={p.course_image_path} alt={p.course_name} />
               </div>
               <div className="card-text">
-                <h4 className="card-title">{p.course_name}</h4>
+                <h3 className="card-title">{p.course_name}</h3>
+                <hr></hr>
                 <p className="focus-area">{p.course_subtitle}</p>
-                <p className="description">Level: {p.msa_class_level}</p>
+                <p className="description">{p.msa_class_level}</p>
               </div>
             </div>
           ))}
@@ -74,18 +75,19 @@ export default function ProgramsSection() {
                 <img src={p.course_image_path} alt={p.course_name} />
               </div>
               <div className="card-text">
-                <h4 className="card-title">{p.course_name}</h4>
+                <h3 className="card-title">{p.course_name}</h3>
+                <hr></hr>
                 <p className="focus-area">{p.course_subtitle}</p>
-                <p className="description">Level: {p.msa_class_level}</p>
+                <p className="description"> {p.msa_class_level}</p>
               </div>
             </div>
           </div>
         ))}
       </div>
 
-      <div className="text-center mt-4">
+      {/* <div className="text-center mt-4">
         <button className="more-btn">More Courses Here</button>
-      </div>
+      </div> */}
     </section>
   );
 }
