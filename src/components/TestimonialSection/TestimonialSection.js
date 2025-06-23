@@ -5,33 +5,39 @@ const testimonials = [
   {
     title: 'Study support',
     text: 'Find study buddies and tutoring options',
-    bgColor: '#d6b5f4',
+    // bgColor: '#d6b5f4',
     img: require('../../assets/bookIcon.png'),
+    // img: require('../../../src/assets/testimonialSVG.svg'),
+    // background-image: url(../../../src/assets/testimonialSVG.svg);
   },
   {
     title: 'Online tools',
     text: 'Access helpful educational websites',
-    bgColor: '#f57c29',
+    // bgColor: '#f57c29',
     img: require('../../assets/bookIcon.png'),
+    // img: require('../../../src/assets/testimonialSVG.svg'),
   },
   {
     title: 'Family hub',
     text: 'Connect your parents or guardians to the school community',
-    bgColor: '#8dd4c0',
+    // bgColor: '#8dd4c0',
     img: require('../../assets/bookIcon.png'),
+    // img: require('../../../src/assets/testimonialSVG.svg'),
   },
-  {
-    title: 'Progress reports',
-    text: 'Track academic performance over time',
-    bgColor: '#ffcc80',
-    img: require('../../assets/bookIcon.png'),
-  },
-  {
-    title: 'Safe environment',
-    text: 'Ensure your child is in a supportive setting',
-    bgColor: '#b2ebf2',
-    img: require('../../assets/bookIcon.png'),
-  }
+  // {
+  //   title: 'Progress reports',
+  //   text: 'Track academic performance over time',
+  //   // bgColor: '#ffcc80',
+  //   img: require('../../assets/bookIcon.png'),
+  //   // img: require('../../../src/assets/testimonialSVG.svg'),
+  // },
+  // {
+  //   title: 'Safe environment',
+  //   text: 'Ensure your child is in a supportive setting',
+  //   // bgColor: '#b2ebf2',
+  //   img: require('../../assets/bookIcon.png'),
+  //   // img: require('../../../src/assets/testimonialSVG.svg'),
+  // }
 ];
 
 export default function TestimonialSection() {

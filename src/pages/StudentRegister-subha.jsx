@@ -13,12 +13,13 @@ const StudentRegister = ({ onClose }) => {
         { name: 'first_name', label: 'First Name', type: 'text', required: true },
         { name: 'middle_name', label: 'Middle Name', type: 'text', required: false },
         { name: 'last_name', label: 'Last Name', type: 'text', required: true },
-        { name: 'student_photo', label: 'Upload Image', type: 'file', required: true },
       ],
     },
     {
       title: 'Date of Birth',
-      fields: [{ name: 'date_of_birth', label: 'Date of Birth', type: 'date', required: true }],
+      fields: [
+        { name: 'date_of_birth', label: 'Date of Birth', type: 'date', required: true },
+      ],
     },
     {
       title: 'Contact Numbers',
@@ -68,47 +69,9 @@ const StudentRegister = ({ onClose }) => {
     setTimeout(() => setToast({ show: false, message: '', type: '' }), 3000);
   };
 
-  const handleChange = async (e) => {
-    const { name, type, files, value } = e.target;
-
-    if (type === 'file' && name === 'student_image') {
-      const file = files[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const img = new Image();
-        img.onload = async () => {
-          const canvas = document.createElement('canvas');
-          const maxWidth = 200;
-          const scale = maxWidth / img.width;
-          canvas.width = maxWidth;
-          canvas.height = img.height * scale;
-
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-          let quality = 0.7;
-          let base64 = canvas.toDataURL('image/jpeg', quality);
-          let blob = await (await fetch(base64)).blob();
-          let sizeKB = blob.size / 1024;
-
-          while (sizeKB > 15 && quality > 0.1) {
-            quality -= 0.1;
-            base64 = canvas.toDataURL('image/jpeg', quality);
-            blob = await (await fetch(base64)).blob();
-            sizeKB = blob.size / 1024;
-          }
-
-          setFormData((prev) => ({ ...prev, [name]: base64 }));
-          showToast('Image uploaded and compressed', 'success');
-        };
-        img.src = event.target.result;
-      };
-      reader.readAsDataURL(file);
-    } else {
-      setFormData(prev => ({ ...prev, [name]: value }));
-    }
+  const handleChange = e => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleNext = () => {
@@ -124,8 +87,9 @@ const StudentRegister = ({ onClose }) => {
 
   const handleRegisterSubmit = async () => {
     const missing = allFields.find(f => f.required && !formData[f.name].trim());
-    if (missing) return showToast(`${missing.label} is required.`, 'danger');
-
+    if (missing) {
+      return showToast(`${missing.label} is required.`, 'danger');
+    }
     try {
       await api.post('student/register/', formData);
       showToast('Registered successfully! Please enter OTP.', 'success');
@@ -142,13 +106,13 @@ const StudentRegister = ({ onClose }) => {
   const handleOtpSubmit = async () => {
     if (!otp.trim()) return showToast('OTP is required.', 'danger');
     try {
-      // await api.post('student/otpverify/', { email: formData.email, otp });
+      await api.post('student/otpverify/', { email: formData.email, otp });
       showToast('OTP Verified! 🎉', 'success');
       setShowOtpModal(false);
       navigate('/');
     } catch (err) {
       console.error(err);
-      showToast(err.response?.data?.student_username?.[0] || 'OTP verification failed.', 'danger');
+      showToast(err.response?.data?.student_username[0] || 'OTP verification failed.', 'danger');
     }
   };
 
@@ -156,12 +120,14 @@ const StudentRegister = ({ onClose }) => {
 
   return (
     <>
+      {/* dark overlay */}
       <div className="sr-overlay" onClick={onClose} />
 
+      {/* registration modal */}
       <div className="sr-modal">
         <div className="sr-header">
           <h5>Student Registration</h5>
-          <button className="sr-close" onClick={onClose}>x</button>
+          <button className="sr-close" onClick={onClose}>×</button>
         </div>
 
         <div className="sr-body">
@@ -203,27 +169,6 @@ const StudentRegister = ({ onClose }) => {
                       value={formData[f.name]}
                       onChange={handleChange}
                     />
-                  ) : f.type === 'file' ? (
-                    <>
-                      <input
-                        type="file"
-                        accept="image/*"
-                        name={f.name}
-                        onChange={handleChange}
-                      />
-                      {formData[f.name] && (
-                        <img
-                          src={formData[f.name]}
-                          alt="Preview"
-                          style={{
-                            width: '100px',
-                            marginTop: '10px',
-                            borderRadius: '8px',
-                            border: '1px solid #ccc'
-                          }}
-                        />
-                      )}
-                    </>
                   ) : (
                     <input
                       type={f.type}
@@ -264,12 +209,14 @@ const StudentRegister = ({ onClose }) => {
         </div>
       </div>
 
+      {/* toast notification */}
       {toast.show && (
         <div className={`sr-toast sr-${toast.type}`}>
           {toast.message}
         </div>
       )}
 
+      {/* OTP Modal */}
       {showOtpModal && (
         <>
           <div className="sr-otp-overlay" />
@@ -277,7 +224,7 @@ const StudentRegister = ({ onClose }) => {
             <div className="sr-header">
               <h5>Enter OTP</h5>
               <button className="sr-close" onClick={() => setShowOtpModal(false)}>
-                x
+                ×
               </button>
             </div>
             <div className="sr-body">

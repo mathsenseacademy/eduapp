@@ -58,7 +58,7 @@ export default function ProgramsSection() {
                 <h3 className="card-title">{p.course_name}</h3>
                 <hr></hr>
                 <p className="focus-area">{p.course_subtitle}</p>
-                <p className="description">{p.msa_class_level}</p>
+                <h6 className="description">{p.msa_class_level}</h6>
               </div>
             </div>
           ))}
@@ -80,7 +80,7 @@ export default function ProgramsSection() {
                 <h3 className="card-title">{p.course_name}</h3>
                 <hr></hr>
                 <p className="focus-area">{p.course_subtitle}</p>
-                <p className="description"> {p.msa_class_level}</p>
+                <h6 className="description"> {p.msa_class_level}</h6>
               </div>
             </div>
           </div>
