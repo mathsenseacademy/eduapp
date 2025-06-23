@@ -44,7 +44,8 @@ export default function ProgramsSection() {
         </div>
 
         <div className="col-md-6 d-flex flex-column">
-          {programs.slice(0, half).map((p, i) => (
+          {/* {programs.slice(0, half).map((p, i) => ( */}
+          {programs.slice(0, 2).map((p, i) => (
             <div
               key={p.ID}
               className="program-card mb-3 clickable" // ← make it clear in CSS
@@ -65,7 +66,8 @@ export default function ProgramsSection() {
       </div>
 
       <div className="row">
-        {programs.slice(half).map((p) => (
+        {/* {programs.slice(half).map((p) => ( */}
+        {programs.slice(2).map((p) => (
           <div className="col-md-6 mb-3 section-two" key={p.ID}>
             <div
               className="program-card clickable"
