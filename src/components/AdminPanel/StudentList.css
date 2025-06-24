@@ -1,0 +1,83 @@
+.student-list-container {
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.student-list-title {
+  margin-bottom: 1rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+}
+
+/* Loader centering */
+.student-list-loading {
+  display: flex;
+  justify-content: center;
+  padding: 4rem 0;
+}
+
+/* Responsive wrapper for horizontal scrolling on small screens */
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+/* Table basics */
+.student-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  min-width: 600px;
+}
+
+.student-table thead {
+  background: #fafafa;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.student-table th,
+.student-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  vertical-align: middle;
+  font-size: 0.95rem;
+}
+
+.student-table th {
+  font-weight: 500;
+  color: #555;
+  border-bottom: 2px solid #eee;
+}
+
+/* Zebra stripes */
+.student-table tbody tr:nth-child(odd) {
+  background: #fff;
+}
+.student-table tbody tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+/* Hover highlight */
+.student-table tbody tr:hover {
+  background: #f1f1ff;
+}
+
+/* Avatar column */
+.avatar-col {
+  width: 72px;
+  text-align: center;
+}
+
+.student-avatar {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+}
