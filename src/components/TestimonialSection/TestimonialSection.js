@@ -3,25 +3,29 @@ import './TestimonialSection.css';
 import leaf from '../../assets/leaf.png'
 const testimonials = [
   {
-    title: 'Study support',
-    text: 'Find study buddies and tutoring options',
+    title: 'Anushka Dey',
+    text: 'Mathsense Academy makes learning math fun and easy, helping me feel confident and score better in class! ',
     // bgColor: '#d6b5f4',
-    img: require('../../assets/bookIcon.png'),
+    img: require('../../assets/AnushkaDey.png'),
+    // img: require('../../assets/Anushka-Dey.svg'),
     // img: require('../../../src/assets/testimonialSVG.svg'),
     // background-image: url(../../../src/assets/testimonialSVG.svg);
   },
   {
-    title: 'Online tools',
-    text: 'Access helpful educational websites',
+    title: 'Susmita Adhikary',
+    text: 'Math Sense Academy has transformed the way I understand math, making complex topics simple and enjoyable!',
     // bgColor: '#f57c29',
-    img: require('../../assets/bookIcon.png'),
+    // img: require('../../assets/Susmita-Adhikary.svg'),
+    img: require('../../assets/Susmita-Adhikary.png'),
+    // img: require('../../assets/bookIcon.png'),
     // img: require('../../../src/assets/testimonialSVG.svg'),
   },
   {
-    title: 'Family hub',
-    text: 'Connect your parents or guardians to the school community',
+    title: 'Sourashis Banerjee',
+    text: 'Thanks to Mathsense Academy, I now find math exciting and easier to understand!',
     // bgColor: '#8dd4c0',
-    img: require('../../assets/bookIcon.png'),
+    // img: require('../../assets/Sourashis-Banerjee.svg'),
+    img: require('../../assets/Sourashis-Banerjee.png'),
     // img: require('../../../src/assets/testimonialSVG.svg'),
   },
   // {
