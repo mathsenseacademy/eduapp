@@ -14,7 +14,14 @@ export default function AddCurriculum() {
   // 1️⃣ Fetch courses on mount
   useEffect(() => {
     api.get('coursemanegment/all_courses_show_public/')  
-      .then(res => setCourses(res.data))
+      .then(res => {
+        // map your API’s { ID, course_name } → { id, name }
+        const normalized = res.data.map(c => ({
+          id:   c.ID,
+          name: c.course_name
+        }));
+        setCourses(normalized);
+      })
       .catch(err => setError('Failed to load courses.'));
   }, []);
 
@@ -43,8 +50,10 @@ export default function AddCurriculum() {
 
     try {
       // send one POST per curriculum name
+          console.log("printID:",courseId);
+
       await Promise.all(
-        curriculumNames.map(name =>
+        curriculumNames.map(name =>          
           api.post('/coursemanegment/add_course_curriculum/', {
             curriculum_name: name.trim(),
             course_id: Number(courseId),
@@ -73,7 +82,7 @@ export default function AddCurriculum() {
             <option value="" disabled>-- pick a course --</option>
             {courses.map(c => (
               <option key={c.id} value={c.id}>
-                {c.course_name || c.title /* adjust per your API */}
+                {c.name }
               </option>
             ))}
           </select>
