@@ -60,7 +60,7 @@ const Header = () => {
   useEffect(() => {
     const nav = document.querySelector(".navbar");
     const handle = () =>
-      nav.classList.toggle("sticky-shadow", window.scrollY > 20);
+      nav.classList.toggle("sticky-shadow", window.scrollY > 60);
     window.addEventListener("scroll", handle);
     return () => window.removeEventListener("scroll", handle);
   }, []);
@@ -210,8 +210,8 @@ const Header = () => {
         >
           <ul className="navbar-nav align-items-center gap-3 mb-2 mb-lg-0">
             {/* language switcher */}
-            <li className="nav-item">
-              <select
+             {/* <li className="nav-item">
+             <select
                 className="form-select form-select-sm language-select"
                 value={i18n.language}
                 onChange={(e) => i18n.changeLanguage(e.target.value)}
@@ -221,8 +221,8 @@ const Header = () => {
                     {l.label}
                   </option>
                 ))}
-              </select>
-            </li>
+              </select> 
+            </li>*/}
 
             {/* main links */}
             {[
@@ -251,8 +251,9 @@ const Header = () => {
               </button>
             ) : (
               <>
+              {/* btn btn-outline-primary */}
                 <button
-                  className="btn btn-outline-primary login-toggle-btn"
+                  className=" login-toggle-btn"
                   onClick={() => setShowLogin(!showLogin)}
                 >
                   {t("login")}
@@ -290,7 +291,7 @@ const Header = () => {
                         onChange={(e) => setIsAdminLogin(e.target.checked)}
                       />
                       <label className="form-check-label" htmlFor="adminCheck">
-                        Login as Admin
+                        Login as Teacher
                       </label>
                     </div>
                     <button type="submit" className="btn btn-primary w-100">

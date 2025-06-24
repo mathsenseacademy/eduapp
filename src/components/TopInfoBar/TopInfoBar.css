@@ -2,8 +2,14 @@
 
 .top-info-bar {
   height: 40px;
-  background: var(--clr-green);          /* primary brand colour */
-  color: #ffffff;
+  /* background: var(--clr-green);    */
+  background:linear-gradient(
+    135deg,
+    var(--hdr-bg-start) 0%,
+    var(--hdr-bg-end)   100%
+  );       /* primary brand colour */
+  color: #084f5d;
+  font-weight: 600;
   display: flex;
   justify-content: space-between;
   align-items: center;
