@@ -39,19 +39,19 @@
   background-image: url(../../../src/assets/testimonialSVG2.svg);
 }
 .testimonial-title {
-  font-size: 1.3rem;
+  font-size: 2.7rem;
   font-weight: 700;
 }
 
 .testimonial-text {
-  font-size: 1rem;
+  font-size: 1.3rem;
   margin-bottom: 1rem;
   color: #333;
 }
 
 .testimonial-img {
-  width: 64px;
-  height: 64px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   object-fit: cover;
   position: absolute;
