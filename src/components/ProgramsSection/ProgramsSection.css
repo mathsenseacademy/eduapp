@@ -6,10 +6,12 @@
 }
 
 .section-heading {
-  font-size: 2rem;
+  font-size: 3.5rem;
   font-weight: 700;
   margin-bottom: 2rem;
   text-align: left;
+  color: #875714;
+
 }
 
 .star-badge {

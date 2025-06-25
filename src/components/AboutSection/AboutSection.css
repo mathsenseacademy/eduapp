@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
 .about-section {
   width: 100%;
   padding: 4rem 1rem;
@@ -25,6 +27,8 @@
 .text-block p {
   margin-bottom: 1rem;
   line-height: 1.6;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-weight: 400;
 }
 .text-block ul {
   padding-left: 1.2rem;
