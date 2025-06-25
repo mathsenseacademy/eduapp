@@ -1,5 +1,5 @@
 /* src/components/Curriculum/Curriculum.css */
-
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 .curriculum-header-wrapper {
   text-align: center;
   margin: 2rem 0 1rem;
@@ -35,6 +35,8 @@
   margin: 0;
   font-weight: 700;
   font-size: 1.75rem;
+  font-family: "Anton", sans-serif;
+  letter-spacing: 2px;
 }
 
 .curriculum-content {

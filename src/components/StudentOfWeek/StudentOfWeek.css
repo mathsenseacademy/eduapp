@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
+
 .sow-wrapper {
   overflow: hidden;
 }
@@ -35,6 +37,8 @@
   font-weight: 700;
   font-size: 1.75rem;
   text-transform: uppercase;
+  font-family: "Anton", sans-serif;
+  letter-spacing: 2px;
 }
 
 /* src/components/StudentOfWeek/StudentOfWeek.css */
@@ -45,6 +49,8 @@
   justify-content: center;
   margin: 3rem 1rem;
   flex-wrap: wrap;
+  padding: 0 10rem;
+  font-family: "Lexend Deca", sans-serif;
 }
 
 /* Photo circle */
@@ -69,33 +75,34 @@
 .sow-bubble-wrapper {
   position: relative;
   flex: 1 1 300px;
-  margin-left: -2rem; /* overlap slightly under the photo */
+  margin-left: -15rem; 
 }
 
 .sow-bubble {
   background: #fdf5d7;
   border: 1px solid #000;
   border-radius: 4px;
-  padding: 1.5rem 2rem;
+  padding: 1.5rem 15rem;
   position: relative;
-  min-height: 10rem;
+  min-height: 20rem;
 }
 
 .sow-bubble::after {
   content: "";
   position: absolute;
   bottom: -1rem;
-  left: 2.5rem;         /* aligns under photo */
-  width: 2rem;
+  left: 10.5rem;         /* aligns under photo */
+  width: 10rem;
   height: 1rem;
   border-bottom: 1px solid #000;
 }
 
 /* Text */
 .sow-text {
-  margin: 0;
-  font-size: 1.125rem;
-  line-height: 1.4;
+  margin: 0 2rem;
+  font-size: 3rem;
+  line-height: 4rem;
+  text-align: center;
 }
 
 .sow-highlight {
@@ -120,4 +127,17 @@
     left: 50%;
     transform: translateX(-50%);
   }
+  .sow-photo-wrapper {
+  flex: 0 0 auto;
+  width: 100%;
+  height: 100%;
+}
+  .sow-container {
+  padding: 0px 0rem;
+  }
+  .sow-text {
+  margin: 0;
+  font-size: 3rem;
+  line-height: 4rem;
+}
 }

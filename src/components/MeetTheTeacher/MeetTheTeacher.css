@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
+
+.sow-wrapper {
+  overflow: hidden;
+}
+
+/* HEADER */
+.sow-header-wrapper {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.sow-header {
+  display: inline-flex;
+  align-items: center;
+  background: #ffd600;
+  border: 2px solid #000;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+}
+.sow-badge {
+  background: #fb923c;
+  border: 2px solid #000;
+  border-radius: 0.25rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-right: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sow-badge img {
+  max-width: 1.5rem;
+  max-height: 1.5rem;
+}
+.sow-title {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.75rem;
+  text-transform: uppercase;
+}
+
+/* src/components/StudentOfWeek/StudentOfWeek.css */
+.main_meetTeacher{
+  display: flex;
+  width: 100%;
+  padding: 2rem 10rem;
+  justify-content: center;
+    width: 100%;
+  /* border: 1px solid #000; */
+}
+.main_meetTeacher .left_teacher_details{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 2;
+}
+.main_meetTeacher .left_teacher_details .top_Teacher_Name_section{
+  border: 2px solid #000;
+  background-color: #5cd1ff;
+  padding: 3rem 2rem;
+  font-family: "Lexend Deca", sans-serif;
+}
+.main_meetTeacher .left_teacher_details .top_Teacher_Name_section h2{
+  width: 100%;
+  text-align: center ;
+}
+.main_meetTeacher .left_teacher_details .top_Teacher_Name_section  p{
+  width: 100%;
+  
+  font-size: 1.3rem;
+}
+.main_meetTeacher .left_teacher_details .top_Teacher_Name_section  ul{
+  width: 100%;
+  font-size: 1.3rem;
+}
+.main_meetTeacher .left_teacher_details .bottom_Teacher_Contact_section{
+  border: 2px solid #000;
+  background-color: #f9b2dc;
+  padding: 3rem 2rem;
+  font-family: "Lexend Deca", sans-serif;
+  text-align: center  ;
+}
+.main_meetTeacher .right_teacher_photo {
+  display: flex;
+  flex-direction: row-reverse;
+  flex: 1;
+}
+.main_meetTeacher .right_teacher_photo img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Responsive: stack vertically */
+@media (max-width: 767px) {
+  .sow-container {
+    flex-direction: column;
+  }
+  .sow-bubble-wrapper {
+    margin-left: 0;
+    margin-top: 1rem;
+    width: 100%;
+  }
+  .sow-bubble {
+    padding: 1rem;
+  }
+  .sow-bubble::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

@@ -6,6 +6,7 @@ import CourseDetails from "../../components/AdminPanel/Courses/CourseDetails";
 import Curriculum    from "../../components/Curriculum/Curriculum";
 import Testimonial   from "../../components/TestimonialSection/TestimonialSection";
 import StudentOfWeek from "../../components/StudentOfWeek/StudentOfWeek";
+import MeetTheTeacher from "../../components/MeetTheTeacher/MeetTheTeacher";
 import ClassroomEssentials from "../../components/ClassroomEssentials/ClassroomEssentials";
 import useLocoScroll from "../../hooks/useLocoScroll";
 
@@ -60,7 +61,10 @@ export default function CoursePage() {
         text={`In math class this week, ${student_of_the_week ||
           "our student"} achieved remarkable success with outstanding precision and creativity.`}
       />
-
+      {/* Meet The teacher */}
+      <MeetTheTeacher
+        
+       />
       <Testimonial />
     </div>
   );
