@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.2bc95e93.css",
-    "main.js": "/static/js/main.10c2bf8d.js",
+    "main.css": "/static/css/main.6b6e9759.css",
+    "main.js": "/static/js/main.4715201a.js",
     "static/js/453.a1c5532f.chunk.js": "/static/js/453.a1c5532f.chunk.js",
     "static/media/hero-1.png": "/static/media/hero-1.12a33cefe30a3274aa37.png",
     "static/media/logo.mp4": "/static/media/logo.5cdb8fe1c7a39d38acfa.mp4",
@@ -16,6 +16,9 @@
     "static/media/logoWithName.png": "/static/media/logoWithName.6b138f6cbd166654dcc4.png",
     "static/media/hatIcon.png": "/static/media/hatIcon.b396d9cb171b8abeb676.png",
     "static/media/ideaIcon.png": "/static/media/ideaIcon.f23072685526d7a7d429.png",
+    "static/media/Sourashis-Banerjee.png": "/static/media/Sourashis-Banerjee.67bce73cd4ae6592164a.png",
+    "static/media/Susmita-Adhikary.png": "/static/media/Susmita-Adhikary.9b54fecd19aeb34b3265.png",
+    "static/media/AnushkaDey.png": "/static/media/AnushkaDey.42f66852bbfb5ecfdf88.png",
     "static/media/logoWith_Name.svg": "/static/media/logoWith_Name.cd0a42cddc6755e35e5d49e40871d698.svg",
     "static/media/aboulUsShape.png": "/static/media/aboulUsShape.824f9df82c0fe651c8dd.png",
     "static/media/coursedetail.svg": "/static/media/coursedetail.c08f9c030e6c088908c5.svg",
@@ -26,12 +29,15 @@
     "static/media/classEssential.svg": "/static/media/classEssential.bd8a370c202fc4cd968f.svg",
     "static/media/classEssential1.svg": "/static/media/classEssential1.db29e19e838213e5ca17.svg",
     "static/media/classEssential2.svg": "/static/media/classEssential2.7b398465ef2a513cff29.svg",
-    "main.2bc95e93.css.map": "/static/css/main.2bc95e93.css.map",
-    "main.10c2bf8d.js.map": "/static/js/main.10c2bf8d.js.map",
+    "static/media/testimonialSVG.svg": "/static/media/testimonialSVG.80cd7d3de6fb183d3cc7.svg",
+    "static/media/testimonialSVG1.svg": "/static/media/testimonialSVG1.2b781721954c40f55eb2.svg",
+    "static/media/testimonialSVG2.svg": "/static/media/testimonialSVG2.538786ffceda3f6e6a88.svg",
+    "main.6b6e9759.css.map": "/static/css/main.6b6e9759.css.map",
+    "main.4715201a.js.map": "/static/js/main.4715201a.js.map",
     "453.a1c5532f.chunk.js.map": "/static/js/453.a1c5532f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2bc95e93.css",
-    "static/js/main.10c2bf8d.js"
+    "static/css/main.6b6e9759.css",
+    "static/js/main.4715201a.js"
   ]
 }

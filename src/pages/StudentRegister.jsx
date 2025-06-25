@@ -7,8 +7,7 @@ import './StudentRegister.css';
 export default function StudentRegister({ onClose }) {
   const navigate = useNavigate();
 
-  // 1️⃣ Define steps as before
-   const steps = [
+    const steps = [
     {
       title: 'Your Name',
       fields: [
@@ -68,13 +67,11 @@ export default function StudentRegister({ onClose }) {
   const [toast, setToast]               = useState({ show: false, message: '', type: '' });
   const [showConfirmExit, setShowConfirmExit] = useState(false);
 
-  // Toast helper
   const showToast = (message, type = 'success') => {
     setToast({ show: true, message, type });
     setTimeout(() => setToast({ show: false, message: '', type: '' }), 3000);
   };
 
-  // Convert file → base64
   const imageToBase64 = file =>
     new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -83,11 +80,11 @@ export default function StudentRegister({ onClose }) {
       reader.readAsDataURL(file);
     });
 
-  // Handle every field change
   const handleChange = async e => {
     const { name, type, files, value } = e.target;
 
-    if (type === 'file' && name === 'student_photo' && files[0]) {
+    if (type === 'file' && files && files[0]) {
+      // handle ANY file field
       try {
         const rawBase64 = await imageToBase64(files[0]);
         const img = new Image();
@@ -106,7 +103,7 @@ export default function StudentRegister({ onClose }) {
           let blob = await (await fetch(compressed)).blob();
           let sizeKB = blob.size / 1024;
 
-          while (sizeKB > 15 && quality > 0.1) {
+          while (sizeKB > 150 && quality > 0.1) {
             quality -= 0.1;
             compressed = canvas.toDataURL('image/jpeg', quality);
             blob = await (await fetch(compressed)).blob();
@@ -137,7 +134,6 @@ export default function StudentRegister({ onClose }) {
 
   const handleBack = () => setCurrentStep(s => Math.max(0, s - 1));
 
-  // Submit registration
   const handleRegisterSubmit = async () => {
     for (let f of allFields) {
       if (f.required && !formData[f.name].trim()) {
@@ -154,21 +150,19 @@ export default function StudentRegister({ onClose }) {
     }
   };
 
-  // OTP verification
   const handleOtpSubmit = async () => {
     if (!otp.trim()) return showToast('OTP is required.', 'danger');
     try {
       await api.post('student/otpverify/', { email: formData.email, otp });
       showToast('OTP Verified! 🎉', 'success');
       setShowOtpModal(false);
-      onClose();             // ← close both OTP and registration
+      onClose();
     } catch (err) {
       console.error(err);
       showToast(err.response?.data?.student_username?.[0] || 'OTP verification failed.', 'danger');
     }
   };
 
-  // Intercept any “close” attempt
   const promptExit = () => setShowConfirmExit(true);
   const confirmExit = yes => {
     setShowConfirmExit(false);
@@ -179,7 +173,6 @@ export default function StudentRegister({ onClose }) {
 
   return (
     <>
-      {/* registration overlay */}
       <div className="sr-overlay" onClick={promptExit} />
 
       <div className="sr-modal">
@@ -187,7 +180,6 @@ export default function StudentRegister({ onClose }) {
           <h5>Student Registration</h5>
           <button className="sr-close" onClick={promptExit}>×</button>
         </div>
-
         <div className="sr-body">
           <h6 className="sr-step-title">{title}</h6>
 
@@ -217,12 +209,7 @@ export default function StudentRegister({ onClose }) {
                         <img
                           src={formData[f.name]}
                           alt="Preview"
-                          style={{
-                            width: '100px',
-                            marginTop: '10px',
-                            borderRadius: '8px',
-                            border: '1px solid #ccc'
-                          }}
+                          className="sr-img-preview"
                         />
                       )}
                     </>
@@ -247,33 +234,22 @@ export default function StudentRegister({ onClose }) {
             />
           )}
         </div>
-
         <div className="sr-footer">
           {currentStep > 0 && (
-            <button className="btn-back" onClick={handleBack}>
-              Back
-            </button>
+            <button className="btn-back" onClick={handleBack}>Back</button>
           )}
           {currentStep < steps.length - 1 ? (
-            <button className="btn-next" onClick={handleNext}>
-              Next
-            </button>
+            <button className="btn-next" onClick={handleNext}>Next</button>
           ) : (
-            <button className="btn-submit" onClick={handleRegisterSubmit}>
-              Submit
-            </button>
+            <button className="btn-submit" onClick={handleRegisterSubmit}>Submit</button>
           )}
         </div>
       </div>
 
-      {/* toast */}
       {toast.show && (
-        <div className={`sr-toast sr-${toast.type}`}>
-          {toast.message}
-        </div>
+        <div className={`sr-toast sr-${toast.type}`}>{toast.message}</div>
       )}
 
-      {/* OTP modal */}
       {showOtpModal && (
         <>
           <div className="sr-otp-overlay" />
@@ -291,35 +267,24 @@ export default function StudentRegister({ onClose }) {
               />
             </div>
             <div className="sr-footer">
-              <button className="btn-back" onClick={() => setShowOtpModal(false)}>
-                Cancel
-              </button>
-              <button className="btn-next" onClick={handleOtpSubmit}>
-                Verify
-              </button>
+              <button className="btn-back" onClick={() => setShowOtpModal(false)}>Cancel</button>
+              <button className="btn-next" onClick={handleOtpSubmit}>Verify</button>
             </div>
           </div>
         </>
       )}
 
-      {/* Confirm “Quit registration?” dialog */}
       {showConfirmExit && (
         <>
           <div className="sr-overlay" />
           <div className="sr-otp-modal">
-            <div className="sr-header">
-              <h5>Quit Registration?</h5>
-            </div>
+            <div className="sr-header"><h5>Quit Registration?</h5></div>
             <div className="sr-body">
-              <p>Are you sure you want to quit? All entered data will be lost.</p>
+              <p>All entered data will be lost. Are you sure?</p>
             </div>
             <div className="sr-footer">
-              <button className="btn-back" onClick={() => confirmExit(false)}>
-                No, Go Back
-              </button>
-              <button className="btn-submit" onClick={() => confirmExit(true)}>
-                Yes, Quit
-              </button>
+              <button className="btn-back" onClick={() => confirmExit(false)}>No, Go Back</button>
+              <button className="btn-submit" onClick={() => confirmExit(true)}>Yes, Quit</button>
             </div>
           </div>
         </>

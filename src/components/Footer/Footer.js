@@ -6,7 +6,7 @@ import brand1 from "../../assets/bookIcon.png";
 import brand2 from "../../assets/bookIcon.png";
 import brand3 from "../../assets/bookIcon.png";
 import brand4 from "../../assets/bookIcon.png";
-import logo from "../../assets/logoWithName.png"
+import logo from "../../assets/logoWith_Name.svg"
 
 export default function Footer() {
   return (
@@ -74,7 +74,7 @@ export default function Footer() {
 <hr/>
       {/* 3. Footer Bottom */}
       <div className="footer-bottom">
-        <span>© Math Senseacadem. All Rights Reserved {new Date().getFullYear()}</span>
+        <span>©MathSenseAcademy. All Rights Reserved {new Date().getFullYear()}</span>
         <Link to="/terms">Terms &amp; Conditions</Link>
       </div>
       </div>
