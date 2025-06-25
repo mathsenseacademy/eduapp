@@ -1,10 +1,9 @@
 {
   "files": {
-    "main.css": "/static/css/main.6b6e9759.css",
-    "main.js": "/static/js/main.4715201a.js",
+    "main.css": "/static/css/main.f8462206.css",
+    "main.js": "/static/js/main.b7eb6b1e.js",
     "static/js/453.a1c5532f.chunk.js": "/static/js/453.a1c5532f.chunk.js",
     "static/media/hero-1.png": "/static/media/hero-1.12a33cefe30a3274aa37.png",
-    "static/media/logo.mp4": "/static/media/logo.5cdb8fe1c7a39d38acfa.mp4",
     "static/media/aboutUs.png": "/static/media/aboutUs.7b10f66549486cfc346f.png",
     "static/media/our-programs-hero.png": "/static/media/our-programs-hero.6a73631c993a2368463c.png",
     "static/media/logo.png": "/static/media/logo.b704c8611ee831484972.png",
@@ -13,13 +12,19 @@
     "static/media/watchIcon.png": "/static/media/watchIcon.91dc139a37f490c40f2e.png",
     "static/media/bookIcon.png": "/static/media/bookIcon.cbca13c9572081ef5e32.png",
     "static/media/teacher.png": "/static/media/teacher.f54d99327f3f30c547aa.png",
+    "static/media/logo.mp4": "/static/media/logo.917616c67697b9697d27.mp4",
     "static/media/logoWithName.png": "/static/media/logoWithName.6b138f6cbd166654dcc4.png",
     "static/media/hatIcon.png": "/static/media/hatIcon.b396d9cb171b8abeb676.png",
     "static/media/ideaIcon.png": "/static/media/ideaIcon.f23072685526d7a7d429.png",
     "static/media/Sourashis-Banerjee.png": "/static/media/Sourashis-Banerjee.67bce73cd4ae6592164a.png",
     "static/media/Susmita-Adhikary.png": "/static/media/Susmita-Adhikary.9b54fecd19aeb34b3265.png",
+    "static/media/silver.png": "/static/media/silver.eeff3543880124cac350.png",
     "static/media/AnushkaDey.png": "/static/media/AnushkaDey.42f66852bbfb5ecfdf88.png",
+    "static/media/subhadeepshome.png": "/static/media/subhadeepshome.8f04053bed57ebd50f39.png",
+    "static/media/kangaroo.png": "/static/media/kangaroo.e9484bce48a76f4a450d.png",
+    "static/media/vvm.png": "/static/media/vvm.ecc903f50c1909968ebc.png",
     "static/media/logoWith_Name.svg": "/static/media/logoWith_Name.cd0a42cddc6755e35e5d49e40871d698.svg",
+    "static/media/imo.png": "/static/media/imo.bb9e96cdcb69b4b8f4f7.png",
     "static/media/aboulUsShape.png": "/static/media/aboulUsShape.824f9df82c0fe651c8dd.png",
     "static/media/coursedetail.svg": "/static/media/coursedetail.c08f9c030e6c088908c5.svg",
     "index.html": "/index.html",
@@ -32,12 +37,12 @@
     "static/media/testimonialSVG.svg": "/static/media/testimonialSVG.80cd7d3de6fb183d3cc7.svg",
     "static/media/testimonialSVG1.svg": "/static/media/testimonialSVG1.2b781721954c40f55eb2.svg",
     "static/media/testimonialSVG2.svg": "/static/media/testimonialSVG2.538786ffceda3f6e6a88.svg",
-    "main.6b6e9759.css.map": "/static/css/main.6b6e9759.css.map",
-    "main.4715201a.js.map": "/static/js/main.4715201a.js.map",
+    "main.f8462206.css.map": "/static/css/main.f8462206.css.map",
+    "main.b7eb6b1e.js.map": "/static/js/main.b7eb6b1e.js.map",
     "453.a1c5532f.chunk.js.map": "/static/js/453.a1c5532f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6b6e9759.css",
-    "static/js/main.4715201a.js"
+    "static/css/main.f8462206.css",
+    "static/js/main.b7eb6b1e.js"
   ]
 }
