@@ -1,26 +1,31 @@
 // src/components/Curriculum/Curriculum.jsx
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getPublicCourseDetails } from "../../api/courseApi";
 import curriculumIcon from "../../assets/bookIcon.png";
+import logoVideo from "../../assets/logo.mp4";    // your local fallback
 import StudentRegister from "../../pages/StudentRegister";
-
 import "./Curriculum.css";
 
 export default function Curriculum() {
   const { id } = useParams();
-  const navigate = useNavigate();
-
   const [curriculums, setCurriculums] = useState([]);
-  const [mediaSrc, setMediaSrc]     = useState("");
-  const [loading, setLoading]       = useState(true);
-   const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [mediaSrc, setMediaSrc]       = useState("");
+  const [loading, setLoading]         = useState(true);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
 
   useEffect(() => {
     getPublicCourseDetails(id)
       .then((res) => {
         setCurriculums(res.data.curriculums || []);
-        setMediaSrc(res.data.course_video_path || res.data.course_image_path || "");
+
+        const vid = res.data.course_video_path;
+        const isYouTube =
+          typeof vid === "string" && vid.includes("youtube.com");
+        const isMathsense =
+          isYouTube &&
+          (vid.includes("@Mathsenseacademy") || vid.includes("/shorts/"));
+        setMediaSrc(isMathsense ? vid : logoVideo);
       })
       .catch(console.error)
       .finally(() => setLoading(false));
@@ -33,6 +38,47 @@ export default function Curriculum() {
       </div>
     );
   }
+
+  // Build a YouTube embed URL with controls always on,
+  // modest branding, and only same-channel recommendations
+  const getYouTubeEmbedUrl = (url) => {
+    // Shorts: /shorts/VIDEO_ID
+    let match = url.match(/youtube\.com\/shorts\/([^?]+)/);
+    if (match) {
+      const id = match[1];
+      return `https://www.youtube.com/embed/${id}?rel=0&modestbranding=1&controls=1`;
+    }
+    // Normal watch?v=VIDEO_ID
+    match = url.match(/v=([^&]+)/);
+    const id = match ? match[1] : "";
+    return `https://www.youtube.com/embed/${id}?rel=0&modestbranding=1&controls=1`;
+  };
+
+  const renderMedia = () => {
+    if (mediaSrc.includes("youtube.com")) {
+      const embedUrl = getYouTubeEmbedUrl(mediaSrc);
+      return (
+        <iframe
+          className="media-frame"
+          src={embedUrl}
+          title="Course video"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+      );
+    }
+
+    // Local fallback .mp4 with native HTML5 controls (which include volume)
+    return (
+      <video
+        controls
+        src={mediaSrc}
+        className="media-frame"
+        poster=""
+      />
+    );
+  };
 
   return (
     <div className="curriculum-page">
@@ -49,22 +95,10 @@ export default function Curriculum() {
       {/* Content */}
       <div className="curriculum-content container-fluid">
         <div className="row align-items-center">
-          {/* Hexagon Media */}
+          {/* Media */}
           <div className="col-12 col-md-6 mb-4 mb-md-0">
             <div className="media-wrapper">
-              {mediaSrc.endsWith(".mp4") ? (
-                <video
-                  controls
-                  src={mediaSrc}
-                  className="media-frame"
-                  poster="" /* optional poster */
-                />
-              ) : (
-                <img src={mediaSrc} alt="" className="media-frame" />
-              )}
-              <div className="play-overlay">
-                ▶︎
-              </div>
+              {renderMedia()}
             </div>
           </div>
 
@@ -76,10 +110,13 @@ export default function Curriculum() {
                   key={item.curriculum_id}
                   className="curriculum-item"
                   style={{
-                    backgroundColor:
-                      ["#5DD3F3", "#FB923C", "#F9A8D4", "#C4B5FD", "#34D399"][
-                        idx % 5
-                      ],
+                    backgroundColor: [
+                      "#5DD3F3",
+                      "#FB923C",
+                      "#F9A8D4",
+                      "#C4B5FD",
+                      "#34D399",
+                    ][idx % 5],
                   }}
                 >
                   {item.curriculum_name}
@@ -92,14 +129,15 @@ export default function Curriculum() {
         {/* Button */}
         <div className="text-center mt-4">
           <button
-            className=" detailed-btn"
+            className="detailed-btn"
             onClick={() => setShowRegisterModal(true)}
           >
             DETAILED CURRICULUM
           </button>
         </div>
       </div>
-       {/* Student Registration Modal */}
+
+      {/* Registration Modal */}
       {showRegisterModal && (
         <StudentRegister onClose={() => setShowRegisterModal(false)} />
       )}

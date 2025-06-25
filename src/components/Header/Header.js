@@ -132,7 +132,7 @@ const Header = () => {
             layoutId="shared-logo"
             transition={{ type: "spring", stiffness: 60, damping: 15 }}
           >
-            <img src={logo} alt="Math Sense Academy" className="logo-img" />
+            <img src={logo} alt="Math Sense Academy" className="logo-img" onClick={() => navigate("/")}/>
           </motion.div>
 
           {/* ─────── Courses pop-up dropdown ─────── */}
@@ -227,10 +227,14 @@ const Header = () => {
             {/* main links */}
             {[
               { to: "/", label: t("home") },
-              { to: "/about", label: t("about") },
-              { to: "/experts", label: t("experts") },
-              { to: "/blog", label: t("blog") },
-              { to: "/contact", label: t("contact") },
+              {  label: t("OurProgram") },
+              {  label: t("about") },
+              {  label: t("Testimonials") },
+              
+              // { to: "/about", label: t("about") },
+              // { to: "/experts", label: t("experts") },
+              // { to: "/blog", label: t("blog") },
+              // { to: "/contact", label: t("contact") },
             ].map((link) => (
               <li key={link.to} className="nav-item">
                 <Link to={link.to} className="nav-link">

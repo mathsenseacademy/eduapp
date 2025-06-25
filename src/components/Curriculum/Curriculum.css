@@ -1,5 +1,6 @@
 /* src/components/Curriculum/Curriculum.css */
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
 .curriculum-header-wrapper {
   text-align: center;
   margin: 2rem 0 1rem;
@@ -44,26 +45,30 @@
   margin: auto;
 }
 
+/* —— UPDATED MEDIA WRAPPER —— */
 .media-wrapper {
   position: relative;
-  border: 4px solid #7c3aed;
-  clip-path: polygon(
-    25% 6.7%,
-    75% 6.7%,
-    100% 50%,
-    75% 93.3%,
-    25% 93.3%,
-    0% 50%
-  );
+  width: 50%;
+   /* height: 350px;  */
+  /* enforce 9:16 portrait ratio */
+  aspect-ratio: 9 / 16;
   overflow: hidden;
+  /* optional simple border instead of hexagon */
+  /* border: 4px solid #7c3aed; */
+  /* optional rounded corners */
+  border-radius: 0.5rem;
 }
 
-.media-frame {
-  display: block;
+.media-wrapper .media-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
 }
 
+/* overlay icon stays centered */
 .play-overlay {
   position: absolute;
   top: 50%;
@@ -92,31 +97,30 @@
 
 .detailed-btn {
   display: inline-block;
-  background: #fff;               /* white fill */
-  color: #000;                    /* black text */
-  border: 1px solid #000;         /* black outline */
-  border-radius: 3rem;          /* fully pill */
-  padding: 0.4rem 1.5rem;         /* tighter vertical, roomy horizontal */
-  font-size: 0.85rem;             /* slightly smaller text */
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
+  border-radius: 3rem;
+  padding: 0.4rem 1.5rem;
+  font-size: 0.85rem;
   font-weight: 600;
-  text-transform: uppercase;      /* all-caps */
-  line-height: 1;                 /* no extra height */
+  text-transform: uppercase;
+  line-height: 1;
   transition: background 0.2s;
 }
 
 .detailed-btn:hover {
-  background: #f0f0f0;            /* subtle hover */
+  background: #f0f0f0;
 }
-
 
 @media (max-width: 767px) {
   .ce-subtitle {
-  display: inline-block;
-  margin: 1rem 3.3rem;}
+    display: inline-block;
+    margin: 1rem 3.3rem;
+  }
   .curriculum-item {
     font-size: 0.9rem;
   }
-  
   .icon-wrapper {
     margin-bottom: 0.5rem;
   }
