@@ -21,9 +21,16 @@ const Home = ({ heroRef, sentinelRef }) => {
        {/* 1-pixel sentinel marks end of hero */}
       <div ref={sentinelRef} style={{ height: 1 }} />
       <FeaturesSection />
+      <section id="programs">
       <ProgramsSection />
+      </section>
+      <section id="testimonials">
        <TestimonialSection />
+      </section>
+      <section id="about">
       <AboutSection />
+      </section>
+
       {/*<ExpertSection />*/}
       {/* <BlogPreviewSection />  */}
       {/* <ContactCTA /> */}

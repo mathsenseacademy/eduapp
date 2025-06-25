@@ -5,6 +5,7 @@ import {
   FaFacebookF,
   FaTwitter,
   FaYoutube,
+   FaInstagram, 
 } from "react-icons/fa";
 import "./TopInfoBar.css";
 
@@ -38,9 +39,11 @@ export default function TopInfoBar({ sentinelRef }) {
       </div>
       <div className="bar-right">
         Follow us:
-        <a href="https://facebook.com" aria-label="Facebook"><FaFacebookF/></a>
-        <a href="https://twitter.com"  aria-label="Twitter" ><FaTwitter/></a>
-        <a href="https://youtube.com"  aria-label="YouTube" ><FaYoutube/></a>
+        <a href="https://www.facebook.com/shomesirmath/" aria-label="Facebook"><FaFacebookF/></a>
+        <a href="https://x.com/ShomeSuvad79678"  aria-label="Twitter" ><FaTwitter/></a>
+        <a href="https://www.instagram.com/maths_ense"  aria-label="Twitter" ><FaInstagram/></a>
+        
+        <a href="https://www.youtube.com/@mathsenseacademy"  aria-label="YouTube" ><FaYoutube/></a>
       </div>
     </div>
   );
