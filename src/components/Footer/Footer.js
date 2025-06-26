@@ -63,10 +63,10 @@ export default function Footer() {
           <div className="link-col">
             <h4>Social</h4>
             <ul>
-              <li><a href="https://facebook.com">Facebook</a></li>
-              <li><a href="https://instagram.com">Instagram</a></li>
-              <li><a href="https://youtube.com">YouTube</a></li>
-              <li><a href="https://twitter.com">Twitter</a></li>
+              <li><a href="https://www.facebook.com/shomesirmath/">Facebook</a></li>
+              <li><a href="https://www.instagram.com/maths_ense/">Instagram</a></li>
+              <li><a href="https://www.youtube.com/@mathsenseacademy">YouTube</a></li>
+              <li><a href="https://x.com/ShomeSuvad79678/">Twitter</a></li>
             </ul>
           </div>
         </div>

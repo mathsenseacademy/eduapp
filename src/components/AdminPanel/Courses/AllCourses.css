@@ -1,0 +1,123 @@
+/* src/components/AdminPanel/Courses/AllCourses.css */
+
+:root {
+  --grid-gap: 1rem;
+  --card-bg: #ffffff;
+  --card-border: #ddd;
+  --card-shadow: rgba(0, 0, 0, 0.1);
+  --card-shadow-hover: rgba(0, 0, 0, 0.15);
+  --primary-color: #007bff;
+  --text-color: #343a40;
+  --muted-color: #6c757d;
+  --success-color: #28a745;
+  --danger-color: #dc3545;
+  --radius: 0.25rem;
+  --transition: 0.3s ease;
+}
+
+.all-courses-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--grid-gap);
+  padding: var(--grid-gap);
+}
+
+.course-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 4px var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition);
+  cursor: pointer;
+  min-height: 280px; /* increased height */
+  padding: 1rem; /* added internal padding */
+}
+
+.course-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 8px var(--card-shadow-hover);
+}
+
+.course-card-header {
+  padding: 1rem;
+  background: var(--primary-color);
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+.course-card-body p strong::after {
+  content: "";
+  display: block;
+  margin-bottom: 0.25rem; /* optional spacing */
+}
+
+.course-card-body {
+  flex: 1;
+  padding: 1rem;
+  color: var(--text-color);
+}
+
+.course-card-body p {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  color: var(--muted-color);
+}
+
+.course-card-body p strong {
+  color: var(--text-color);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.course-card-footer {
+  padding: 0.75rem 1rem;
+  background: #f8f9fa;
+  text-align: right;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #fff;
+  border-radius: var(--radius);
+}
+
+.badge.active {
+  background-color: var(--success-color);
+}
+
+.badge.inactive {
+  background-color: var(--danger-color);
+}
+
+.loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+}
+
+@media (max-width: 576px) {
+  .all-courses-wrapper {
+    grid-template-columns: 1fr;
+    padding: 0.5rem;
+  }
+
+  .course-card-header {
+    font-size: 1.1rem;
+    padding: 0.75rem;
+  }
+
+  .course-card-body {
+    padding: 0.75rem;
+  }
+
+  .course-card-footer {
+    padding: 0.5rem 0.75rem;
+  }
+}

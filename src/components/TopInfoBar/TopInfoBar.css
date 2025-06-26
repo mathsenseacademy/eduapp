@@ -27,11 +27,12 @@
 .top-info-bar.show { transform: translateY(0); }
 
 .top-info-bar a {
-  color: var(--clr-yellow);              /* accent link colour */
+  /* color: var(--clr-yellow);    */
+  color:  var(--text-dark, #222);            /* accent link colour */
   margin-left: 0.75rem;
   text-decoration: underline;
 }
-.top-info-bar a:hover { text-decoration: none; }
+.top-info-bar a:hover { text-decoration: none;  color: #444;  }
 
 /* ─── MOBILE  (< 576 px) ────────────────────────────────────────── */
 @media (max-width: 575.98px) {

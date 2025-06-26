@@ -70,3 +70,14 @@ export const addClassroomEssential = (payload) =>
 export const editClassroomEssential = (payload) =>
   api.post("/coursemanegment/edit_classroom_essentials/", payload);
 
+/** fetch one curriculum by ID for edit */
+export const getCurriculumById = payload =>
+  api.post('/coursemanegment/show_curriculum_by_id/', payload);
+
+/** update existing curriculum */
+export const editCurriculum = payload =>
+  api.post('/coursemanegment/edit_curriculum/', payload);
+
+
+export const getEssentialsById = payload =>
+  api.post('/coursemanegment/show_classroom_essentials_by_id/', payload);

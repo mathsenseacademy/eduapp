@@ -10,6 +10,7 @@ import EditCourse   from "./EditCourse";
 
 import AllCurriculums    from "./Curriculum/AllCurriculums";
 import CreateCurriculum  from "./Curriculum/AddCurriculum";
+import EditCurriculum from "./Curriculum/EditCurriculum";
 
 import AllClassroomEssentials from "./ClassroomEssentials/AllClassroomEssentials"
 import Essentials        from "./ClassroomEssentials/Essentials";
@@ -26,7 +27,9 @@ const tabs = [
   { to: `${base}/essentials`, icon: <FaBook />,  label: "All ClassroomEssential" },
   { to: `${base}/create`, icon: <FaPlus />,  label: "Add Course"        },
   { to: `${base}/curriculums/create`, icon: <FaBook />,  label: "Add Curriculum" },
-   { to: `${base}/essentials/create`,    icon: <FaBook />,  label: "Essentials" },
+  // { to: `${base}/curriculums/edit`, icon: <FaEdit />,  label: "Add Curriculum" },
+   { to: `${base}/essentials/create`,    icon: <FaEdit />,  label: "Add Essentials" },
+  //  { to: `${base}/essentials/edit`,    icon: <FaBook />,  label: "Essentials" },
   // { to: `${base}/edit`,   icon: <FaEdit />,  label: "Edit Course"       },
 ];
 
@@ -76,11 +79,13 @@ const tabs = [
           {/* Curricula */}
          <Route path="curriculums" element={<AllCurriculums />} />
          <Route path="curriculums/create" element={<CreateCurriculum />} />
-         {/* <Route path="curriculums/edit/:id" element={<EditCurriculum />} /> */}
+         <Route path="curriculums/edit/:id" element={<EditCurriculum />} />
          {/* Classroom essentials */}
    <Route path="essentials" element={<AllClassroomEssentials />} />
    <Route path="essentials/create" element={<Essentials />} />
-   <Route path="essentials/edit/:id" element={<Essentials />} />
+   {/* <Route path="essentials/edit/:id" element={<Essentials />} /> */}
+   <Route path="essentials/edit/:essentialsId" element={<Essentials />} />
+
 
           <Route path="*"      element={<Navigate  replace />} />
         </Routes>

@@ -35,7 +35,7 @@ export default function TopInfoBar({ sentinelRef }) {
   return (
     <div className={`top-info-bar ${visible ? "show" : "hide"}`}>
       <div className="bar-left">
-        <FaPhoneAlt /> +91 9062428472 | <FaEnvelope /> info@mathsenseacademy.com
+        <FaPhoneAlt /> +91 70034 16272 | <FaEnvelope /> info@mathsenseacademy.com
       </div>
       <div className="bar-right">
         Follow us:
