@@ -190,4 +190,7 @@
     flex-direction: column;
     gap: 0.5rem;
   }
+  .brand-collabs img {
+  max-height: 55px;
+  }
 }

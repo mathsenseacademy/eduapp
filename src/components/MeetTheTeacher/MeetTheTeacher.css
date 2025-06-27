@@ -92,8 +92,17 @@
 
 /* Responsive: stack vertically */
 @media (max-width: 767px) {
+  .main_meetTeacher {
+  display: flex;
+  flex-direction: column-reverse;
+  width: 100%;
+  padding: 2rem 1rem;
+  }
   .sow-container {
     flex-direction: column;
+  }
+  .right_teacher_photo{
+    margin-bottom: 1rem;
   }
   .sow-bubble-wrapper {
     margin-left: 0;

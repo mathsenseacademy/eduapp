@@ -82,3 +82,11 @@
 .ce-panel--2 .ce-header {
   background: url("../../assets/classEssential2.svg") no-repeat center/cover;
 }
+
+
+@media (max-width: 767px) {
+.ce-subtitle {
+    display: inline-block;
+    margin: 1rem 1.3rem;
+  }
+}
