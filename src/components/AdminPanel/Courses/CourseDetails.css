@@ -149,6 +149,8 @@ background-repeat: no-repeat;
 @media (max-width: 767px) {
   .bubble {
     padding: 1.5rem 1rem;
+    position: absolute;
+    width: 20rem;
   }
   .bubble--purple {
     clip-path: polygon(
@@ -215,7 +217,8 @@ background-repeat: no-repeat;
   .bubble--orange {
     position: absolute;
     top: 13rem;
-    left: 1px;
+    /* left: 1px; */
+    padding: 1.5rem 1rem;
   }
 .bubble--orange p {
     font-size: 0.6rem;
@@ -233,6 +236,14 @@ background-repeat: no-repeat;
 .ce-subtitle{
   margin: 1rem 1.3rem;
 }
+.circle-arrow {
+    right: 20rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+    top: 15rem;
+    left: 24rem;
+  }
 
 }
 
@@ -268,6 +279,7 @@ background-repeat: no-repeat;
   }
 }
 
+/* TAB */
 @media only screen and (min-width: 768px) and (max-width: 992px) {
 
   .Left-bubbles{
