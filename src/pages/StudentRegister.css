@@ -14,13 +14,14 @@
   top: 50%;
   left: 50%;
   width: 90%;
-  max-width: 500px;
+  max-width: 480px;
   transform: translate(-50%, -50%);
   background: #fff;
   border-radius: 8px;
   overflow: hidden;
   z-index: 1001;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  padding: 0;
 }
 
 /* header */
@@ -28,7 +29,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #0b6477; /* green */
+  background: #0b6477;
   padding: 0.75rem 1rem;
   color: #fff;
 }
@@ -45,21 +46,38 @@
   padding: 1rem;
 }
 .sr-step-title {
+  margin-bottom: 0.5rem;
+  color: #875714;
+  font-size: 1rem;
+}
+.sr-step-description {
   margin-bottom: 1rem;
-  color: #875714; /* brown */
+  font-size: 0.9rem;
+  line-height: 1.4;
 }
 .sr-body label {
   display: block;
   margin-bottom: 0.25rem;
   color: #0b6477;
   font-weight: 500;
+  font-size: 0.85rem;
 }
 .sr-body input,
 .sr-body textarea {
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.4rem;
   margin-bottom: 0.75rem;
   border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+/* image preview */
+.sr-img-preview {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-top: 0.5rem;
   border-radius: 4px;
 }
 
@@ -67,7 +85,8 @@
 .sr-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
 }
 .sr-col-4 {
   flex: 0 0 30%;
@@ -81,32 +100,29 @@
   display: flex;
   justify-content: flex-end;
   gap: 0.5rem;
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 1rem;
   background: #fafafa;
 }
-.btn-back {
-  background: #875714; /* brown */
-  color: #fff;
+.btn-back,
+.btn-next,
+.btn-submit {
   border: none;
-  padding: 0.5rem 1rem;
   border-radius: 4px;
+  padding: 0.45rem 1rem;
+  font-size: 0.9rem;
   cursor: pointer;
+}
+.btn-back {
+  background: #875714;
+  color: #fff;
 }
 .btn-next {
-  background: #0b6477; /* green */
+  background: #0b6477;
   color: #fff;
-  border: none;
-  padding: 0.5rem 1.25rem;
-  border-radius: 4px;
-  cursor: pointer;
 }
 .btn-submit {
-  background: #fab554; /* yellow */
+  background: #fab554;
   color: #000;
-  border: none;
-  padding: 0.5rem 1.25rem;
-  border-radius: 4px;
-  cursor: pointer;
 }
 
 /* toast */
@@ -118,10 +134,67 @@
   border-radius: 4px;
   color: #fff;
   z-index: 1002;
+  font-size: 0.9rem;
 }
 .sr-success {
-  background: #0b6477; /* green */
+  background: #0b6477;
 }
 .sr-danger {
-  background: #875714; /* brown */
+  background: #875714;
+}
+
+/* …existing CSS… */
+
+/* Extra-large screens */
+@media (min-width>= 1921px) and (min-height<= 1201px) {
+  .sr-modal,
+  .sr-otp-modal {
+    width: 40%;
+    max-width: 200px;
+  }
+}
+
+
+/* Responsive breakpoints */
+@media (max-width: 600px) {
+  .sr-modal,
+  .sr-otp-modal {
+    width: 95%;
+    max-width: 360px;
+  }
+  .sr-row {
+    gap: 0.5rem;
+  }
+  .sr-col-4,
+  .sr-col-6 {
+    flex: 0 0 100%;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .sr-modal,
+  .sr-otp-modal {
+    width: 90%;
+    max-width: 420px;
+  }
+  .sr-col-4 {
+    flex: 0 0 48%;
+  }
+  .sr-col-6 {
+    flex: 0 0 100%;
+  }
+}
+
+@media (min-width: 901px) {
+  .sr-modal,
+  .sr-otp-modal {
+    width: 80%;
+    max-width: 480px;
+  }
+  .sr-col-4 {
+    flex: 0 0 30%;
+  }
+  .sr-col-6 {
+    flex: 0 0 48%;
+  }
 }

@@ -7,129 +7,125 @@ import "./StudentRegister.css";
 export default function StudentRegister({ onClose }) {
   const navigate = useNavigate();
 
-  const steps = [
-    {
-      title: "Terms And Conditions",
-      description:
-        "1. Fees once paid is non-refundable/adjustable under any circumstances. Fee installments must be paid on or before the due date.\n" +
-        "2. Monthly fees should be paid by latest 10th of the month.\n" +
-        "3. Disciplinary actions will be taken against students found guilty of disrupting the classroom.\n" +
-        "4. Institute management will have full authority to change the terms and conditions without any prior information.\n" +
-        "5. Institute reserves the right to publish the photo and name of the successful candidates for portfolio development of the institute.\n",
+const steps = [
+  {
+    title: "Your Name",
+    fields: [
+      { name: "first_name", label: "First Name", type: "text", required: true },
+      { name: "middle_name", label: "Middle Name", type: "text", required: false },
+      { name: "last_name", label: "Last Name", type: "text", required: true },
+      {
+        name: "student_photo_path",
+        label: "Upload Image",
+        type: "file",
+        required: true,
+      },
+    ],
+  },
+  {
+    title: "Date of Birth",
+    fields: [
+      {
+        name: "date_of_birth",
+        label: "Date of Birth",
+        type: "date",
+        required: true,
+      },
+    ],
+  },
+  {
+    title: "Contact Numbers",
+    fields: [
+      {
+        name: "contact_number_1",
+        label: "Primary Contact",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "contact_number_2",
+        label: "Alternate Contact",
+        type: "text",
+        required: false,
+      },
+    ],
+  },
+  {
+    title: "Education",
+    fields: [
+      { name: "student_class", label: "Class", type: "text", required: true },
+      {
+        name: "school_or_college_name",
+        label: "School",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "board_or_university_name",
+        label: "Board",
+        type: "text",
+        required: true,
+      },
+    ],
+  },
+  {
+    title: "Address",
+    fields: [
+      { name: "address", label: "Address", type: "textarea", required: true },
+      { name: "city", label: "City", type: "text", required: true },
+      { name: "district", label: "District", type: "text", required: true },
+      { name: "state", label: "State", type: "text", required: true },
+      { name: "pin", label: "PIN Code", type: "text", required: true },
+    ],
+  },
+  {
+    title: "Additional Info",
+    fields: [
+      {
+        name: "notes",
+        label: "Notes (optional)",
+        type: "textarea",
+        required: false,
+      },
+      { name: "email", label: "Email", type: "email", required: true },
+    ],
+  },
+  // Moved from the top down here, so it shows last:
+  {
+    title: "Terms And Conditions",
+    description:
+      "1. Fees once paid is non-refundable/adjustable under any circumstances. Fee installments must be paid on or before the due date.\n" +
+      "2. Monthly fees should be paid by latest 10th of the month.\n" +
+      "3. Disciplinary actions will be taken against students found guilty of disrupting the classroom.\n" +
+      "4. Institute management will have full authority to change the terms and conditions without any prior information.\n" +
+      "5. Institute reserves the right to publish the photo and name of the successful candidates for portfolio development of the institute.\n",
+    fields: [
+      {
+        name: "conditions",
+        label: "I agree with the terms and conditions.",
+        type: "checkbox",
+        required: true,
+      },
+      {
+        name: "terms",
+        type: "checkbox",
+        label:
+          "I/We, hereby declare that the information given above is the best of knowledge/belief and nothing has been concealed or distorted. If at any stage I am found to have distorted any information or violated institution's Terms & Conditions, the management will have full authority to restrict the admission",
+        required: true,
+      },
+    ],
+  },
+];
 
-      fields: [
-        {
-          name: "conditions",
-          label: "I agree with the terms and conditions.",
-          type: "checkbox",
-          required: true,
-        },
-        {
-          name: "terms",
-          type: "checkbox",
-          label: "I/We, hereby declare that the information given above is the best of knowledge/ belief and nothing has been concealed or distorted. If at any stage I am found to have distorted any information or violated institution's Terms & Conditions, the management will have full authority to restrict the admission", 
-          
-          required: true,
-        },
-      ],
-    },
-    {
-      title: "Your Name",
-      fields: [
-        {
-          name: "first_name",
-          label: "First Name",
-          type: "text",
-          required: true,
-        },
-        {
-          name: "middle_name",
-          label: "Middle Name",
-          type: "text",
-          required: false,
-        },
-        { name: "last_name", label: "Last Name", type: "text", required: true },
-        {
-          name: "student_photo_path",
-          label: "Upload Image",
-          type: "file",
-          required: true,
-        },
-      ],
-    },
-    {
-      title: "Date of Birth",
-      fields: [
-        {
-          name: "date_of_birth",
-          label: "Date of Birth",
-          type: "date",
-          required: true,
-        },
-      ],
-    },
-    {
-      title: "Contact Numbers",
-      fields: [
-        {
-          name: "contact_number_1",
-          label: "Primary Contact",
-          type: "text",
-          required: true,
-        },
-        {
-          name: "contact_number_2",
-          label: "Alternate Contact",
-          type: "text",
-          required: false,
-        },
-      ],
-    },
-    {
-      title: "Education",
-      fields: [
-        { name: "student_class", label: "Class", type: "text", required: true },
-        {
-          name: "school_or_college_name",
-          label: "School",
-          type: "text",
-          required: true,
-        },
-        {
-          name: "board_or_university_name",
-          label: "Board",
-          type: "text",
-          required: true,
-        },
-      ],
-    },
-    {
-      title: "Address",
-      fields: [
-        { name: "address", label: "Address", type: "textarea", required: true },
-        { name: "city", label: "City", type: "text", required: true },
-        { name: "district", label: "District", type: "text", required: true },
-        { name: "state", label: "State", type: "text", required: true },
-        { name: "pin", label: "PIN Code", type: "text", required: true },
-      ],
-    },
-    {
-      title: "Additional Info",
-      fields: [
-        {
-          name: "notes",
-          label: "Notes (optional)",
-          type: "textarea",
-          required: false,
-        },
-        { name: "email", label: "Email", type: "email", required: true },
-      ],
-    },
-  ];
 
   const allFields = steps.flatMap((s) => s.fields);
+
+  // initialize checkboxes to false
   const [formData, setFormData] = useState(
-    allFields.reduce((acc, f) => ({ ...acc, [f.name]: "" }), {})
+    allFields.reduce((acc, f) => {
+      acc[f.name] = f.type === "checkbox" ? false : "";
+      return acc;
+    }, {})
   );
   const [currentStep, setCurrentStep] = useState(0);
   const [showOtpModal, setShowOtpModal] = useState(false);
@@ -151,10 +147,10 @@ export default function StudentRegister({ onClose }) {
     });
 
   const handleChange = async (e) => {
-    const { name, type, files, value } = e.target;
+    const { name, type, files, value, checked } = e.target;
 
-    if (type === "file" && files && files[0]) {
-      // handle ANY file field
+    if (type === "file" && files?.[0]) {
+      // your existing image-compression logic
       try {
         const rawBase64 = await imageToBase64(files[0]);
         const img = new Image();
@@ -188,6 +184,8 @@ export default function StudentRegister({ onClose }) {
         console.error("Image upload error", err);
         showToast("Failed to upload image", "danger");
       }
+    } else if (type === "checkbox") {
+      setFormData((prev) => ({ ...prev, [name]: checked }));
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
@@ -195,7 +193,8 @@ export default function StudentRegister({ onClose }) {
 
   const handleNext = () => {
     for (let f of steps[currentStep].fields) {
-      if (f.required && !formData[f.name].trim()) {
+      const val = formData[f.name];
+      if (f.required && (val === "" || val === false)) {
         return showToast(`${f.label} is required.`, "danger");
       }
     }
@@ -206,7 +205,8 @@ export default function StudentRegister({ onClose }) {
 
   const handleRegisterSubmit = async () => {
     for (let f of allFields) {
-      if (f.required && !formData[f.name].trim()) {
+      const val = formData[f.name];
+      if (f.required && (val === "" || val === false)) {
         return showToast(`${f.label} is required.`, "danger");
       }
     }
@@ -216,10 +216,7 @@ export default function StudentRegister({ onClose }) {
       setShowOtpModal(true);
     } catch (err) {
       console.error(err);
-      showToast(
-        err.response?.data?.message || "Registration failed.",
-        "danger"
-      );
+      showToast(err.response?.data?.message || "Registration failed.", "danger");
     }
   };
 
@@ -260,13 +257,14 @@ export default function StudentRegister({ onClose }) {
         </div>
         <div className="sr-body">
           <h6 className="sr-step-title">{title}</h6>
-          {/* <p className="sr-step-description">{description}</p> */}
-          <p
-            className="sr-step-description"
-            dangerouslySetInnerHTML={{
-              __html: description.replace(/\n/g, "<br>"),
-            }}
-          />
+          {description && (
+            <p
+              className="sr-step-description"
+              dangerouslySetInnerHTML={{
+                __html: description.replace(/\n/g, "<br>"),
+              }}
+            />
+          )}
 
           {fields.length > 1 ? (
             <div className="sr-row">
@@ -275,15 +273,28 @@ export default function StudentRegister({ onClose }) {
                   key={f.name}
                   className={fields.length === 2 ? "sr-col-6" : "sr-col-4"}
                 >
-                  <label>{f.label}</label>
-                  {f.type === "textarea" ? (
-                    <textarea
-                      name={f.name}
-                      value={formData[f.name]}
-                      onChange={handleChange}
-                    />
+                  {f.type === "checkbox" ? (
+                    <label>
+                      <input
+                        type="checkbox"
+                        name={f.name}
+                        checked={formData[f.name]}
+                        onChange={handleChange}
+                      />
+                      {f.label}
+                    </label>
+                  ) : f.type === "textarea" ? (
+                    <>
+                      <label>{f.label}</label>
+                      <textarea
+                        name={f.name}
+                        value={formData[f.name]}
+                        onChange={handleChange}
+                      />
+                    </>
                   ) : f.type === "file" ? (
                     <>
+                      <label>{f.label}</label>
                       <input
                         type="file"
                         accept="image/*"
@@ -299,12 +310,15 @@ export default function StudentRegister({ onClose }) {
                       )}
                     </>
                   ) : (
-                    <input
-                      type={f.type}
-                      name={f.name}
-                      value={formData[f.name]}
-                      onChange={handleChange}
-                    />
+                    <>
+                      <label>{f.label}</label>
+                      <input
+                        type={f.type}
+                        name={f.name}
+                        value={formData[f.name]}
+                        onChange={handleChange}
+                      />
+                    </>
                   )}
                 </div>
               ))}
