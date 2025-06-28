@@ -138,11 +138,14 @@ const Header = () => {
 
             <div
               className="nav-item courses-wrapper"
-              onMouseEnter={() => setCoursesOpen(true)}
-              onMouseLeave={() => setCoursesOpen(false)}
+              
             >
-              <button className="btn btn-outline-danger dropdown-toggle">
+              <button className="btn btn-outline-danger dropdown-toggle"
+              onMouseEnter={() => setCoursesOpen(true)}
+                onMouseLeave={() => setCoursesOpen(false)}
+              >
                 {t("courses")}
+                
               </button>
               <AnimatePresence>
                 {coursesOpen && (
