@@ -116,10 +116,10 @@ const Header = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg fixed-top px-3 d-sm-flex flex-sm-column">
+      <nav className="navbar navbar-expand-lg fixed-top px-3 d-sm-flex flex-sm-column flex-lg-row">
         <div className="container-fluid justify-content-between d-flex">
           {/* ── Left: Logo & Courses ── */}
-          <div className="d-flex align-items-center gap-4 d-sm-flex flex-sm-column">
+          <div className="d-flex align-items-center gap-4 d-sm-flex flex-sm-column flex-lg-row">
             <motion.div
               layoutId="shared-logo"
               transition={{ type: "spring", stiffness: 60, damping: 15 }}
@@ -204,7 +204,7 @@ const Header = () => {
           {/* ── Right nav items ── */}
           <div
             id="mainNav"
-            className="collapse navbar-collapse justify-content-end mt-3 mt-lg-0"
+            className="collapse navbar-collapse justify-content-end mt-3 mt-lg-0 mb-5 mb-lg-0"
           >
             <ul className="navbar-nav align-items-center gap-3 mb-2 mb-lg-0">
               {navItems.map((item) => (
@@ -241,7 +241,7 @@ const Header = () => {
             </ul>
 
             {/* ── Auth button / form ── */}
-            <div className="position-relative mt-2 mt-lg-0">
+            <div className="position-relative mt-2 mt-lg-0  mb-2 mb-lg-0">
               {adminUser ? (
                 <button
                   className="btn btn-outline-success"

@@ -307,9 +307,9 @@ html.info-bar-visible .navbar.fixed-top { top: 40px; }
 }
 
 @media (min-width: 600px) {
-    .flex-sm-column {
+    /* .flex-sm-column {
     flex-direction: row !important;
-  }
+  } */
 }
 
 

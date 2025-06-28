@@ -159,8 +159,10 @@
 @media (max-width: 600px) {
   .sr-modal,
   .sr-otp-modal {
-    width: 80%;
+    width: 90%;
     max-width: 80%;
+    margin-top: 3rem;
+    margin-right: 0;
   }
   .sr-row {
     gap: 0.5rem;
