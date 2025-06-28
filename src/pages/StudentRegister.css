@@ -159,8 +159,8 @@
 @media (max-width: 600px) {
   .sr-modal,
   .sr-otp-modal {
-    width: 95%;
-    max-width: 360px;
+    width: 80%;
+    max-width: 80%;
   }
   .sr-row {
     gap: 0.5rem;
@@ -189,7 +189,8 @@
   .sr-modal,
   .sr-otp-modal {
     width: 80%;
-    max-width: 480px;
+    /* max-width: 480px; */
+    max-width:100%;
   }
   .sr-col-4 {
     flex: 0 0 30%;
