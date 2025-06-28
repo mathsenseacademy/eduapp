@@ -179,7 +179,7 @@ html.info-bar-visible .navbar.fixed-top { top: 40px; }
 /* ───────────────────  MOBILE (<768px) ───────────────── */
 @media (max-width: 768px) {
   .logo-img {
-    width: 100px;
+    width: 160px;
   }
   .sticky-register-btn {
     font-size: 0.8rem;
@@ -250,10 +250,22 @@ html.info-bar-visible .navbar.fixed-top { top: 40px; }
   /* container flex & wrap */
   .navbar .container-fluid {
     display: flex;
+    flex: 1 1 70% !important;
     flex-wrap: wrap;
     align-items: center;
+    max-width: 90%;
+    margin: 0 !important;
   }
-
+  /* html.info-bar-visible .navbar.fixed-top{
+    max-width: 89%;
+  }
+  .top-info-bar {
+    max-width: 89%;
+  } */
+  .courses-wrapper {
+    position: absolute;
+    bottom: 0.3rem;;
+  }
   /* Row 1: Logo + Courses */
   .navbar .container-fluid > .d-flex.align-items-center {
     order: 1;

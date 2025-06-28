@@ -116,10 +116,10 @@ const Header = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg fixed-top px-3">
+      <nav className="navbar navbar-expand-lg fixed-top px-3 d-sm-flex flex-sm-column">
         <div className="container-fluid justify-content-between d-flex">
           {/* ── Left: Logo & Courses ── */}
-          <div className="d-flex align-items-center gap-4">
+          <div className="d-flex align-items-center gap-4 d-sm-flex flex-sm-column">
             <motion.div
               layoutId="shared-logo"
               transition={{ type: "spring", stiffness: 60, damping: 15 }}
