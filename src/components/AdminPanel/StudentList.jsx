@@ -1,13 +1,13 @@
-// src/components/AdminPanel/StudentList.jsx
 import React, { useEffect, useState } from "react";
 import api from "../../api/api";
 import Loader from "../Loader/DataLoader";
 import "./StudentList.css";
+import { useNavigate } from "react-router-dom";
 
 export default function StudentList() {
   const [students, setStudents] = useState([]);
   const [loading, setLoading]   = useState(false);
-
+const navigate = useNavigate();
   useEffect(() => {
     (async () => {
       setLoading(true);
@@ -54,7 +54,12 @@ export default function StudentList() {
                 .filter(Boolean)
                 .join(" ");
               return (
-                <tr key={s.id}>
+                // <tr key={s.id}>
+                <tr
+                  key={s.id}
+                  className="clickable-row"
+                  onClick={() => navigate(`/admin/students/edit/${s.ID}`)}
+                >
                   <td className="avatar-col">
                     <img
                       className="student-avatar"
@@ -63,14 +68,25 @@ export default function StudentList() {
                     />
                   </td>
                   <td>{s.student_id}</td>
-
                   <td>{fullName}</td>
                   <td>{s.date_of_birth}</td>
                   <td>{s.student_class}</td>
                   <td>{s.contact_number_1}</td>
                   <td>{s.email}</td>
-                  <td>{s.is_active}</td>
-                  <td>{s.is_verified}</td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      checked={!!s.is_active}
+                      disabled
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      checked={!!s.is_verified}
+                      disabled
+                    />
+                  </td>
                 </tr>
               );
             })}
