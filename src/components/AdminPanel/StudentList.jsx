@@ -1,3 +1,4 @@
+// src/components/AdminPanel/StudentList.jsx
 import React, { useEffect, useState } from "react";
 import api from "../../api/api";
 import Loader from "../Loader/DataLoader";
@@ -6,8 +7,12 @@ import { useNavigate } from "react-router-dom";
 
 export default function StudentList() {
   const [students, setStudents] = useState([]);
-  const [loading, setLoading]   = useState(false);
-const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [courses, setCourses] = useState([]);
+  const [loadingCourses, setLoadingCourses] = useState(true);
+  const navigate = useNavigate();
+
+  // Fetch students
   useEffect(() => {
     (async () => {
       setLoading(true);
@@ -18,6 +23,22 @@ const navigate = useNavigate();
         console.error("Error fetching students:", err);
       } finally {
         setLoading(false);
+      }
+    })();
+  }, []);
+
+  // Fetch courses for class lookup
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await api.get(
+          "coursemanegment/all_courses_show_public/"
+        );
+        setCourses(data);
+      } catch (err) {
+        console.error("Failed to load courses:", err);
+      } finally {
+        setLoadingCourses(false);
       }
     })();
   }, []);
@@ -40,7 +61,7 @@ const navigate = useNavigate();
               <th className="avatar-col">Photo</th>
               <th>Student ID</th>
               <th>Name</th>
-              <th>Date of Birth</th>
+              {/* <th>Date of Birth</th> */}
               <th>Class</th>
               <th>Contact</th>
               <th>Email</th>
@@ -53,10 +74,18 @@ const navigate = useNavigate();
               const fullName = [s.first_name, s.middle_name, s.last_name]
                 .filter(Boolean)
                 .join(" ");
+
+              // find matching course
+              const course = courses.find((c) => c.ID === s.student_class);
+              const classLabel = loadingCourses
+                ? "Loading..."
+                : course
+                ? `${course.msa_class_level} (${course.course_name})`
+                : s.student_class;
+
               return (
-                // <tr key={s.id}>
                 <tr
-                  key={s.id}
+                  key={s.ID}
                   className="clickable-row"
                   onClick={() => navigate(`/admin/students/edit/${s.ID}`)}
                 >
@@ -69,8 +98,8 @@ const navigate = useNavigate();
                   </td>
                   <td>{s.student_id}</td>
                   <td>{fullName}</td>
-                  <td>{s.date_of_birth}</td>
-                  <td>{s.student_class}</td>
+                  {/* <td>{s.date_of_birth}</td> */}
+                  <td>{classLabel}</td>
                   <td>{s.contact_number_1}</td>
                   <td>{s.email}</td>
                   <td>

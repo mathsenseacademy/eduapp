@@ -254,7 +254,13 @@ const Header = () => {
                 </button>
               ) : (
                 <>
-                  <button
+                <button
+                    className="btn btn-outline-primary"
+                    onClick={() => navigate("/login")}
+                  >
+                    {t("login")}
+                  </button>
+                  {/* <button
                     className="login-toggle-btn btn btn-outline-primary"
                     onClick={() => setShowLogin(!showLogin)}
                   >
@@ -310,7 +316,7 @@ const Header = () => {
                         </span>
                       </p>
                     </form>
-                  )}
+                  )} */}
                 </>
               )}
             </div>

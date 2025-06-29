@@ -16,10 +16,10 @@
 }
 
 /* ───────────────────  LOGIN DROPDOWN  ───────────────── */
-.login-form {
+/* .login-form {
   width: 250px;
   z-index: 1050;
-}
+} */
 
 /* ─── Header overrides for maximum contrast ───────────────── */
 
@@ -298,12 +298,12 @@ html.info-bar-visible .navbar.fixed-top { top: 40px; }
   }
 
   /* Row 4: Login toggle inside collapse */
-  .login-toggle-btn {
+  /* .login-toggle-btn {
     order: 4;
     width: 100%;
     text-align: center;
     margin: 0.5rem 0;
-  }
+  } */
 }
 
 @media (min-width: 600px) {

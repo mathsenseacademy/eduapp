@@ -15,6 +15,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Loader        from "./components/Loader/Loader";
 import CoursePage    from "./pages/CoursePage/CoursePage";
 import useLocoScroll from "./hooks/useLocoScroll";
+import Login from "./pages/Login";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -42,6 +43,7 @@ function App() {
           <div data-scroll-container ref={scrollRef}>
             <div data-scroll-section className="pt-header">
               <Routes>
+                <Route path="/login" element={<Login />} /> 
                 <Route path="/" element={<Home heroRef={heroRef} sentinelRef={sentinelRef} />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/student/register" element={<StudentRegister />} />
