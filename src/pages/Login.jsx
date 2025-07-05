@@ -46,10 +46,13 @@ export default function Login() {
 
   return (
     <div className="login-page">
+      <div className="bg"></div>
+      <div className="bg bg2"></div>
+      <div className="bg bg3"></div>
       <form
         ref={formRef}
         onSubmit={handleSubmit}
-        className="login-form"
+        className="login-form " 
       >
         <h2>Login</h2>
 
