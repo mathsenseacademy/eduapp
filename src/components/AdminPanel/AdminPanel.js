@@ -3,14 +3,16 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import StudentList from "./StudentList";
+import StudentEdit from "./StudentEdit";
 import CoursesPanel from "./Courses/CoursesPanel";
 import SetPaper from "./setQuestion/SetPaper";
 
 const AdminPanel = () => (
   <Routes>
     {/* default landing → students */}
-    <Route path="student" element={<StudentList />} />
     <Route path="students" element={<StudentList />} />
+  <Route path="students/edit/:id" element={<StudentEdit />} />
+
     <Route path="courses/*" element={<CoursesPanel />} />
     {/* set-paper with its own nested routes */}
     <Route path="set-paper/*" element={<SetPaper />} />

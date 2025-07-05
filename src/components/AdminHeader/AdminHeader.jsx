@@ -68,7 +68,7 @@ const AdminHeader = () => {
 
           <ul className="admin-nav-links">
             <li>
-              <Link to="/admin/student">
+              <Link to="/admin/students">
                 <FaUsers /> <span>Students</span>
               </Link>
             </li>

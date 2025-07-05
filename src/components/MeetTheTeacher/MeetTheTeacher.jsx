@@ -27,7 +27,7 @@ export default function MeetTheTeacher({
           <div className="left_teacher_details">
               <div className="top_Teacher_Name_section">
                 {/* <h2>{name}</h2> */}
-                <h2>Suvadeep Shome</h2>
+                <h2>Suvadip Shome</h2>
                 <p>Let's get to know our teacher! Share some fun information including:</p>
                 <ul>
                   <li>Favorite subject: Math</li>

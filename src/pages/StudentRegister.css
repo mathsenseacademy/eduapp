@@ -95,6 +95,15 @@
   flex: 0 0 48%;
 }
 
+/* in StudentRegister.css */
+.sr-row select {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+}
+
+
 /* footer */
 .sr-footer {
   display: flex;
