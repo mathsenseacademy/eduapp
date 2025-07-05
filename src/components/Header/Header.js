@@ -141,7 +141,7 @@ const Header = () => {
               
             >
               <button className="btn btn-outline-danger dropdown-toggle"
-              onMouseEnter={() => setCoursesOpen(true)}
+              // onMouseEnter={() => setCoursesOpen(true)}
                 // onMouseLeave={() => setCoursesOpen(false)}
               >
                 {t("courses")}
