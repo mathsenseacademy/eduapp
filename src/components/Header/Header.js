@@ -1,38 +1,39 @@
 // src/components/Header/Header.jsx
 import React, { useState, useEffect, useRef } from "react";
-import { Link, useNavigate }       from "react-router-dom";
-import { useTranslation }           from "react-i18next";
-import { jwtDecode }                from "jwt-decode";
-import { motion, AnimatePresence }  from "framer-motion";
-import api                          from "../../api/api";
-import { getActiveCourses }         from "../../api/courseApi";
-import logo                         from "../../assets/logoWith_Name.svg";
-import StudentRegister              from "../../pages/StudentRegister";
+import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { jwtDecode } from "jwt-decode";
+import { motion, AnimatePresence } from "framer-motion";
+import api from "../../api/api";
+import { getActiveCourses } from "../../api/courseApi";
+import logo from "../../assets/logoWith_Name.svg";
+import StudentRegister from "../../pages/StudentRegister";
 
 import "./Header.css";
 
 const Header = () => {
-  const [showLogin, setShowLogin]           = useState(false);
-  const [coursesOpen, setCoursesOpen]       = useState(false);
-  const [courses, setCourses]               = useState([]);
+  const [showLogin, setShowLogin] = useState(false);
+  const [coursesOpen, setCoursesOpen] = useState(false);
+  const [courses, setCourses] = useState([]);
   const [coursesLoading, setCoursesLoading] = useState(true);
-  const [username, setUsername]             = useState("");
-  const [password, setPassword]             = useState("");
-  const [loginError, setLoginError]         = useState(null);
-  const [adminUser, setAdminUser]           = useState(null);
-  const [isAdminLogin, setIsAdminLogin]     = useState(true);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState(null);
+  const [adminUser, setAdminUser] = useState(null);
+  const [isAdminLogin, setIsAdminLogin] = useState(true);
   const [showStickyRegister, setShowStickyRegister] = useState(false);
-  const [showRegisterModal, setShowRegisterModal]   = useState(false);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const coursesRef = useRef(null);
 
-  const { t }      = useTranslation();
-  const navigate   = useNavigate();
+  const { t } = useTranslation();
+  const navigate = useNavigate();
   const loginBoxRef = useRef(null);
 
   /* ── load active courses ── */
   useEffect(() => {
     setCoursesLoading(true);
     getActiveCourses()
-      .then(res => setCourses(res))
+      .then((res) => setCourses(res))
       .catch(() => setCourses([]))
       .finally(() => setCoursesLoading(false));
   }, []);
@@ -85,12 +86,22 @@ const Header = () => {
     return () => document.removeEventListener("mousedown", handleClick);
   }, [showLogin]);
 
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (coursesRef.current && !coursesRef.current.contains(e.target)) {
+        setCoursesOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   /* ── login handler ── */
   const handleLogin = async (e) => {
     e.preventDefault();
-    const endpoint   = isAdminLogin ? "administrator/login/" : "student/login/";
-    const redirectTo = isAdminLogin ? "/admin"              : "/student/dashboard";
-    const userType   = isAdminLogin ? "admin"               : "student";
+    const endpoint = isAdminLogin ? "administrator/login/" : "student/login/";
+    const redirectTo = isAdminLogin ? "/admin" : "/student/dashboard";
+    const userType = isAdminLogin ? "admin" : "student";
 
     try {
       const { data } = await api.post(endpoint, { username, password });
@@ -108,10 +119,10 @@ const Header = () => {
   /* ── nav items ── */
   const navItems = [
     // Home: still a <Link> to “/” but we add an onClick to scroll to top
-    { type: "link",   to: "/",        label: t("home") },
-    { type: "anchor", to: "programs",     label: t("OurProgram") },
+    { type: "link", to: "/", label: t("home") },
+    { type: "anchor", to: "programs", label: t("OurProgram") },
     { type: "anchor", to: "testimonials", label: t("Testimonials") },
-    { type: "anchor", to: "about",        label: t("about") },
+    { type: "anchor", to: "about", label: t("about") },
   ];
 
   return (
@@ -136,49 +147,54 @@ const Header = () => {
               />
             </motion.div>
 
-            <div
-              className="nav-item courses-wrapper"
-              
-            >
-              <button className="btn btn-outline-danger dropdown-toggle"
-              onMouseEnter={() => setCoursesOpen(true)}
-                // onMouseLeave={() => setCoursesOpen(false)}
-              >
-                {t("courses")}
-                
-              </button>
-              <AnimatePresence>
-                {coursesOpen && (
-                  <motion.ul
-                    key="course-popup"
-                    className="courses-popup"
-                    initial={{ opacity: 0, y: -8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -8 }}
-                    transition={{ duration: 0.25, ease: "easeOut" }}
-                  >
-                    {coursesLoading ? (
-                      <li className="px-3 py-2 text-muted">Loading…</li>
-                    ) : courses.length ? (
-                      courses.map((c) => (
-                        <li key={c.id}>
-                          <Link
-                            to={`/courses/${c.id}`}
-                            className="course-link"
-                            onClick={() => setCoursesOpen(false)}
-                          >
-                            {c.course_name}
-                          </Link>
-                        </li>
-                      ))
-                    ) : (
-                      <li className="px-3 py-2 text-muted">
-                        No courses available
-                      </li>
+            {/* <div className="nav-item courses-wrapper"> */}
+              <div className="d-flex align-items-center …">
+                {/* Logo omitted for brevity */}
+
+                <div
+                  ref={coursesRef}
+                  className="nav-item courses-wrapper"
+                  onMouseEnter={() => setCoursesOpen(true)}
+                  onMouseLeave={() => setCoursesOpen(false)}
+                >
+                  <button className="btn btn-outline-danger dropdown-toggle">
+                    {t("courses")}
+                  </button>
+
+                  <AnimatePresence>
+                    {coursesOpen && (
+                      <motion.ul
+                        key="course-popup"
+                        className="courses-popup"
+                        initial={{ opacity: 0, y: -8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -8 }}
+                        transition={{ duration: 0.25, ease: "easeOut" }}
+                      >
+                        {coursesLoading ? (
+                          <li className="px-3 py-2 text-muted">Loading…</li>
+                        ) : courses.length ? (
+                          courses.map((c) => (
+                            <li key={c.id}>
+                              <Link
+                                to={`/courses/${c.id}`}
+                                className="course-link"
+                                onClick={() => setCoursesOpen(false)}
+                              >
+                                {c.course_name}
+                              </Link>
+                            </li>
+                          ))
+                        ) : (
+                          <li className="px-3 py-2 text-muted">
+                            No courses available
+                          </li>
+                        )}
+                      </motion.ul>
                     )}
-                  </motion.ul>
-                )}
-              </AnimatePresence>
+                  </AnimatePresence>
+                </div>
+              </div>
 
               {showStickyRegister && (
                 <motion.button
@@ -192,7 +208,7 @@ const Header = () => {
                 </motion.button>
               )}
             </div>
-          </div>
+          {/* </div> */}
 
           {/* ── Hamburger (mobile) ── */}
           <button
@@ -229,10 +245,9 @@ const Header = () => {
                       onClick={() => {
                         const bsCollapse = document.getElementById("mainNav");
                         if (bsCollapse.classList.contains("show")) {
-                          window.bootstrap
-                            .Collapse
-                            .getInstance(bsCollapse)
-                            .hide();
+                          window.bootstrap.Collapse.getInstance(
+                            bsCollapse
+                          ).hide();
                         }
                       }}
                     >
@@ -254,7 +269,7 @@ const Header = () => {
                 </button>
               ) : (
                 <>
-                <button
+                  <button
                     className="btn btn-outline-primary"
                     onClick={() => navigate("/login")}
                   >
