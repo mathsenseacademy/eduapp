@@ -1,0 +1,64 @@
+.dashboard {
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Profile card */
+.profile-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+.profile-card h1 {
+  margin-bottom: 1rem;
+  font-size: 1.75rem;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+}
+
+.info-grid h4 {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.info-grid p {
+  margin: 0.25rem 0 0;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* Mobile styles */
+@media (max-width: 600px) {
+  .profile-card {
+    padding: 1rem;
+  }
+  .profile-card h1 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Tablet */
+@media (min-width: 601px) and (max-width: 900px) {
+  .profile-card {
+    padding: 1.25rem;
+  }
+  .profile-card h1 {
+    font-size: 1.6rem;
+  }
+}
+
+/* Desktop */
+@media (min-width: 901px) {
+  .info-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+}

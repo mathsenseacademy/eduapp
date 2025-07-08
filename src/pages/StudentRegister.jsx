@@ -310,7 +310,7 @@ export default function StudentRegister({ onClose }) {
     } catch (err) {
       console.error(err);
       showToast(
-        err.response?.data?.message || "Registration failed.",
+        err.response?.data?.error || "Registration failed.",
         "danger"
       );
     }
