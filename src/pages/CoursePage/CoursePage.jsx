@@ -10,7 +10,7 @@ import MeetTheTeacher from "../../components/MeetTheTeacher/MeetTheTeacher";
 import Testimonial from "../../components/TestimonialSection/TestimonialSection";
 import useLocoScroll from "../../hooks/useLocoScroll";
 
-export default function CoursePage() {
+export default function CoursePage({ sentinelRef }) {
   const { id } = useParams();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -29,7 +29,6 @@ export default function CoursePage() {
   if (loading) return <div>Loading…</div>;
   if (!data)    return <div>Course not found.</div>;
 
-  // Destructure and rename raw student_of_the_week
   const {
     course_name,
     course_subtitle,
@@ -38,38 +37,51 @@ export default function CoursePage() {
     student_of_the_week: sowRaw,
     classroom_essentials = [],
   } = data;
-
-  // Guarantee sow is always an object
   const sow = sowRaw || {};
 
   return (
-    <div>
-      <CourseDetails
-        courseName={course_name}
-        subtitle={course_subtitle}
-        imagePath={course_image_path}
-        description={description}
+    <>
+      {/* invisible anchor for TopInfoBar */}
+      <div
+        ref={sentinelRef}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "1px",
+          height: "1px",
+          pointerEvents: "none",
+        }}
       />
 
-      <Curriculum />
-
-      <ClassroomEssentials items={classroom_essentials} />
-
-      {sowRaw && (
-        <StudentOfWeek
-          name={sow.first_name ?? "—"}
-          photo={sow.student_photo_path }
-          text={
-            sow.text ||
-            `In math class this week, ${sow.first_name || "our student"} achieved remarkable success.`
-          }
-          header="Student of the Week"
+      <div className="course-page">
+        <CourseDetails
+          courseName={course_name}
+          subtitle={course_subtitle}
+          imagePath={course_image_path}
+          description={description}
         />
-      )}
 
-      <MeetTheTeacher />
+        <Curriculum />
 
-      <Testimonial />
-    </div>
+        <ClassroomEssentials items={classroom_essentials} />
+
+        {sowRaw && (
+          <StudentOfWeek
+            name={sow.first_name ?? "—"}
+            photo={sow.student_photo_path}
+            text={
+              sow.text ||
+              `In math class this week, ${sow.first_name || "our student"} achieved remarkable success.`
+            }
+            header="Student of the Week"
+          />
+        )}
+
+        <MeetTheTeacher />
+
+        <Testimonial />
+      </div>
+    </>
   );
 }

@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useEffect, useRef, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { LayoutGroup } from "framer-motion";
@@ -20,47 +19,54 @@ import ProtectedRoute  from "./components/ProtectedRoute";
 import Loader          from "./components/Loader/Loader";
 
 import useLocoScroll   from "./hooks/useLocoScroll";
+import StudentProfile from "./components/StudentProfile/StudentProfile";
 
 function App() {
-  // 1. Loading state
+  // ── 1. Loading state
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const t = setTimeout(() => setLoading(false), 2000);
     return () => clearTimeout(t);
   }, []);
 
-  // 2. Hooks for layout & scroll
-  const { scrollRef }   = useLocoScroll(!loading);
-  const sentinelRef     = useRef(null);
-  const location        = useLocation();
-  const path            = location.pathname;
+  // ── 2. Location + scroll container + sentinel
+  const location    = useLocation();
+  const path        = location.pathname;
+  const { scrollRef } = useLocoScroll(!loading);
+  const sentinelRef = useRef(null);
 
-  // 3. Route flags
+  // ── 3. Always snap to top on route change
+  useEffect(() => {
+    if (scrollRef.current?.scrollTo) {
+      scrollRef.current.scrollTo(0, 0);
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [location.pathname, scrollRef]);
+
+  // ── 4. Early return while loading
+  if (loading) return <Loader />;
+
+  // ── 5. Route flags
   const isAdminRoute    = path.startsWith("/admin");
   const isStudentRoute  = path.startsWith("/student/");
   const isRoot          = path === "/";
   const isCoursePage    = path.startsWith("/courses/");
-  // const isLogin    = path.startsWith("/login/");
-  const userType        = localStorage.getItem("userType");
+  const isLoginRoute    = path === "/login";
+  const isRegisterRoute = path === "/register" || path === "/student/register";
+  const forceShowAuthBar = isLoginRoute || isRegisterRoute;
+  const showTopInfoBar   = (isRoot || isCoursePage || forceShowAuthBar)
+                         && !isStudentRoute
+                         && !isAdminRoute;
+  const userType = localStorage.getItem("userType");
 
-  // 4. While loading, show the loader
-  if (loading) return <Loader />;
-
-  // 5. Decide if TopInfoBar shows:
-  //    - home (with or without hash)
-  //    - any /courses/:id
-  //    - but never under /student/* or /admin/*
-  const showTopInfoBar = (isRoot || isCoursePage) && !isStudentRoute && !isAdminRoute;
-  // const showTopInfoBar = (isRoot || isCoursePage||isLogin) && !isStudentRoute && !isAdminRoute;
-
-  // 6. Choose header based on route
+  // ── 6. Pick the right header
   let HeaderComponent;
   if (isAdminRoute) {
     HeaderComponent = <AdminHeader />;
   } else if (isStudentRoute) {
     HeaderComponent = <StudentHeader />;
   } else {
-    // public pages (including "/"), always show the standard Header
     HeaderComponent = (
       <Header
         showDashboardBtn={isRoot && !!userType}
@@ -71,7 +77,12 @@ function App() {
 
   return (
     <LayoutGroup>
-      {showTopInfoBar && <TopInfoBar sentinelRef={sentinelRef} />}
+      {showTopInfoBar && (
+        <TopInfoBar
+          sentinelRef={sentinelRef}
+          forceVisible={forceShowAuthBar}
+        />
+      )}
 
       {HeaderComponent}
 
@@ -79,10 +90,7 @@ function App() {
         <div data-scroll-section className="pt-header">
           <Routes>
             <Route path="/login" element={<Login />} />
-            <Route
-              path="/"
-              element={<Home sentinelRef={sentinelRef} />}
-            />
+            <Route path="/" element={<Home sentinelRef={sentinelRef} />} />
             <Route path="/register" element={<Register />} />
             <Route path="/student/register" element={<StudentRegister />} />
 
@@ -91,11 +99,17 @@ function App() {
               element={
                 <ProtectedRoute studentOnly>
                   <StudentDashboard />
+                  {/* <StudentProfile/> */}
                 </ProtectedRoute>
               }
             />
 
-            <Route path="/courses/:id" element={<CoursePage />} />
+            {/* <Route path="/courses/:id" element={<CoursePage />} /> */}
+
+             <Route
+            path="/courses/:id"
+            element={<CoursePage sentinelRef={sentinelRef} />}
+          />
 
             <Route
               path="/admin/*"
