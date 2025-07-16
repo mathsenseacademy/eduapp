@@ -11,6 +11,9 @@ const Hero = () => {
   return (
     <section className="custom-hero">
       <div className="hero-container">
+        <div className="bg"></div>
+      <div className="bg bg2"></div>
+      <div className="bg bg3"></div>
         {/* Left content */}
         <div className="hero-left">
           <img src={logo} alt="Mathsense Logo" className="hero-logo" />
