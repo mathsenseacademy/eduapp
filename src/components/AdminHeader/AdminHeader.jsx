@@ -79,6 +79,11 @@ const AdminHeader = () => {
               </Link>
             </li>
             <li>
+             <Link to="/admin/batches">
+               <FaFileAlt /> <span>Batches</span>
+             </Link>
+             </li>
+            <li>
               <Link to="/admin/set-paper">
                 <FaFileAlt /> <span>Set Paper</span>
               </Link>

@@ -6,6 +6,8 @@ import StudentList from "./StudentList";
 import StudentEdit from "./StudentEdit";
 import CoursesPanel from "./Courses/CoursesPanel";
 import SetPaper from "./setQuestion/SetPaper";
+import BatchPanel from './Batches/BatchPanel';
+
 
 const AdminPanel = () => (
   <Routes>
@@ -19,6 +21,7 @@ const AdminPanel = () => (
 
     {/* any unknown path inside /admin → redirect to student list */}
     <Route path="" element={<Navigate to="students" replace />} />
+    <Route path="/batches/*" element={<BatchPanel />} />
   </Routes>
 );
 
