@@ -1,0 +1,110 @@
+/* src/components/AdminPanel/BatchPanel.css */
+
+/* ============================================
+   Variables
+   ============================================ */
+:root {
+  /* Height of your fixed admin header */
+  --admin-header-height: 60px;
+}
+
+/* ============================================
+   Wrapper
+   ============================================ */
+.bp-wrapper {
+  display: flex;
+  position: relative;
+  height: 100%;
+}
+
+/* ============================================
+   Toggle Button (for mobile / collapsed)
+   ============================================ */
+.bp-toggle {
+  position: fixed;
+  top: calc(var(--admin-header-height) + 1rem);
+  left: 1rem;
+  z-index: 101; /* above sidebar, below header */
+  background: white;
+  border: 1px solid #ced4da;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  margin-bottom: 1rem; /* space below toggle before list */
+}
+
+/* ============================================
+   Sidebar Navigation
+   ============================================ */
+.bp-nav {
+  position: fixed;
+  top: var(--admin-header-height);
+  left: 0;
+  width: 260px;
+  height: calc(100vh - var(--admin-header-height));
+  overflow-y: auto;
+  background: #f8f9fa;
+  border-right: 1px solid #dee2e6;
+  padding-top: 4rem; /* extra space for toggle */
+  z-index: 100; /* below toggle and header */
+  transition: transform 0.3s ease;
+}
+
+/* Hide sidebar off-canvas by default on small screens */
+@media (max-width: 992px) {
+  .bp-nav {
+    transform: translateX(-100%);
+  }
+}
+
+/* ============================================
+   Sidebar Links
+   ============================================ */
+.bp-link {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  color: #495057;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.bp-link:hover {
+  background: #e9ecef;
+  color: #212529;
+}
+
+.bp-link.active {
+  background: #e2e6ea;
+  color: #212529;
+  font-weight: 500;
+}
+
+.bp-link .link-label {
+  margin-left: 0.5rem;
+}
+
+/* ============================================
+   Main Content Area
+   ============================================ */
+.bp-content {
+  flex: 1;
+  margin-left: 0; /* updated by framer-motion when sidebar opens */
+  padding: calc(var(--admin-header-height) + 2rem) 2rem 2rem;
+  transition: margin-left 0.3s ease;
+  min-height: 100vh;
+  background: #fff;
+}
+
+/* On larger screens, ensure content shifts when sidebar is open */
+@media (min-width: 993px) {
+  .bp-content {
+    margin-left: 260px;
+  }
+}
+
+/* ============================================
+   Admin Header (ensure it sits above everything)
+   ============================================ */
+.admin-navbar {
+  z-index: 200 !important;
+}
