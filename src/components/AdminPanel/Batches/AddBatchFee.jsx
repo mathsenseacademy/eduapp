@@ -1,32 +1,21 @@
 // src/components/AdminPanel/Batches/AddBatchFee.jsx
-<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { addBatchFee, updateBatchFee } from "../../../api/batchApi";
 import api from "../../../api/api";
-=======
-import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { addBatchFee } from "../../../api/batchApi";
->>>>>>> 937e57e59ea28d74ed2a5eff2da053073c13c819
 
 export default function AddBatchFee() {
   const { id } = useParams();
   const navigate = useNavigate();
-<<<<<<< HEAD
   const [formType, setFormType] = useState('Add');
   const [batchFee, setBatchFee] = useState();
   const [loadingBatchFee, setLoadingBatchFee] = useState(true);
   const [fee, setFee] = useState({ batch_fee_id: 0, fee_title: "", amount: "", due_date: "", fee_type: "recurring" });
-=======
-  const [fee, setFee] = useState({ fee_title: "", amount: "", due_date: "", fee_type: "recurring" });
->>>>>>> 937e57e59ea28d74ed2a5eff2da053073c13c819
 
   const handleChange = e => setFee({ ...fee, [e.target.name]: e.target.value });
 
   const handleSubmit = e => {
     e.preventDefault();
-<<<<<<< HEAD
     if (formType == 'Add') {
       addBatchFee({ batch_id: +id, ...fee }).then(() => navigate("/admin/batches/all"));
     } else {
@@ -144,18 +133,6 @@ export default function AddBatchFee() {
           </tbody>
         </table>
       </div>
-=======
-    addBatchFee({ batch_id: +id, ...fee }).then(() => navigate("/admin/batches/all"));
-  };
-
-  return (
-    <div>
-      <h2>Add Fee to Batch #{id}</h2>
-      <form onSubmit={handleSubmit}>
-        {/* inputs for fee_title, amount, due_date, fee_type */}
-        <button type="submit" className="btn btn-success">Save Fee</button>
-      </form>
->>>>>>> 937e57e59ea28d74ed2a5eff2da053073c13c819
     </div>
   );
 }
