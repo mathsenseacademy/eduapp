@@ -10,6 +10,7 @@ export default function FeeStatus() {
   useEffect(() => {
     getStudentFeeStatus(id).then(res => setStatus(res.data));
   }, [id]);
+<<<<<<< HEAD
   console.log(status);
 
   return (
@@ -66,6 +67,13 @@ export default function FeeStatus() {
           </div>
         </div>
       </div>
+=======
+
+  return (
+    <div>
+      <h2>Student Fee Status for Batch #{id}</h2>
+      {/* render a table of students and their fee-paid / due info */}
+>>>>>>> 937e57e59ea28d74ed2a5eff2da053073c13c819
     </div>
   );
 }
