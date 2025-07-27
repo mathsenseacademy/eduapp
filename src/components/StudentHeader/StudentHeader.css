@@ -77,8 +77,8 @@
 }
 
 .studentDashboardMain .logo img {
-    width: 2rem;
-    height: 2rem;
+    width: 10rem;
+    height:5rem;
 }
 
 .studentDashboardMain,
@@ -186,6 +186,36 @@
         width: 4.5rem;
         padding: 0 1rem;
     }
+}
+
+
+.student-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  background-color: var(--color-white);
+  height: 4rem;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+#profile-btn,
+.logout-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-dark);
+  font-size: 1.5rem;
+}
+
+.dark-mode #profile-btn,
+.dark-mode .logout-btn {
+  color: var(--color-white);
 }
 
 

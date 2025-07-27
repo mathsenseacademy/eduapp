@@ -1,3 +1,125 @@
+/* === THEME VARIABLES === */
+:root {
+  --color-primary: #7380ec;
+  --color-success: #41f1b6;
+  --color-danger: #ff7782;
+  --color-warning: #ffbb55;
+  --color-white: #fff;
+  --color-info: #7d8da1;
+  --color-dark: #363949;
+  --color-dark-varient: #677483;
+  --color-light: rgba(132, 139, 200, 0.18);
+  --box-shadow: 0 2rem 3rem var(--color-light);
+  --card-padding: 1.4rem;
+  --card-border-radius: 1rem;
+  --border-radius-2: 0.8rem;
+}
+
+body.dark-mode {
+  --color-primary: #5d9eff;
+  --color-success: #2ed39f;
+  --color-danger: #ff6b6b;
+  --color-warning: #ffc947;
+  --color-white: #1e1e2f;
+  --color-info: #a0a5b7;
+  --color-dark: #f1f1f1;
+  --color-dark-varient: #c2c4d6;
+  --color-light: rgba(255, 255, 255, 0.05);
+  --box-shadow: 0 2rem 3rem rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .studentDashboardMain header,
+body.dark-mode .studentDashboardMain aside .profile {
+  background-color: var(--color-white) !important;
+  color: var(--color-dark) !important;
+}
+
+body.dark-mode .studentDashboardMain header .material-icons-sharp,
+body.dark-mode .studentDashboardMain aside .profile .top *,
+body.dark-mode .studentDashboardMain aside .profile .about p,
+body.dark-mode .studentDashboardMain aside .profile .about h5,
+body.dark-mode .studentDashboardMain .logo h2,
+body.dark-mode .studentDashboardMain .logo span,
+body.dark-mode .studentDashboardMain .sd_navbar a,
+body.dark-mode .studentDashboardMain .sd_navbar h3 {
+  color: var(--color-dark) !important;
+  fill: var(--color-dark) !important;
+}
+
+body.dark-mode .studentDashboardMain .sd_navbar a.active {
+  background-color: var(--color-primary);
+  color: #fff !important;
+  border-radius: var(--card-border-radius);
+}
+
+body.dark-mode .studentDashboardMain main .subjects > div,
+body.dark-mode .studentDashboardMain main .timetable table,
+body.dark-mode .studentDashboardMain .right .announcements .updates,
+body.dark-mode .studentDashboardMain .right .leaves .teacher {
+  background-color: var(--color-white);
+  color: var(--color-dark);
+}
+
+/* === EXISTING CSS === */
+
+.studentDashboardMain img {
+  display: block;
+  width: 100%;
+}
+
+.studentDashboardMain h1 {
+  font-weight: 800;
+  font-size: 1.8rem;
+}
+
+.studentDashboardMain h2 {
+  font-size: 1.4rem;
+}
+
+.studentDashboardMain h3 {
+  font-size: .87rem;
+}
+
+.studentDashboardMain h4 {
+  font-size: .8rem;
+}
+
+.studentDashboardMain h5 {
+  font-size: .77rem;
+}
+
+.studentDashboardMain small {
+  font-size: .75rem;
+}
+
+.studentDashboardMain .text-muted {
+  color: var(--color-info);
+}
+
+.studentDashboardMain p {
+  color: var(--color-dark-varient);
+}
+
+.studentDashboardMain b {
+  color: var(--color-dark);
+}
+
+.studentDashboardMain .primary {
+  color: var(--color-primary);
+}
+
+.studentDashboardMain .danger {
+  color: var(--color-danger);
+}
+
+.studentDashboardMain .success {
+  color: var(--color-success)
+}
+
+.studentDashboardMain .warning {
+  color: var(--color-warning);
+}
+
 .studentDashboardMain img {
   display: block;
   width: 100%;

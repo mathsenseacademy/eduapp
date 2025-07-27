@@ -71,6 +71,7 @@ export default function Login() {
             "student/verify_student_login_otp/",
             { email: studentEmail, otp }
           );
+        
 
           // tokens
           localStorage.setItem("accessToken", data.access);
@@ -78,29 +79,30 @@ export default function Login() {
           localStorage.setItem("userType", "student");
 
           // store student profile
-          const {
-            student_id,
-            first_name,
-            middle_name,
-            last_name,
-            date_of_birth,
-            contact_number_1,
-            student_class,
-            school_or_college_name,
-            email: studentEmailResponse,
-          } = data;
-          const profile = {
-            student_id,
-            first_name,
-            middle_name,
-            last_name,
-            date_of_birth,
-            contact_number_1,
-            student_class,
-            school_or_college_name,
-            email: studentEmailResponse,
-          };
-          localStorage.setItem("studentProfile", JSON.stringify(profile));
+          // const {
+          //   student_id,
+          //   first_name,
+          //   middle_name,
+          //   last_name,
+          //   date_of_birth,
+          //   contact_number_1,
+          //   student_class,
+          //   school_or_college_name,
+          //   email: studentEmailResponse,
+          // } = data;
+          // const profile = {
+          //   student_id,
+          //   first_name,
+          //   middle_name,
+          //   last_name,
+          //   date_of_birth,
+          //   contact_number_1,
+          //   student_class,
+          //   school_or_college_name,
+          //   email: studentEmailResponse,
+          // };
+          // localStorage.setItem("studentProfile", JSON.stringify(profile));
+localStorage.setItem("studentProfile", JSON.stringify(data));
 
           navigate("/student/dashboard");
         } catch {

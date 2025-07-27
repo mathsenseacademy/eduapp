@@ -21,7 +21,7 @@ import useLocoScroll   from "./hooks/useLocoScroll";
 import { SdTimeTable } from "./pages/StudentDashboard/SdTimeTable/SdTimeTable";
 import { SdExamination } from "./pages/StudentDashboard/SdExamination/SdExamination";
 import { SdChangePassword } from "./pages/StudentDashboard/SdChangePassword/SdChangePassword";
-import { SdHome } from "./pages/StudentDashboard/SdHome/SdHome";
+import { SdHome } from "./pages/StudentDashboard/SdHome";
 
 function App() {
   // ── 1. Loading state
