@@ -18,7 +18,7 @@ export default function Footer() {
         ))}
       </div>
 
-<div class="container">
+<div className="container">
   
 
 

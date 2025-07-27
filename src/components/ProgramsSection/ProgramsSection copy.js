@@ -7,8 +7,8 @@ import api from "../../api/api";
 
 export default function ProgramsSection() {
   const [programs, setPrograms] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [loading,  setLoading]  = useState(true);
+  const [error,    setError]    = useState(null);
   const navigate = useNavigate();                        // ← hook
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function ProgramsSection() {
   }, []);
 
   if (loading) return <div className="programs-section">Loading programs…</div>;
-  if (error) return <div className="programs-section">{error}</div>;
+  if (error)   return <div className="programs-section">{error}</div>;
 
   // split roughly in half for layout
   const half = Math.ceil(programs.length / 2);

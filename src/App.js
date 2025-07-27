@@ -12,14 +12,16 @@ import Home            from "./pages/Home";
 import Register        from "./pages/Register";
 import StudentRegister from "./pages/StudentRegister";
 import Login           from "./pages/Login";
-import StudentDashboard from "./pages/StudentDashboard/StudentDashboard";
 import CoursePage      from "./pages/CoursePage/CoursePage";
 import AdminPanel      from "./components/AdminPanel/AdminPanel";
 import ProtectedRoute  from "./components/ProtectedRoute";
 import Loader          from "./components/Loader/Loader";
 
 import useLocoScroll   from "./hooks/useLocoScroll";
-import StudentProfile from "./components/StudentProfile/StudentProfile";
+import { SdTimeTable } from "./pages/StudentDashboard/SdTimeTable/SdTimeTable";
+import { SdExamination } from "./pages/StudentDashboard/SdExamination/SdExamination";
+import { SdChangePassword } from "./pages/StudentDashboard/SdChangePassword/SdChangePassword";
+import { SdHome } from "./pages/StudentDashboard/SdHome/SdHome";
 
 function App() {
   // ── 1. Loading state
@@ -94,22 +96,28 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/student/register" element={<StudentRegister />} />
 
-            <Route
-              path="/student/dashboard"
-              element={
-                <ProtectedRoute studentOnly>
-                  <StudentDashboard />
-                  {/* <StudentProfile/> */}
-                </ProtectedRoute>
-              }
-            />
+            <Route path="/student/dashboard" element={
+              <ProtectedRoute studentOnly>
+                  <SdHome />
+              </ProtectedRoute>
+            }/>
+            <Route path="/student/time-table" element={
+              <ProtectedRoute studentOnly>
+                <SdTimeTable />
+              </ProtectedRoute>
+            } />
+            <Route path="/student/examination" element={
+              <ProtectedRoute studentOnly>
+                <SdExamination />
+              </ProtectedRoute>
+            } />
+            <Route path="/student/change-password" element={
+              <ProtectedRoute studentOnly>
+                <SdChangePassword />
+              </ProtectedRoute>
+            } />
 
-            {/* <Route path="/courses/:id" element={<CoursePage />} /> */}
-
-             <Route
-            path="/courses/:id"
-            element={<CoursePage sentinelRef={sentinelRef} />}
-          />
+            <Route path="/courses/:id" element={<CoursePage sentinelRef={sentinelRef} />}/>
 
             <Route
               path="/admin/*"
@@ -121,7 +129,7 @@ function App() {
             />
           </Routes>
 
-          {!isAdminRoute && <Footer />}
+          {(!isAdminRoute && !isStudentRoute) && <Footer />}
         </div>
       </div>
     </LayoutGroup>
