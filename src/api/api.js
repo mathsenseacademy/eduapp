@@ -1,8 +1,4 @@
 import axios from "axios";
-
-/* ------------------------------------------------
-   AXIOS INSTANCE
-   ------------------------------------------------ */
 const api = axios.create({
   // baseURL: "http://mathsenseacademy.com:7000/",
   baseURL:"https://api.mathsenseacademy.com",

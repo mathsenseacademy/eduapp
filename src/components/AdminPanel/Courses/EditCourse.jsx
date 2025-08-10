@@ -1,5 +1,5 @@
 // src/components/AdminPanel/Courses/EditCourse.jsx
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getCourseById, editCourse } from "../../../api/courseApi";
 import { useParams, useNavigate } from "react-router-dom";
 import Loader from "../../Loader/DataLoader";

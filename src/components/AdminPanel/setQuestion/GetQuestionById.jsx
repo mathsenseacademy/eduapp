@@ -1,5 +1,5 @@
 // src/components/AdminPanel/SetPaper/GetQuestionById.jsx
-import React, { useState } from "react";
+import { useState } from "react";
 import { getQuestionById } from "../../../api/questionApi";
 
 const GetQuestionById = () => {

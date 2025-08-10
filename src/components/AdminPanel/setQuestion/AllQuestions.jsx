@@ -1,5 +1,5 @@
 // src/components/AdminPanel/SetPaper/AllQuestions.jsx
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllQuestions } from "../../../api/questionApi";
 import Loader from "../../Loader/DataLoader";

@@ -1,5 +1,5 @@
 // src/components/AdminPanel/Batches/AllBatches.jsx
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getAllBatches } from "../../../api/batchApi";
 import { Link } from "react-router-dom";
 
@@ -23,7 +23,7 @@ export default function AllBatches() {
         </thead>
         <tbody>
           {batches.map(b => (
-            <tr key={b.id}>
+            <tr key={b.batch_id}>
               <td>{b.batch_name}</td>
               <td>{b.course_name}</td>
               <td>
@@ -34,9 +34,9 @@ export default function AllBatches() {
                 ))}
               </td>
               <td>
-                <Link to={`../edit/${b.id}`} className="btn btn-sm btn-primary">Edit</Link>{" "}
-                <Link to={`../fee/${b.id}`}  className="btn btn-sm btn-success">Add Fee</Link>{" "}
-                <Link to={`../status/${b.id}`} className="btn btn-sm btn-info">Fee Status</Link>
+                <Link to={`../edit/${b.batch_id}`} className="btn btn-sm btn-primary">Edit</Link>{" "}
+                <Link to={`../fee/${b.batch_id}`}  className="btn btn-sm btn-success">Set Fee</Link>{" "}
+                <Link to={`../status/${b.batch_id}`} className="btn btn-sm btn-info">Fee Status</Link>
               </td>
             </tr>
           ))}

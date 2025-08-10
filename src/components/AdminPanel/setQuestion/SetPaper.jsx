@@ -1,5 +1,5 @@
 // src/components/AdminPanel/SetPaper/SetPaper.jsx
-import React, { useState } from "react";
+import { useState } from "react";
 import { NavLink, Routes, Route, Navigate } from "react-router-dom";
 import { FaPlus, FaList, FaSearch } from "react-icons/fa";
 

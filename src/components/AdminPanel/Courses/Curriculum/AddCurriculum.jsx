@@ -1,5 +1,5 @@
 // src/components/AdminPanel/Courses/AddCurriculum.jsx
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../../../api/api';
 import './AddCurriculum.css';

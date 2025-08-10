@@ -1,5 +1,5 @@
 // src/components/ProgramsSection/ProgramsSection.jsx
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";         // ← import
 import "./ProgramsSection.css";
 import heroImage from "../../assets/our-programs-hero.png";

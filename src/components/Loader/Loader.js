@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import './Loader.css';
 import { motion, useAnimation } from 'framer-motion';
 import logoVideo from '../../assets/logo.mp4';

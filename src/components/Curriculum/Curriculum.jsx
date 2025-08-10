@@ -1,5 +1,4 @@
-// src/components/Curriculum/Curriculum.jsx
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getPublicCourseDetails } from "../../api/courseApi";
 import curriculumIcon from "../../assets/bookIcon.png";

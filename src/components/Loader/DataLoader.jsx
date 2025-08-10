@@ -1,4 +1,3 @@
-import React from "react";
 import "./DataLoader.css";
 
 const Loader = ({ size = 48, color = "#0d6efd" }) => (

@@ -1,6 +1,3 @@
-// 📁 src/pages/StudentDashboard/components/Announcements.jsx
-import React from "react";
-
 export default function Announcements() {
   return (
     <div className="announcements">

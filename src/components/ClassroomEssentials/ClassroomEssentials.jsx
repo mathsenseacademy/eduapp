@@ -1,8 +1,7 @@
 // src/components/ClassroomEssentials/ClassroomEssentials.jsx
-import React, { useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
-import classessentials from "../../assets/bookIcon.png";
 import "./ClassroomEssentials.css";
 
 export default function ClassroomEssentials({ items }) {

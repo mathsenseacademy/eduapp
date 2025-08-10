@@ -1,4 +1,3 @@
-import React from 'react';
 import './ExpertSection.css';
 
 const experts = [

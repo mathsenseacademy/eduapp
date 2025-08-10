@@ -1,7 +1,3 @@
-
-// 📁 src/pages/StudentDashboard/components/TeachersOnLeave.jsx
-import React from "react";
-
 export default function TeachersOnLeave() {
   const teachers = [
     { name: "The Professor", status: "Full Day", photo: "../../../assets/images/profile-2.jpeg" },

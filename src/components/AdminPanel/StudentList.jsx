@@ -1,5 +1,5 @@
 // src/components/AdminPanel/StudentList.jsx
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import api from "../../api/api";
 import Loader from "../Loader/DataLoader";
 import "./StudentList.css";

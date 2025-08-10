@@ -1,4 +1,3 @@
-import React from "react";
 import "./StudentOfWeek.css";
 import bulbIcon from "../../assets/ideaIcon.png";  
 

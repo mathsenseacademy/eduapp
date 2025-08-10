@@ -1,5 +1,5 @@
 // src/components/AdminPanel/BatchPanel.jsx
-import React, { useState } from "react";
+import { useState } from "react";
 import { NavLink, Routes, Route, Navigate } from "react-router-dom";
 import { FaList, FaPlus, FaEdit, FaMoneyBill } from "react-icons/fa";
 import { motion } from "framer-motion";

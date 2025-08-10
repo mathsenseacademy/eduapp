@@ -1,14 +1,13 @@
 // src/components/ProgramsSection/ProgramsSection.jsx
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";         // ← import
 import "./ProgramsSection.css";
-import heroImage from "../../assets/our-programs-hero.png";
 import api from "../../api/api";
 
 export default function ProgramsSection() {
   const [programs, setPrograms] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [loading,  setLoading]  = useState(true);
+  const [error,    setError]    = useState(null);
   const navigate = useNavigate();                        // ← hook
 
   useEffect(() => {
@@ -23,14 +22,14 @@ export default function ProgramsSection() {
   }, []);
 
   if (loading) return <div className="programs-section">Loading programs…</div>;
-  if (error) return <div className="programs-section">{error}</div>;
+  if (error)   return <div className="programs-section">{error}</div>;
 
   // split roughly in half for layout
   const half = Math.ceil(programs.length / 2);
 
   return (
     <section className="programs-section">
-      <h2 className="section-heading">
+      {/* <h2 className="section-heading">
         <span className="star-badge spin">★</span> Our Programs
       </h2>
 
@@ -44,12 +43,11 @@ export default function ProgramsSection() {
         </div>
 
         <div className="col-md-6 d-flex flex-column">
-          {/* {programs.slice(0, half).map((p, i) => ( */}
           {programs.slice(0, 2).map((p, i) => (
             <div
               key={p.ID}
-              className="program-card mb-3 clickable" // ← make it clear in CSS
-              onClick={() => navigate(`/courses/${p.ID}`)} // ← navigate on click
+              className="program-card mb-3 clickable"
+              onClick={() => navigate(`/courses/${p.ID}`)}
             >
               <div className="card-image">
                 <img src={p.course_image_path} alt={p.course_name} />
@@ -66,7 +64,6 @@ export default function ProgramsSection() {
       </div>
 
       <div className="row">
-        {/* {programs.slice(half).map((p) => ( */}
         {programs.slice(2).map((p) => (
           <div className="col-md-6 mb-3 section-two" key={p.ID}>
             <div
@@ -85,11 +82,52 @@ export default function ProgramsSection() {
             </div>
           </div>
         ))}
-      </div>
-
-      {/* <div className="text-center mt-4">
-        <button className="more-btn">More Courses Here</button>
       </div> */}
+
+
+
+      <div className="programs-section">
+          <div className="ps-container">
+              <div className="psc-top">
+                  <div className="psct-heading">
+                      <span>Our Featured Programs</span>
+                  </div>
+                  <div className="psct-about">
+                      <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.</span>
+                  </div>
+              </div>
+              <div className="psc-bottom">
+                  <div className="pscb-list">
+                    {programs.slice(2).map((p) => {
+                      return(
+                        <div className="pscbl-item">
+                            <div className="pscblic-image">
+                                <img src={p.course_image_path} alt={p.course_name} />
+                            </div>
+                            <div className="pscblic-data">
+                                <div className="pscblicd-inner">
+                                    <div className="pscblicdi-name">
+                                        <span>{p.course_name}</span>
+                                    </div>
+                                    <div className="pscblicdi-detail">
+                                        <span>{p.course_subtitle}</span>
+                                        <span>{p.msa_class_level}</span>
+                                    </div>
+                                    <div className="pscblicdi-view">
+                                        <button className="button" type="button" onClick={() => navigate(`/courses/${p.ID}`)}>
+                                            <span>See More</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      )
+                      })
+                    }
+                  </div>
+              </div>
+          </div>
+      </div>
     </section>
   );
 }

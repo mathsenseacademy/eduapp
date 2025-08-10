@@ -1,4 +1,3 @@
-import React from "react";
 import "./FeaturesSection.css";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";

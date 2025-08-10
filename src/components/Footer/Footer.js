@@ -1,7 +1,5 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import "./Footer.css";
-
 import brand1 from "../../assets/imo.png";
 import brand2 from "../../assets/kangaroo.png";
 import brand3 from "../../assets/vvm.png";
@@ -11,7 +9,6 @@ import logo from "../../assets/logoWith_Name.svg"
 export default function Footer() {
   return (
     <footer className="site-footer">
-      {/* 1. Brand Collabs */}
       <div className="brand-collabs">
         {[brand1, brand2, brand3, brand4].map((src, i) => (
           <img key={i} src={src} alt={`Brand ${i+1}`} />
@@ -19,12 +16,7 @@ export default function Footer() {
       </div>
 
 <div className="container">
-  
-
-
-      {/* 2. Main Footer Content */}
       <div className="footer-main">
-        {/* Newsletter */}
         <div className="newsletter">
           <img
             src={logo }
@@ -37,8 +29,6 @@ export default function Footer() {
             <button type="submit">→</button>
           </form>
         </div>
-
-        {/* Links Columns */}
         <div className="footer-links">
           <div className="link-col">
             <h4>Company</h4>
@@ -72,7 +62,6 @@ export default function Footer() {
         </div>
       </div>
 <hr/>
-      {/* 3. Footer Bottom */}
       <div className="footer-bottom">
         <span>©MathSenseAcademy. All Rights Reserved {new Date().getFullYear()}</span>
         <Link to="/terms">Terms &amp; Conditions</Link>
