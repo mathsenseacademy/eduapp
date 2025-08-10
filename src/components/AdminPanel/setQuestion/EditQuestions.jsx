@@ -1,5 +1,5 @@
 // src/components/AdminPanel/SetPaper/EditQuestions.jsx
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getQuestionById, editQuestion } from "../../../api/questionApi";
 import Loader from "../../Loader/DataLoader";

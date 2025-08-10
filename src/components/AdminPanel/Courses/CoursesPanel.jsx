@@ -1,12 +1,11 @@
 // src/components/AdminPanel/Courses/CoursesPanel.jsx
-import React, { useState } from "react";
+import { useState } from "react";
 import { NavLink, Routes, Route, Navigate } from "react-router-dom";
 import { FaList, FaPlus, FaEdit, FaBook } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 import AllCourses   from "./AllCourses";
 import CreateCourse from "./CreateCourse";
-import EditCourse   from "./EditCourse";
 
 import AllCurriculums    from "./Curriculum/AllCurriculums";
 import CreateCurriculum  from "./Curriculum/AddCurriculum";

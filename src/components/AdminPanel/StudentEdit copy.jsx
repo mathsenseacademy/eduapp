@@ -1,5 +1,5 @@
 // src/components/AdminPanel/StudentEdit.jsx
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../../api/api";
 import Loader from "../Loader/DataLoader";

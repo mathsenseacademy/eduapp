@@ -1,8 +1,9 @@
 // src/components/AdminPanel/Batches/BatchForm.jsx
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   createBatch,
+  getAllCourse,
   getBatchById,
   updateBatch,
 } from "../../../api/batchApi";
@@ -37,6 +38,14 @@ export default function BatchForm() {
         .catch(console.error);
     }
   }, [id, isEdit]);
+
+  const [allCourse, setAllCourse] = useState([]);
+
+  useEffect(() => {
+    getAllCourse()
+      .then(res => setAllCourse(res.data))
+      .catch(console.error);
+  }, []);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -105,14 +114,15 @@ export default function BatchForm() {
 
         <div className="mb-3">
           <label className="form-label">Course ID</label>
-          <input
-            name="course_id"
-            type="number"
-            value={form.course_id}
-            onChange={handleChange}
-            className="form-control"
-            required
-          />
+          <select name="course_id" id="" className="form-control" onChange={handleChange} value={form.course_id}>
+            {
+              allCourse?.map((val, key) => {
+                return (
+                  <option key={key} value={val.ID}>{val.course_name}</option>
+                )
+              })
+            }
+          </select>
         </div>
 
         <hr />
@@ -128,7 +138,7 @@ export default function BatchForm() {
                 required
               >
                 <option value="">Weekday…</option>
-                {["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
+                {["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
                   .map(w => <option key={w}>{w}</option>)}
               </select>
             </div>

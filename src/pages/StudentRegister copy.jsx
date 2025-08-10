@@ -1,8 +1,8 @@
 // src/components/StudentRegister/StudentRegister.jsx
-import React, { useState } from "react";
 import api from "../api/api";
 import { useNavigate } from "react-router-dom";
 import "./StudentRegister.css";
+import { useState } from "react";
 
 export default function StudentRegister({ onClose }) {
   const navigate = useNavigate();

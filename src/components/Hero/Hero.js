@@ -1,5 +1,5 @@
 // src/components/Hero/Hero.jsx
-import React, { useState } from "react";
+import { useState } from "react";
 import StudentRegister from "../../pages/StudentRegister";
 import "./Hero.css";
 import heroImage from "../../assets/hero-1.png"; 

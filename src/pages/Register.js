@@ -1,7 +1,6 @@
 // src/pages/Register.js
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import api from "../api/api";
 import "./Register.css";
 import Loader from "../components/Loader/DataLoader";
 

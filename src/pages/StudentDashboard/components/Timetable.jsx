@@ -1,6 +1,3 @@
-// 📁 src/pages/StudentDashboard/components/Timetable.jsx
-import React from "react";
-
 export default function Timetable() {
   return (
     <div className="timetable" id="timetable">
@@ -24,5 +21,3 @@ export default function Timetable() {
     </div>
   );
 }
-
-

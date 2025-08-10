@@ -1,6 +1,3 @@
-// 📁 src/pages/StudentDashboard/components/StudentSidebar.jsx
-import React from "react";
-
 export default function StudentSidebar({ student }) {
   return (
     <div className="profile">
@@ -31,5 +28,3 @@ export default function StudentSidebar({ student }) {
     </div>
   );
 }
-
-

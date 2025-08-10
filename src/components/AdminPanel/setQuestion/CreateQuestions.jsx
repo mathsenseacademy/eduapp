@@ -1,5 +1,5 @@
 // src/components/AdminPanel/SetPaper/CreateQuestions.jsx
-import React, { useState } from "react";
+import { useState } from "react";
 import { createQuestion } from "../../../api/questionApi";
 import Loader from "../../Loader/DataLoader";           // optional spinner
 

@@ -1,11 +1,9 @@
-// 📁 src/pages/StudentDashboard/SdHome.jsx
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import StudentSidebar from "./components/StudentSidebar";
 import AttendanceSection from "./components/AttendanceSection";
 import Timetable from "./components/Timetable";
 import Announcements from "./components/Announcements";
 import TeachersOnLeave from "./components/TeachersOnLeave";
-// import "../StudentDashboard.css";
 
 export const SdHome = () => {
   const [student, setStudent] = useState(null);

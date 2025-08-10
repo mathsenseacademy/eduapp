@@ -1,4 +1,3 @@
-import React from "react";
 import "./MeetTheTeacher.css";
 import bulbIcon from "../../assets/ideaIcon.png";  // Replace with the actual path to your teacher image
 import teacher_img from "../../assets/subhadeepshome.png";  // Replace with the actual path to your teacher image
@@ -9,7 +8,6 @@ export default function MeetTheTeacher({
   photo ,
   text 
 }) {
-    // const [before, after] = text.split(name);
   return (
     <section className="sow-wrapper my-5">
       {/* Header */}

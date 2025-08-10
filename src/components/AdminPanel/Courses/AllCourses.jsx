@@ -1,5 +1,5 @@
 // src/components/AdminPanel/Courses/AllCourses.jsx
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getAllCourses } from "../../../api/courseApi";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../Loader/DataLoader";

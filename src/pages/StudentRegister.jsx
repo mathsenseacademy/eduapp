@@ -1,5 +1,5 @@
 // src/components/StudentRegister/StudentRegister.jsx
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import api from "../api/api";
 import { useNavigate } from "react-router-dom";
 import "./StudentRegister.css";

@@ -1,6 +1,3 @@
-// 📁 src/pages/StudentDashboard/components/AttendanceSection.jsx
-import React from "react";
-
 export default function AttendanceSection() {
   const subjects = [
     { icon: "architecture", name: "Engineering Graphics", count: "12/14", percent: "86%" },

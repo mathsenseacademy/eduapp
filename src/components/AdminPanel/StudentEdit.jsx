@@ -1,5 +1,5 @@
 // src/components/AdminPanel/StudentEdit.jsx
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../../api/api";
 import Loader from "../Loader/DataLoader";
@@ -16,7 +16,9 @@ export default function StudentEdit() {
 
   // Courses dropdown data + loading flag
   const [courses, setCourses] = useState([]);
+  const [batches, setBatches] = useState([]);
   const [loadingCourses, setLoadingCourses] = useState(true);
+  const [loadingBatches, setLoadingBatches] = useState(true);
 
   // 1) Fetch student details on mount
   useEffect(() => {
@@ -48,6 +50,19 @@ export default function StudentEdit() {
         setLoadingCourses(false);
       }
     })();
+
+    (async () => {
+      try {
+        const { data } = await api.get(
+          "batchmanegment/all_batches_with_schedule/"
+        );
+        setBatches(data);
+      } catch (err) {
+        console.error("Failed to load courses:", err);
+      } finally {
+        setLoadingBatches(false);
+      }
+    })();
   }, []);
 
   // 3) Handle any form field change
@@ -60,7 +75,7 @@ export default function StudentEdit() {
   };
 
   // 4) Submit updated student
-   // 4) Submit updated student using the new endpoint
+  // 4) Submit updated student using the new endpoint
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSaving(true);
@@ -87,6 +102,8 @@ export default function StudentEdit() {
         is_activate: student.is_active,                // note field name `is_activate`
         date_of_birth: student.date_of_birth,
         student_photo_path: student.student_photo_path,
+        batch_id: student.batch_id,
+        batch_id: student.batch_id,
       };
 
       await api.post(
@@ -101,14 +118,13 @@ export default function StudentEdit() {
     }
   };
 
-
   // Only show global loader while student data is loading
   if (loadingStudent) return <Loader size={56} />;
   if (!student) return <p>Student not found</p>;
 
   return (
     <div className="student-edit-container">
-    <h2 className="student-edit-title">
+      <h2 className="student-edit-title">
         Edit Student:{" "}
         {[student.first_name, student.middle_name, student.last_name]
           .filter(Boolean)
@@ -239,6 +255,30 @@ export default function StudentEdit() {
             value={student.board_or_university_name || ""}
             onChange={handleChange}
           />
+        </label>
+
+        {/* Batches dropdown */}
+        <label>
+          Batches
+          {loadingBatches ? (
+            <select disabled>
+              <option>Loading classes…</option>
+            </select>
+          ) : (
+            <select
+              name="batch_id"
+              value={student.batch_id || ""}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select a class</option>
+              {batches.map((c) => (
+                <option key={c.batch_id} value={c.batch_id}>
+                  {c.batch_name}
+                </option>
+              ))}
+            </select>
+          )}
         </label>
 
         {/* Address */}
