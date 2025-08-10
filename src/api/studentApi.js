@@ -8,3 +8,9 @@ export const getStudentDetailsById = async (studentId) => {
   });
   return response.data;
 };
+
+// src/api/studentApi.js
+export const updateMonthWiseBatchFeeStatus = async (payload) => {
+  const response = await api.post("/batchmanegment/month_wise_batch_fee_status/", payload);
+  return response.data;
+};
