@@ -28,3 +28,22 @@ export const editQuestion = (payload) =>
    ---------------------------------------- */
 export const getAllQuestions = () =>
   api.get("/examsetup/getallquestions/");
+
+
+
+/* Base: /exam/questions/ */
+
+export const createQuestionNew = (payload) =>
+  api.post("/exam/questions/", payload); // payload: { Question, OptionA, OptionB, OptionC, OptionD, RightOption, Marks, Remarks }
+
+export const getQuestionByIdNew = (id) =>
+  api.get(`/exam/questions/${id}/`);
+
+export const editQuestionNew = (id, payload) =>
+  api.put(`/exam/questions/${id}/`, payload); // use PATCH if your backend prefers partial updates
+
+export const getAllQuestionsNew = () =>
+  api.get("/exam/questions/");
+
+export const deleteQuestionNew = (id) =>
+  api.delete(`/exam/questions/${id}/`);

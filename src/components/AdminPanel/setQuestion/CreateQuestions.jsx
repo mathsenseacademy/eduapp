@@ -1,12 +1,21 @@
 // src/components/AdminPanel/SetPaper/CreateQuestions.jsx
 import { useState } from "react";
-import { createQuestion } from "../../../api/questionApi";
-import Loader from "../../Loader/DataLoader";           // optional spinner
+import { createQuestionNew } from "../../../api/questionApi";
+import Loader from "../../Loader/DataLoader";
 
-const empty = { question: "", optioncount: 4, marks: 1 };
+const empty = {
+  Question: "",
+  OptionA: "",
+  OptionB: "",
+  OptionC: "",
+  OptionD: "",
+  RightOption: "",
+  Marks: 1,
+  Remarks: ""
+};
 
 const CreateQuestions = () => {
-  const [form, setForm]   = useState(empty);
+  const [form, setForm] = useState(empty);
   const [saving, setSaving] = useState(false);
 
   const update = (e) =>
@@ -15,20 +24,16 @@ const CreateQuestions = () => {
   const submit = async (e) => {
     e.preventDefault();
 
-    // ---- quick client-side guard ------------------------------
-    const payload = {
-      question:    form.question.trim(),
-      optioncount: parseInt(form.optioncount, 10),
-      marks:       parseInt(form.marks, 10),
-    };
-    if (!payload.question) return alert("Question text required");
-    if (payload.optioncount < 2) return alert("At least 2 options");
-    if (payload.marks <= 0)      return alert("Marks must be > 0");
+    // quick validation
+    if (!form.Question.trim()) return alert("Question is required");
+    if (!form.OptionA || !form.OptionB) return alert("At least Option A & B are required");
+    if (!["A", "B", "C", "D"].includes(form.RightOption))
+      return alert("Right Option must be A, B, C, or D");
+    if (form.Marks <= 0) return alert("Marks must be greater than 0");
 
-    // ---- API call ---------------------------------------------
     try {
       setSaving(true);
-      await createQuestion(payload);          // POST → /examsetup/createquestions/
+      await createQuestionNew(form); // POST to /exam/questions/
       alert("Question created!");
       setForm(empty);
     } catch (err) {
@@ -46,22 +51,65 @@ const CreateQuestions = () => {
       <label>
         Question
         <textarea
-          name="question"
-          value={form.question}
+          name="Question"
+          value={form.Question}
           onChange={update}
           required
         />
       </label>
 
       <label>
-        Option Count
+        Option A
         <input
-          type="number"
-          name="optioncount"
-          value={form.optioncount}
+          type="text"
+          name="OptionA"
+          value={form.OptionA}
           onChange={update}
-          min={2}
-          max={10}
+          required
+        />
+      </label>
+
+      <label>
+        Option B
+        <input
+          type="text"
+          name="OptionB"
+          value={form.OptionB}
+          onChange={update}
+          required
+        />
+      </label>
+
+      <label>
+        Option C
+        <input
+          type="text"
+          name="OptionC"
+          value={form.OptionC}
+          onChange={update}
+        />
+      </label>
+
+      <label>
+        Option D
+        <input
+          type="text"
+          name="OptionD"
+          value={form.OptionD}
+          onChange={update}
+        />
+      </label>
+
+      <label>
+        Right Option (A/B/C/D)
+        <input
+          type="text"
+          name="RightOption"
+          value={form.RightOption}
+          onChange={(e) =>
+            setForm({ ...form, RightOption: e.target.value.toUpperCase() })
+          }
+          maxLength={1}
           required
         />
       </label>
@@ -70,11 +118,20 @@ const CreateQuestions = () => {
         Marks
         <input
           type="number"
-          name="marks"
-          value={form.marks}
+          name="Marks"
+          value={form.Marks}
           onChange={update}
           min={1}
           required
+        />
+      </label>
+
+      <label>
+        Remarks
+        <textarea
+          name="Remarks"
+          value={form.Remarks}
+          onChange={update}
         />
       </label>
 
