@@ -1,0 +1,115 @@
+.why-section {
+  background: #fff;
+  padding:0.5rem 2rem;
+  font-family: "Poppins", sans-serif;
+}
+
+.why-header h2 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #875714;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  text-align: center;
+}
+.why-header{
+  width: 70%;
+}
+.why-header h2 img {
+  height: 150px;
+}
+.why-heade-subtitle {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #7d4900;
+}
+.why-grid-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  /* gap: 2rem; */
+  align-items: center;
+  justify-content: center;
+  /* margin-top: 1.5rem; */
+}
+
+/* === Feature Cards Grid === */
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  /* gap: rem; */
+  flex: 2;
+}
+
+.why-card {
+  padding: 2rem;
+  /* border-radius: 12px; */
+  color: #fff;
+  text-align: left;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.why-card:nth-child(1),
+.why-card:nth-child(4) {
+  background-color: #0b6477;
+}
+.why-card:nth-child(2),
+.why-card:nth-child(3) {
+  background-color: #fab554;
+  color: #7d4900;
+}
+
+.why-card {
+ padding: 10% 3%;
+}
+.why-card img {
+  width: 48px;
+  height: auto;
+  align-self: center;
+}
+
+.why-card h3 {
+  font-size: 2.3rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.why-card p {
+  font-size: 1.3rem;
+  line-height: 1.5;
+  text-align: center;  
+}
+
+/* === Right-side mentor image === */
+.why-mentor {
+  flex: 1;
+  text-align: center;
+}
+.why-mentor img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .why-section {
+    padding: 3rem 1.25rem;
+  }
+  .why-header h2 {
+    font-size: 2rem;
+  }
+  .why-mentor {
+    margin-top: 2rem;
+  }
+  .why-grid {
+  flex: auto;
+}
+.why-header h2 img {
+  height: 100px;
+  margin-left: 40%;
+}
+}

@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+.about-section {
+  width: 100%;
+  padding: 4rem 1rem;
+  background-color: #fffdf6;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Remove Bootstrap gutter on this row */
+.about-section .row {
+  margin: 0;
+}
+
+/* TEXT SIDE */
+.text-block {
+  padding: 0 2rem;
+}
+.about-heading {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+.highlight {
+  color: #fc7c5f;
+}
+.text-block p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-weight: 400;
+}
+.text-block ul {
+  padding-left: 1.2rem;
+  margin: 0;
+}
+.text-block li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+/* IMAGE SIDE */
+.image-block {
+  padding: 0;
+}
+.custom-image-wrapper {
+  width: 100%;
+  /* Maintain the aspect ratio of your shapeMask.png */
+  aspect-ratio: 1.25; /* e.g. if your mask is 1250×1000, use 1.25 */
+  overflow: hidden;
+  /* No need for extra CSS—mask is handled inline */
+}
+
+/* MOBILE FALLBACK: simple rounded rectangle */
+@media (max-width: 768px) {
+  .text-block {
+    padding: 0 1rem 2rem;
+  }
+  .custom-image-wrapper {
+    mask: none ;
+    -webkit-mask: none ;
+    border-radius: 1rem;
+  }
+}

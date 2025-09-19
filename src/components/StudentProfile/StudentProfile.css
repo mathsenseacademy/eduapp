@@ -1,0 +1,57 @@
+.student-profile {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.profile-card {
+  display: flex;
+  flex-direction: row;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  overflow: hidden;
+  max-width: 800px;
+  width: 100%;
+}
+
+.photo-wrapper {
+  flex: 0 0 240px;
+  background: #f4f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.student-photo {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #ddd;
+}
+
+.info {
+  flex: 1;
+  padding: 1.5rem;
+}
+
+.info h2 {
+  margin: 0 0 1rem;
+  font-size: 1.75rem;
+  color: #333;
+}
+
+.info p {
+  margin: 0.5rem 0;
+  line-height: 1.4;
+  color: #555;
+}
+
+.profile-loading,
+.profile-error {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+}

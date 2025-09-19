@@ -1,0 +1,252 @@
+.studentDashboardMain img {
+  display: block;
+  width: 100%;
+}
+
+.studentDashboardMain h1 {
+  font-weight: 800;
+  font-size: 1.8rem;
+}
+
+.studentDashboardMain h2 {
+  font-size: 1.4rem;
+}
+
+.studentDashboardMain h3 {
+  font-size: .87rem;
+}
+
+.studentDashboardMain h4 {
+  font-size: .8rem;
+}
+
+.studentDashboardMain h5 {
+  font-size: .77rem;
+}
+
+.studentDashboardMain small {
+  font-size: .75rem;
+}
+
+.studentDashboardMain .text-muted {
+  color: var(--color-info);
+}
+
+.studentDashboardMain p {
+  color: var(--color-dark-varient);
+}
+
+.studentDashboardMain b {
+  color: var(--color-dark);
+}
+
+.studentDashboardMain .primary {
+  color: var(--color-primary);
+}
+
+.studentDashboardMain .danger {
+  color: var(--color-danger);
+}
+
+.studentDashboardMain .success {
+  color: var(--color-success)
+}
+
+.studentDashboardMain .warning {
+  color: var(--color-warning);
+}
+.studentDashboardMain h3 {
+    font-weight: 500;
+}
+
+.studentDashboardMain {
+    position: fixed;
+    width: 100vw;
+    z-index: 1000;
+    background-color: var(--color-background);
+}
+
+.studentDashboardMain.active {
+    box-shadow: var(--box-shadow);
+}
+
+.logo {
+    display: flex;
+    gap: .8rem;
+    margin-right: auto;
+}
+
+.studentDashboardMain .logo img {
+    width: 10rem;
+    height:5rem;
+}
+
+.studentDashboardMain,
+.studentDashboardMain .sd_navbar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 3rem;
+    color: var(--color-info);
+}
+
+.studentDashboardMain .sd_navbar a {
+    display: flex;
+    margin-left: 2rem;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    height: 3.7rem;
+    transition: all 300ms ease;
+    padding: 0 2rem;
+}
+
+.studentDashboardMain .sd_navbar a:hover {
+    padding-top: 1.5rem;
+}
+
+.studentDashboardMain .sd_navbar a.active {
+    background: var(--color-light);
+    color: var(--color-primary);
+}
+
+.studentDashboardMain .sd_navbar a.active::before {
+    content: "";
+    background-color: var(--color-primary);
+    position: absolute;
+    height: 5px;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+.studentDashboardMain #profile-btn {
+    display: none;
+    font-size: 2rem;
+    margin: .5rem 2rem 0 0;
+    cursor: pointer;
+}
+
+.studentDashboardMain .theme-toggler {
+    background: var(--color-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 1.6rem;
+    width: 4.2rem;
+    cursor: pointer;
+    border-radius: var(--border-radius-1);
+    margin-right: 2rem;
+}
+
+.studentDashboardMain .theme-toggler span {
+    font-size: 1.2rem;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.studentDashboardMain .theme-toggler span.active {
+    background-color: var(--color-primary);
+    color: white;
+    border-radius: var(--border-radius-1);
+}
+
+
+/* MEDIA QUERIES  */
+@media screen and (max-width: 1200px) {
+    .studentDashboardMain html {
+        font-size: 12px;
+    }
+
+    .studentDashboardMain .container {
+        grid-template-columns: 13rem auto 20rem;
+    }
+
+    .studentDashboardMain {
+        position: fixed;
+    }
+
+    .studentDashboardMain .container {
+        padding-top: 4rem;
+    }
+
+    .studentDashboardMain .logo h2 {
+        display: none;
+    }
+
+    .sd_navbar h3 {
+        display: none;
+    }
+
+    .studentDashboardMain .sd_navbar a {
+        width: 4.5rem;
+        padding: 0 1rem;
+    }
+}
+
+
+.student-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  background-color: var(--color-white);
+  height: 4rem;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+#profile-btn,
+.logout-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-dark);
+  font-size: 1.5rem;
+}
+
+.dark-mode #profile-btn,
+.dark-mode .logout-btn {
+  color: var(--color-white);
+}
+
+
+@media screen and (max-width: 768px) {
+    .studentDashboardMain html {
+        font-size: 10px;
+    }
+
+    .studentDashboardMain {
+        padding: 0 .8rem;
+    }
+
+    .studentDashboardMain .container {
+        width: 100%;
+        grid-template-columns: 1fr;
+        margin: 0;
+    }
+
+    .studentDashboardMain #profile-btn {
+        display: inline;
+    }
+
+    .studentDashboardMain .sd_navbar {
+        padding: 0;
+    }
+
+    .studentDashboardMain .sd_navbar a {
+        margin: 0 .5rem 0 0;
+    }
+
+    .studentDashboardMain .theme-toggler {
+        margin: 0;
+    }
+}

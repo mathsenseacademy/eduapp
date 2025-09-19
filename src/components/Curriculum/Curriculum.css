@@ -1,0 +1,138 @@
+/* src/components/Curriculum/Curriculum.css */
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+.curriculum-header-wrapper {
+  text-align: center;
+  margin: 2rem 0 1rem;
+}
+
+.curriculum-header {
+  display: inline-flex;
+  align-items: center;
+  background: #ffd600;
+  border: 2px solid #000;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+}
+
+.icon-wrapper {
+  background: #f9a8d4;
+  border: 2px solid #000;
+  border-radius: 0.25rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-right: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.curriculum-header h2 {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.75rem;
+  font-family: "Anton", sans-serif;
+  letter-spacing: 2px;
+}
+
+.curriculum-content {
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* —— UPDATED MEDIA WRAPPER —— */
+.media-wrapper {
+  position: relative;
+  width: 50%;
+   /* height: 350px;  */
+  /* enforce 9:16 portrait ratio */
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  /* optional simple border instead of hexagon */
+  /* border: 4px solid #7c3aed; */
+  /* optional rounded corners */
+  border-radius: 0.5rem;
+}
+
+.media-wrapper .media-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* overlay icon stays centered */
+.play-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  color: rgba(255, 255, 255, 0.85);
+  pointer-events: none;
+}
+
+.curriculum-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.curriculum-item {
+  border: 2px solid #000;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.25rem;
+  text-align: center;
+  font-weight: 500;
+  color: #000;
+}
+
+.detailed-btn {
+  display: inline-block;
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
+  border-radius: 3rem;
+  padding: 0.4rem 1.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: 1;
+  transition: background 0.2s;
+}
+
+.detailed-btn:hover {
+  background: #f0f0f0;
+}
+
+@media (max-width: 767px) {
+  .ce-subtitle {
+    display: inline-block;
+    margin: 1rem 1.3rem;
+  }
+  .curriculum-item {
+    font-size: 0.9rem;
+  }
+  .icon-wrapper {
+    margin-bottom: 0.5rem;
+  }
+  .curriculum-header {
+    flex-direction: row;
+    width: 90%;
+  }
+  .media-wrapper {
+  width: 85%;
+  height: auto;
+  
+  margin: 2rem;
+}
+
+}
